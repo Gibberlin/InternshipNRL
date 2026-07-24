@@ -1,0 +1,141 @@
+NUMALIGARH REFINERY LIMITED (NRL) - ENTERPRISE SYSTEMS AND CYBERSECURITY POSTURE
+================================================================================
+
+This document compiles the research findings regarding Numaligarh Refinery Limited's (NRL) actual digital transformation initiatives, industrial IT/OT architectures, and modern security infrastructure. It is designed to act as a direct technical resource for rewriting the internship report.
+
+--------------------------------------------------------------------------------
+1. DIGITAL TRANSFORMATION & INDUSTRIAL CONNECTIVITY
+--------------------------------------------------------------------------------
+
+A. BSNL 5G Captive Non-Public Network (CNPN)
+   - Partnership: Deployed in collaboration with Bharat Sanchar Nigam Limited (BSNL) in August 2025.
+   - Significance: India's first 5G Captive Non-Public Network (CNPN) in the refining sector.
+   - Purpose: Establishes a highly secure, ultra-reliable, high-bandwidth, and low-latency (URLLC) communication backbone across the refinery's physical footprint.
+   - Enabled Use Cases:
+     - Real-time IoT sensor telemetry aggregation from thousands of field instruments.
+     - Integration of AR/VR/MR applications for immersive workforce training and remote engineering maintenance assistance.
+     - High-speed transmission of massive 3D model data for Digital Twin operations.
+     - Video analytics, autonomous operations, and mobile computing on the refinery floor.
+
+B. 3D Digital Twin & Operations Management (Hexagon ALIM & j5 OMS)
+   - Hexagon ALIM (Asset Lifecycle Information Management): Used to maintain a data-centric master model and 3D Digital Twin of the refinery's physical assets. It ensures interoperability between 3D CAD/engineering design models and real-time operations, ensuring data consistency throughout the asset lifecycle.
+   - Hexagon j5 OMS (Operations Management Solution): Digitizes operations logs, shift handover sheets, standing orders, and operator rounds. It acts as a single source of truth for plant operations, replacing manual paper logs and minimizing human error during shift transitions.
+   - Integration: Utilizes the j5 Connector for AspenTech to pull process historian tags directly into shift logs, ensuring operators have context-aware telemetry during handovers.
+
+C. AWS-Based Integrated Electronic Data and Document Management System (IEDDMS)
+   - Cloud Adoption: Hosted on Amazon Web Services (AWS), implemented in collaboration with AWS partner Minfy Technologies.
+   - Purpose: Centrally manages complex engineering documents, technical drawings, approvals, and workflows across distributed stakeholders.
+   - Business Impact: Supports the massive Numaligarh Refinery Expansion Project (NREP) to scale refining capacity from 3 MMTPA to 9 MMTPA. Cloud hosting ensures secure access for international vendors, high availability, and automated document control workflows.
+
+D. AspenTech Operational Excellence Suite
+   - Aspen HYSYS: Used for process engineering simulation, thermodynamic calculations, and creating digital twins of physical refinery units. Used to predict fouling in crude preheat exchangers, optimizing maintenance intervals.
+   - Aspen DMC3 (Dynamic Matrix Control): Deployed for Advanced Process Control (APC) within major refinery units (e.g., Crude Distillation Unit/Vacuum Distillation Unit - CDU/VDU). It implements multivariable predictive control to maximize throughput and yield while maintaining strict quality constraints.
+   - Aspen InfoPlus.21 (IP21): The primary manufacturing data historian. It aggregates millisecond-level time-series data from DCS (Distributed Control Systems) and SCADA networks, serving as the historical data repository for plant-wide analytics.
+
+--------------------------------------------------------------------------------
+2. ENTERPRISE SECURITY FRAMEWORKS & OPERATIONS
+--------------------------------------------------------------------------------
+
+A. Airtel Business Secure Intelligent SOC (iSOC)
+   - Operational Model: An AI/ML-driven Managed Detection and Response (MDR) Security Operations Center (SOC) framework managed by Airtel Business.
+   - Coverage: Provides 24/7/365 security monitoring, log analysis, threat intelligence, and incident triage across the entire enterprise. Monitors over 1,700 endpoints, servers, PCs, mobile devices, and central data centers.
+   - Rationale: Addresses the remote geographical constraints of the refinery in Assam and solves the cybersecurity talent shortage by leveraging a specialized external SOC.
+   - Technical Highlights: Employs automated AI/ML models to filter noise and correlate event telemetry across different network segments, reducing false positives and enabling rapid threat containment.
+
+B. Next-Generation Endpoint & Network Security
+   - EDR/XDR (Endpoint/Extended Detection and Response): Shifted from traditional signature-based antivirus to behavior-based Next-Gen EDR/XDR (exemplified by systems like SentinelOne). It utilizes machine learning agent engines on hosts to detect fileless attacks, memory injection, ransomware processes, and facilitates automated agent isolation and rollback.
+   - Next-Generation Firewalls (NGFW): Deployed in a redundant, double-layered architecture utilizing firewalls from two completely different OEMs to prevent single-point-of-failure vulnerabilities in OT and SCADA network segregation.
+   - FortiAnalyzer: A centralized log management, analytics, and reporting platform that integrates with NGFWs to analyze firewall traffic, security events, policy efficiency, and network telemetry.
+   - Web Application Firewalls (WAF): Deployed to perform deep packet inspection at Layer 7 (Application Layer) for all public and partner-facing web services. Protects web portals against OWASP Top 10 vulnerabilities, specifically blocking SQL Injection (SQLi), Cross-Site Scripting (XSS), and directory traversal attempts.
+   - Cyble AI: Deployed for external threat intelligence and Dark Web monitoring. It continuously scans public and underground forums for compromised NRL credentials, leaked proprietary documents, and active campaigns targeting Indian critical infrastructure.
+
+C. Cryptography and Hashing Principles
+   - Encryption: Protects data-in-transit using Transport Layer Security (TLS 1.3) and data-at-rest using Advanced Encryption Standard (AES-256).
+   - Integrity & Hashing: Employs SHA-256 algorithms to verify the integrity of critical system files, database backups, and software updates, preventing unauthorized tampering.
+
+--------------------------------------------------------------------------------
+3. OUTCOMES, CONCLUSION & IT/OT CONVERGENCE
+--------------------------------------------------------------------------------
+
+- IT/OT Convergence: Security frameworks must bridge the gap between traditional IT systems (ERP, SAP S/4 HANA, AWS document storage) and OT industrial automation networks (DCS, SCADA, AspenTech historian, PLC networks). The security design must enforce strict Purdue Model boundaries while allowing secure telemetry flow.
+- National Critical Infrastructure protection: Refineries are classified as Critical Information Infrastructure (C CII). Thus, maintaining high-availability security controls (like the redundant NGFWs, Airtel iSOC, and AWS cloud backups) is essential for national security.
+- Strategic Learning: Practical understanding of cloud security architectures on AWS, advanced industrial communication networks (captive 5G), AI-assisted SOC scaling, and the mitigation of advanced persistent threats (APTs) targeting energy infrastructures.
+
+
+Yashins info:
+
+Part 1 — Industrial IT/OT Convergence & Digital Infrastructure
+
+5G CNPN and Edge Computing
+BSNL and Numaligarh Refinery signed an agreement to deploy a captive non-public 5G network (CNPN) at NRL, intended to provide ultra-reliable, low-latency connectivity for industrial use cases including real-time IoT telemetry and AR/VR-based operator training.
+
+Private 5G CNPNs in industry enable millisecond-level latency and deterministic QoS at the site edge, which supports time-sensitive sensor telemetry, remote video for situational awareness, and immersive augmented/virtual reality applications for maintenance and training.
+
+Deployments typically combine BSNL’s spectrum/core services with system integrators and edge compute (on-prem or MEC) to place data processing close to the plant, reducing backhaul to central clouds and improving resilience and security for critical control-plane traffic.
+
+Hexagon 3D Digital Twin
+Hexagon’s digital-twin solutions create visual, spatially accurate replicas of industrial sites that merge as-built 3D geometry with live telemetry to form a single operational picture.
+
+Connected digital-twin workflows bind physical assets (pipes, valves, instruments) to IoT streams and enterprise systems so that condition, location, and performance metrics update in near real time; this supports predictive maintenance and operator situational awareness.
+
+Hexagon products provide connectors and integrations for operational and cloud systems, enabling the twin to ingest sensor/IoT feeds and present a synchronized, georeferenced view of asset state and alerts.
+
+AspenTech, SCADA/DCS and InfoPlus.21 Historian
+AspenTech InfoPlus.21 (IP.21) is a high-performance process historian designed to collect millisecond-to-second time-series from DCS/SCADA/PLC systems and contextualize events for analytics, visualization, and batch/process reporting.
+
+Typical integrations use industry-standard interfaces (OPC, REST, ODBC, COM) and are architected to stream plant automation telemetry (process variables, alarms, batch events) into IP.21 for both real-time dashboards and long-term analysis.
+
+When paired with digital twin or analytics platforms, IP.21 supplies the live telemetry that keeps 3D models and decision-support apps in sync with the physical plant.
+
+Cloud Migration — AWS IEDDMS for Engineering Blueprints
+Enterprise engineering document and data management systems migrate to AWS to scale storage of large engineering blueprints and enable serverless or containerized processing for OCR, indexing, and metadata extraction.
+
+On AWS the typical architecture for an IEDDMS places document storage in Amazon S3, uses Lambda/Step Functions for processing and orchestration (e.g., Textract for OCR), and persists metadata in DynamoDB or Aurora, all inside a secured VPC with IAM controls and encryption.
+
+Hexagon and other EAM/digital-twin vendors have documented integrations and joint best-practices with AWS for securely hosting digital-twin services, enabling the twin and document systems to share artifacts, telemetry, and AI/ML services in cloud-native workflows.
+
+Migration benefits include scalable object storage for very large drawings, automated intelligent document processing (indexing and search), disaster recovery, and simplified integration with analytics or machine-learning pipelines hosted on AWS.
+
+How these pieces work together at NRL (concise architecture narrative)
+
+Edge capture and transport: Field sensors, PLCs, and operator AR devices send telemetry over the BSNL private 5G CNPN to on-site edge compute or MEC nodes to guarantee low latency and site-isolated connectivity.
+
+Local historian and control integration: Edge gateways forward millisecond-level telemetry into the plant historian (Aspen InfoPlus.21) and into SCADA/DCS supervisory layers for real-time control and alarm management.
+
+Twin synchronization and situational awareness: Hexagon’s 3D digital twin subscribes to historian and IoT streams so the 3D site model reflects live values (flow, temperature, valve status), enabling visual alerts and predictive maintenance workflows.
+
+Cloud-backed documentation and analytics: Engineering blueprints, vendor manuals, and large asset files are stored in AWS (S3) and processed with document-inspection and ML services; the cloud-hosted IEDDMS provides global access, versioning, and integration with asset management and twin services.
+
+Security & resilience considerations: The CNPN isolates industrial traffic from public networks, while edge compute, historian retention policies, and cloud IAM/encryption protect data flows; system integrations should follow standards (OPC, REST) and vendor best-practices for secure connectors.
+
+Short list of primary integration points (useful for later securing/design)
+
+5G CNPN ↔ MEC/Edge compute (sensor aggregation, protocol translation).
+
+Edge gateways ↔ DCS/SCADA (OPC/Modbus) ↔ InfoPlus.21 historian.
+
+InfoPlus.21 ↔ Hexagon digital twin (real-time feeds and contextual metadata).
+
+IEDDMS (AWS S3 + Lambda/Textract + DB) ↔ Engineering workstations and Hexagon/asset systems.
+
+Cross-domain APIs (REST/HTTPS) used by SOC or SIEM collectors to ingest telemetry/alerts for cybersecurity monitoring
+
+
+Part 2 — Enterprise Security Controls Protecting NRL’s Industrial Infrastructure
+
+Airtel Secure iSOC
+NRL’s managed security operations model is centered on an AI/ML-driven iSOC that continuously monitors enterprise telemetry and triages the highest-risk events from very large log volumes. The platform combines SIEM, SOAR, UEBA, threat-intelligence feeds, and automated containment so analysts focus on validated threats rather than raw noise. In practice, this means the SOC filters millions of daily events, enriches them with context, and escalates only the incidents that match recognized attack patterns or critical anomalies. This model reduces alert fatigue, shortens dwell time, and improves response consistency across distributed IT assets. [web:22][web:25][web:33]
+
+Next-Gen EDR/XDR vs. Legacy Antivirus
+Legacy antivirus tools mainly depend on static signatures and scheduled scans, which makes them weak against fileless malware, polymorphic threats, and modern ransomware. Next-generation EDR/XDR tools use behavior analytics, machine learning, and process reconstruction to detect suspicious execution paths before or during an attack. SentinelOne’s published comparisons describe autonomous detection, Storyline-style incident reconstruction, offline protection, and one-click or automated remediation as core differentiators from traditional AV. For an enterprise environment, this means endpoint protection is not just blocking known malware, but also detecting lateral movement, in-memory attacks, and post-exploitation activity. [web:23][web:24][web:34]
+
+Network Segmentation and the Purdue Model
+Industrial security architectures commonly follow Purdue-style segmentation, where corporate IT, DMZ services, control networks, and field devices are separated into distinct trust zones. In this model, redundant NGFWs from different OEMs are often deployed at IT/OT boundaries to avoid a single point of failure and to preserve layered inspection of north-south traffic. The goal is to prevent direct lateral movement from the IT environment into OT systems and to enforce tightly controlled, policy-based data exchange. This kind of zoning is especially important for critical infrastructure because it limits blast radius if a corporate endpoint or application is compromised. [web:28]
+
+Threat Intelligence and Dark Web Monitoring
+Cyble’s threat-intelligence products continuously monitor dark web, deep web, and paste-site sources for leaked credentials, exposed records, and threat-actor chatter. Their AI-native platform emphasizes real-time risk tagging, contextual enrichment, and SOC-vetted alerts so defenders can act before stolen credentials are used in an intrusion. For a refinery or other critical national infrastructure operator, this helps detect credential theft, brand impersonation, and pre-attack planning early in the kill chain. Dark web monitoring is most valuable when paired with identity controls, MFA, and incident-response playbooks that can quickly reset or revoke exposed accounts. [web:37][web:41][web:42]
+
+How These Controls Work Together
+Together, the iSOC, EDR/XDR, segmented firewall architecture, and threat-intelligence stack form a layered defense model. The SOC detects and prioritizes suspicious behavior, the endpoint stack catches malicious execution on devices, the firewalls restrict propagation between IT and OT, and dark web monitoring warns about external exposure before attacks begin. This combination is a practical blueprint for defending a large industrial environment where availability, safety, and rapid containment are more important than any single security product. 
+
+Part 3: The Concept-to-Code Mapping (Your Project)This is where we tie your hard work to the research. We need to explicitly map the enterprise tools we just researched to the specific Python/Docker microservices you built:Enterprise: EDR Agents $\rightarrow$ Your Build: agent.py and log_collector.pyEnterprise: Airtel iSOC & Splunk/QRadar $\rightarrow$ Your Build: siem_server.py and engine.pyEnterprise: NGFW IP drops $\rightarrow$ Your Build: The block_ip SOAR playbook.Enterprise: SCADA/OT Networks $\rightarrow$ Your Build: The vulnerable_app.py honeypot.

@@ -1,0 +1,386 @@
+IMAGE 1: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image002.png
+  PRECEDING:
+    * INTERNSHIP REPORT Design and Implementation of a Multi-Source SIEM and SOAR Platform for Automated Threat Detection and Response at NRL Submitted in partial fulfilment of the requirements for the award of the degree of UNDERGRADUATE DEGREE IN COMPUTER SCIENCE Submitted By: Name Enrollment No. Antara Deb 232010007007 Avirup Roy 232010007010 Darshana Saikia 232010007016 Priyangka Das 232010007042 Rivleena Khound 232010007047 Syed Yashin Hussain 242050007014 Under the Guidance of Mr. Muhammad Kasim Senior Officer (IIS) Internship Organization Numaligarh Refinery Limited (NRL) Institution Barak Valley Engineering College Academic Session [2023-2027]
+  FOLLOWING:
+    * INTERNSHIP REPORT
+    * Design and Implementation of a Multi-Source SIEM and SOAR Platform for Automated Threat Detection and Response at NRL
+    * Submitted in partial fulfilment of the requirements for the award of the degree of UNDERGRADUATE DEGREE IN COMPUTER SCIENCE
+    * Submitted By:
+    * Submitted By
+============================================================
+
+IMAGE 2: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image004.jpg
+  PRECEDING:
+    * Chapter 14: Conclusion
+    * — Summarises core deliverables, system capabilities, and final technical conclusions.
+    * Chapter 2: COMPANY PROFILE
+    * 2.1 Overview of Numaligarh Refinery Limited (NRL)
+    * Numaligarh Refinery Limited (NRL) is a prestigious Navratna Central Public Sector Enterprise (CPSE) operating under the administrative purview of the Ministry of Petroleum and Natural Gas, Government of India. Earning its elite Navratna designation in December 2025 due to its exceptional operational and financial performance, NRL enjoys substantial strategic autonomy. This corporate elevation provides the organization with greater flexibility in international operations, large-scale financial investments, and independent joint venture decisions without requiring prior government approval, allowing it to compete effectively with global energy conglomerates.
+  FOLLOWING:
+    * Figure 2.1: NRL Main gate
+    * .1
+    * Located at Numaligarh in the Golaghat district of Assam, NRL operates a highly efficient 3 Million Metric Tonnes Per Annum (MMTPA) crude oil refinery, which is widely recognized as one of the most operationally agile refining setups in the country. The localized refining infrastructure is supported by a 42 TMTPA LPG bottling plant at Numaligarh and primary marketing terminals situated at both Numaligarh and Siliguri. Beyond bulk distribution, NRL has established an extensive downstream retail presence featuring a network of more than 500 retail outlets across the nation. It stands proudly as the single largest petroleum refiner in Northeast India and maintains a dominant global footprint as the country’s largest producer and exporter of high-grade Paraffin Wax.
+    * To secure long-term national energy independence, NRL has embarked on a massive integrated refinery expansion project (NREP) to treble its refining capacity from 3 MMTPA to 9 MMTPA, with an estimated capital investment exceeding Rs. 28,000 Crore. This mega-project fundamentally changes the refinery's logistics, involving the construction of a dedicated Crude Oil Import Terminal at Paradip Port in Odisha and the laying of a 1,640 KM cross-country crude pipeline to transport imported crude oil directly to Numaligarh. Concurrently, NRL is diversifying into petrochemicals by implementing a 360 KTPA Polypropylene project at an estimated cost of Rs. 7,231 Crore. The company consistently demonstrates incredible operational resilience; in FY 2025–26, it processed a record-breaking 3,113 TMT of crude oil, achieving a peak capacity utilization of 103%—marking the second consecutive year the refinery has operated beyond its rated design capacity.
+    * 2.2 History and Background
+============================================================
+
+IMAGE 3: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image006.jpg
+  PRECEDING:
+    * To secure long-term national energy independence, NRL has embarked on a massive integrated refinery expansion project (NREP) to treble its refining capacity from 3 MMTPA to 9 MMTPA, with an estimated capital investment exceeding Rs. 28,000 Crore. This mega-project fundamentally changes the refinery's logistics, involving the construction of a dedicated Crude Oil Import Terminal at Paradip Port in Odisha and the laying of a 1,640 KM cross-country crude pipeline to transport imported crude oil directly to Numaligarh. Concurrently, NRL is diversifying into petrochemicals by implementing a 360 KTPA Polypropylene project at an estimated cost of Rs. 7,231 Crore. The company consistently demonstrates incredible operational resilience; in FY 2025–26, it processed a record-breaking 3,113 TMT of crude oil, achieving a peak capacity utilization of 103%—marking the second consecutive year the refinery has operated beyond its rated design capacity.
+    * 2.2 History and Background
+    * The historical genesis of NRL is deeply rooted in the historic "Assam Accord," signed on August 15, 1985, between the Government of India, the Government of Assam, and leaders of the Assam Movement to address issues related to illegal immigration, protection of Assamese identity, and the social, economic, and political future of the state. Conceived as a major vehicle for rapid industrialization and socio-economic development in the Northeast, the refinery stands as a glowing manifestation of successful regional corporate execution.
+    * The historical genesis of NRL is deeply rooted in the historic "Assam Accord," signed on August 15, 1985, between the Government of India, the Government of Assam, and
+    * Conceived as a major vehicle for rapid industrialization and socio-economic development in the Northeast, the refinery stands as a glowing manifestation of successful regional corporate execution.
+  FOLLOWING:
+    * Figure 2.2: The signing of the historic Assam Accord on August 15, 1985
+    * Figure
+    * 2
+    * .2
+    * : The signing of the historic
+============================================================
+
+IMAGE 4: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image008.jpg
+  PRECEDING:
+    * NRL's Information Integration Services (IIS) and digital infrastructure act as the central nervous system across enterprise management, plant automation, and cybersecurity. The company has a rich history of digital evolution: starting as the first oil sector PSU to implement Ramco ERP in 1998, migrating to SAP R/3 in 2005, upgrading to SAP ECC 6.0 in 2011, and ultimately migrating to modern SAP S/4 HANA integrated with IBM Business Automation Workflow (BAW) in 2022 to digitize all key business processes. Plant operations are driven by the AspenTech Operational Excellence Suite (including Aspen HYSYS, DMC3, and InfoPlus.21) alongside the SampleManager LIMS for certified quality control workflows.
+    * From a cybersecurity perspective, NRL has maintained a rigorous ISO 27001 Information Security Management System (ISMS) certification since June 2009. The refinery’s digital infrastructure is safeguarded by an enterprise-grade Managed Detection and Response (MDR) Security Operations Center (SOC) framework leveraging AI-driven log correlation, 24/7 endpoint/network defense, and automated threat hunting. NRL's double-layered protection architecture features Next-Generation Firewalls (NGFWs) deployed from two completely different OEMs within the OT network to maximize defensive redundancy. Recent key security initiatives include:
+    * Implementing geographic blocking on the network data center to restrict access from over 100 malicious source countries.
+    * Transitioning from traditional VPNs to Fortinet Zero Trust Network Access (ZTNA) for granular application verification of external users.
+    * Integrating Office 365 cloud logs directly into the SOC and implementing a Local Administrator Password Solution (LAPS) to eliminate default admin risk.
+  FOLLOWING:
+    * Successfully running non-critical mock drills out of a cloud-based Disaster Recovery (DR) data center.
+    * Figure 2.3: Best CISO of the Year award at the 2nd Bharat PSU Manthan 2026
+    * NRL's digital excellence has earned it extensive national acclaim, including the Excellence in Cyber Security and SOC Implementation honour at the 3rd PSU Transformation Awards, the Best use of Automation & Digital Technologies at the Governance Now 11th PSU Awards, and the Best CISO of The Year award at the 2nd Bharat PSU Manthan 2026.
+    * 2.5 Shareholding Patterns
+    * As of the current operational cycle, NRL possesses an Authorized Share Capital of Rs. 5,000 Crore and a Paid-up Share Capital of Rs. 1,758.99 Crore. The company features a highly structured public sector equity distribution:
+============================================================
+
+IMAGE 5: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image010.jpg
+  PRECEDING:
+    * Rs. 140
+    * Total
+    * 1,75,89,90,361
+    * 100.00
+    * Rs.17,58,99,03,610
+  FOLLOWING:
+    * Figure 2.4: Shareholding Pattern
+    * 2.6 Alliances and Joint Ventures
+    * To support its tripling capacity expansion and cross-border commercial strategy, NRL has entered into major alliances and joint ventures:
+    * Upstream & Downstream Integration:
+    * Direct B2B operational integration via unified SAP pipelines with major industry players, including IOCL, BPCL, HPCL, ONGC, and Nayara Energy.
+============================================================
+
+IMAGE 6: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image012.png
+  PRECEDING:
+    * The industry concepts, compliance standards, and architectural paradigms evaluated in this chapter establish the theoretical foundation for the platform. By combining centralised log shipping with real-time correlation and automated response orchestration, the platform provides a robust framework for the methodology and detailed system architecture detailed in subsequent chapters.
+    * CHAPTER 4: RESEARCH AND DEVELOPMENT METHODOLOGY
+    * 4.1 Development Approach and Engineering Lifecycle
+    * Unlike descriptive or survey-based academic research, this project employs an empirical software engineering and system development methodology. The primary telemetry evaluated consists of real-time application logs, HTTP request streams, structured security alert objects, and programmatic execution outputs from response playbooks.
+    * This project was engineered using an iterative, component-based microservices development lifecycle. Each architectural layer was designed, implemented, and validated in direct alignment with its structural dependencies:
+  FOLLOWING:
+    * Figure 4.1: Architecture Overview
+    * 4.1.1 Phase I: Telemetry & Ingestion Backbone Engineering
+    * The initial engineering phase focused on establishing reliable log shipping and API ingestion mechanisms. Before implementing analytical correlation logic, stable endpoints were required to ingest, filter, and normalize raw telemetry. Log shipping agents (agent.py, log_collector.py), log processing configurations (logstash.conf, filebeat.yml), and the central HTTP Ingress API (app/api/ingress.py) were built and verified to ensure lossless stream handling.
+    * 4.1.2 Phase II: Target Application & Attack Simulation Integration
+    * To generate realistic security events in a controlled environment, a deliberately vulnerable target web application (vulnerable_app.py) and a log generation script (log_generator.sh) were deployed. This provided an authentic attack surface generating HTTP 401 authentication failures, 500 internal server errors, and web application exploit patterns to validate ingestion pipelines under real-world threat conditions.
+============================================================
+
+IMAGE 7: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image014.png
+  PRECEDING:
+    * 4.2.4 Logstash & Filebeat Ingestion Pipeline (logstash.conf, filebeat.yml)
+    * For standardised enterprise log shipping, Filebeat (filebeat.yml) is deployed to harvest system events, forwarding them to Logstash (logstash.conf). Logstash executes pattern matching, extracts key attributes (e.g., client IP, HTTP status code, timestamp), and formats the output into normalised JSON structures for downstream evaluation.
+    * 4.3 Containerised Microservices Sandbox
+    * To isolate the platform, avoid external infrastructure dependencies, and ensure absolute environment reproducibility, the entire project stack was containerised using Docker and Docker Compose (docker-compose.yml, Dockerfile.*).
+    * Each functional module runs in an isolated container instance communicating over a dedicated internal software-defined network:
+  FOLLOWING:
+    * Figure 4.1: Docker Compose Environment
+    * Validation Testing Strategy
+    * Component-Level Unit Verification:
+    * Each microservice module (e.g., ingress routes in app/api/ingress.py, playbook logic in app/playbooks.py, and rule evaluations in app/engine.py) was tested independently to verify input/output correctness.
+    * End-to-End Integration Testing:
+============================================================
+
+IMAGE 8: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image016.png
+  PRECEDING:
+    * app/api/dashboard.py, app/static/dashboard/ (index.html, script.js, styles.css)
+    * Visualises live metrics, active security incidents, and playbook status.
+    * The research and development methodology outlined in this chapter establishes a structured, empirical framework. By validating the SIEM/SOAR microservices architecture against authentic attack simulations within a containerised Docker environment, the platform demonstrates complete end-to-end operational functionality. This methodology provides the foundation for the deep system architecture analysed in Chapter 5.
+    * CHAPTER 5: SYSTEM ARCHITECTURE
+    * 5.1 Ingestion Pipeline and Operational Overview
+  FOLLOWING:
+    * 5.1 Ingestion Pipeline and Operational Overview
+    * Figure 5.1: System Architecture Flow
+    * This Security Information and Event Management (SIEM) and Security Orchestration, Automation, and Response (SOAR) platform is engineered as a decoupled, microservices-driven architecture. Each containerised module is assigned a specific function within the continuous telemetry processing, stream normalisation, threat correlation, and automated incident response lifecycle. To ensure absolute platform portability, reproducibility, and environment isolation, all components are packaged and orchestrated via Docker and Docker Compose (docker-compose.yml, Dockerfile.*).
+    * As illustrated in the architectural overview, system telemetry flows through a deterministic, unidirectional pipeline before executing an automated defence action. Security logs generated by the target web application (vulnerable_app.py) and log shipping agents (agent.py, log_collector.py) are securely routed to the central Ingress API (app/api/ingress.py), where raw records are normalised into structured data attributes. The events are then evaluated by the SIEM detection engine (app/engine.py, siem_server.py) against stateful correlation rules. Upon identifying an indicator of compromise, structured alert objects (app/models.py) are instantiated, instantly triggering the SOAR orchestration module (app/soar_engine.py, app/playbooks.py) to execute automated remediation workflows (e.g., dynamic IP blocking). The management dashboard (app/static/dashboard/) operates asynchronously as a decoupled read-only interface, querying active system metrics and alert states without impacting the core ingestion throughput.
+    * 5.2 Microservice Component Descriptions
+============================================================
+
+IMAGE 9: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image018.jpg
+  PRECEDING:
+    * SOC Monitoring UI:
+    * app/api/dashboard.py, app/static/dashboard/ (index.html, script.js, styles.css).
+    * Containerization & Deployment:
+    * docker-compose.yml, Dockerfile.siem, Dockerfile.agent, Dockerfile.collector, Dockerfile.vulnerable.
+    * 6.2 Telemetry Ingestion and Log Processing Pipeline
+  FOLLOWING:
+    * 6.2 Telemetry Ingestion and Log Processing Pipeline
+    * Figure 6.1: Centralised Raw Log Collector Stream Viewer
+    * Real-time raw log stream interface displaying live JSON payloads, host identifiers, and timestamps ingested directly from distributed agents before stateful rule correlation.
+    * 6.2.1 Distributed Log Shipping Agents (agent.py, log_collector.py)
+    * To stream event data from host endpoints to the central server, lightweight Python shipping scripts operate continuously in the background:
+============================================================
+
+IMAGE 10: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image020.jpg
+  PRECEDING:
+    * Queue Ingestion:
+    * Pushes sanitised event records into the memory store for immediate processing by the detection engine.
+    * 6.3 Target Application and Attack Simulation (vulnerable_app.py, log_generator.sh)
+    * To evaluate the platform under realistic threat conditions, an isolated attack surface and synthetic log generator were implemented:
+    * 6.3.1 Vulnerable Web Application (vulnerable_app.py)
+  FOLLOWING:
+    * 6.3.1 Vulnerable Web Application (vulnerable_app.py)
+    * Figure 6.2: The Corporate Portal Authentication Interface
+    * A custom Flask web application exposes deliberately flawed endpoints to simulate typical corporate web service vulnerabilities:
+    * Authentication Bypass / Brute-Force Endpoint:
+    * Generates HTTP 401 Unauthorised responses upon invalid credential attempts.
+============================================================
+
+IMAGE 11: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image022.jpg
+  PRECEDING:
+    * Unauthorised File Access:
+    * Logs abnormal HTTP 403/404 directory traversal requests.
+    * 6.3.2 Automated Threat Generator (log_generator.sh)
+    * An automated shell script simulates adversary behaviour by firing rapid sequences of HTTP requests against vulnerable_app.py. It generates multi-vector attacks such as bursts of failed logins from a single IP, rapid error rate spikes across endpoints, and web application scanning—providing authentic telemetry for the SIEM detection rules.
+    * 6.3.3 Industrial SCADA/OT Telemetry Interface
+  FOLLOWING:
+    * 6.3.3 Industrial SCADA/OT Telemetry Interface
+    * Figure 6.3: SCADA HMI Industrial Mixture Control Dashboard
+    * Real-time SCADA HMI interface visualising refinery telemetry parameters including Crude Oil Heater Temperature, Pressure, and Chemical Flow Rate polled via Modbus gateway proxies.
+    * 6.4 SIEM Detection Engine and Incident Modelling
+    * 6.4.1 Alert Data Modelling (app/models.py)
+============================================================
+
+IMAGE 12: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image024.png
+  PRECEDING:
+    * 6.5 SOAR Orchestration Engine and Response Playbooks
+    * 6.5.1 SOAR Core (app/soar_engine.py, app/api/soar_api.py)
+    * The SOAR engine (app/soar_engine.py) operates as an automated listener that evaluates new alerts emitted by the SIEM core. It exposes management endpoints via app/api/soar_api.py to allow security analysts to inspect active workflows or manually trigger response actions.
+    * 6.5.2 Automated Response Playbooks (app/playbooks.py)
+    * Remediation workflows are codified as modular Python functions inside app/playbooks.py. Depending on the severity and rule type of the alert, the SOAR engine automatically triggers specific playbooks:
+  FOLLOWING:
+    * Figure 6.4: SOAR Engine Severity Levels
+    * Active IP Blocking Playbook (block_ip):
+    * Dynamically updates firewall rules or access control tables to drop all subsequent incoming network packets from a malicious source_ip.
+    * Host Agent Containment Playbook (isolate_agent):
+    * Flags an infected host agent, disabling its network communication except for control-plane management channels to prevent lateral movement.
+============================================================
+
+IMAGE 13: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image026.png
+  PRECEDING:
+    * Identifies automated web vulnerability scanners (e.g., Nikto, Dirbuster) probing non-existent or restricted endpoints.
+    * Logic:
+    * Tracks cumulative HTTP 403 Forbidden and HTTP 404 Not Found status codes per client socket IP. Crossing the threshold of 8 occurrences within 45 seconds raises a MEDIUM severity alert.
+    * 7.2 SOAR Playbook Design & Mapping
+    * When an alert is registered in app/models.py, the SOAR engine (app/soar_engine.py) matches the alert type to an execution workflow defined in app/playbooks.py
+  FOLLOWING:
+    * When an alert is registered in app/models.py, the SOAR engine (app/soar_engine.py) matches the alert type to an execution workflow defined in app/playbooks.py
+    * Figure 7.1: Playbook Mapping Matrix
+    * 7.2.1 Playbook Mapping Matrix
+    * Triggering SIEM Rule
+    * Programmatic Action Sequence
+============================================================
+
+IMAGE 14: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image028.png
+  PRECEDING:
+    * Central SIEM & SOAR Server Container (siem_server.py, app/engine.py, app/soar_engine.py):
+    * Ingests log streams, evaluates detection rules, manages alert states (app/models.py), and executes response playbooks (app/playbooks.py).
+    * Automated Attack Generator (log_generator.sh):
+    * Fires multi-vector attack scripts against the target application to produce authentic threat telemetry.
+    * Figure 8.1: Test Environment Execution Flow
+  FOLLOWING:
+    * Figure 8.1: Test Environment Execution Flow
+    * 8.2 Demonstration Scenario 1: Automated Brute-Force Detection & Dynamic IP Blocking
+    * 8.2.1 Execution & Attack Injection
+    * To test RULE-01 (Brute-Force Authentication Attempt), the automated attack script (log_generator.sh) executed a rapid sequence of invalid login attempts against the authentication endpoint of vulnerable_app.py. The script dispatched 10 POST requests containing invalid credential combinations within a 15-second window from client socket IP 192.168.1.105.
+    * 8.2.2 Log Ingestion & SIEM Engine Evaluation
+============================================================
+
+IMAGE 15: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image030.jpg
+  PRECEDING:
+    * HTTP 200 OK
+    * PASSED
+    * The test suite confirmed $100\%$ functional pass rates across all playbook routines, verifying that automated response workflows execute safely and deterministically.
+    * 8.5 SOC Monitoring Dashboard UI Performance (app/static/dashboard/)
+    * During attack simulation runs, the Security Operations Centre (SOC) dashboard (app/static/dashboard/) provided real-time visibility into enterprise security posture.
+  FOLLOWING:
+    * During attack simulation runs, the Security Operations Centre (SOC) dashboard (app/static/dashboard/) provided real-time visibility into enterprise security posture.
+    * Figure 8.2: Security Operations Centre (SOC) Monitoring & SOAR Dashboard
+    * Key operational capabilities confirmed on the dashboard interface during testing included:
+    * Asynchronous Polling:
+    * script.js polled backend REST routes (app/api/dashboard.py) every 3 seconds, updating UI components without requiring full page reloads.
+============================================================
+
+IMAGE 16: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image032.png
+  PRECEDING:
+    * 9.1 Real-Time Log Ingestion Throughput vs. Microservices Architectural Overhead
+    * 9.1.1 The Engineering Challenge
+    * In high-volume logging environments, real-time ingestion speed is critical to minimise Mean Time to Detect (MTTD). However, building the platform as a collection of decoupled, containerised microservices introduces network latency and serialisation overhead across service boundaries:
+    * Total Ingestion Latency = TAgent Capture + TNetwork Transport + TLogstash Grok + TIngress Validation + TStorage Write
+    * During initial testing, executing synchronous HTTP POST requests from client agents (agent.py, log_collector.py) directly to the central API gateway (app/api/ingress.py) created worker thread blocking during volumetric log bursts (e.g., automated attack simulations via log_generator.sh).
+  FOLLOWING:
+    * During initial testing, executing synchronous HTTP POST requests from client agents (agent.py, log_collector.py) directly to the central API gateway (app/api/ingress.py) created worker thread blocking during volumetric log bursts (e.g., automated attack simulations via log_generator.sh).
+    * Figure 9.1: Synchronous vs. Asynchronous Trade Off
+    * 9.1.2 Evaluated Alternatives & Selected Trade-Off
+    * Monolithic In-Memory Architecture:
+    * Running the log shipping agent, correlation rules, and dashboard in a single Python process would eliminate inter-process HTTP calls and network overhead. However, this creates a single-point-of-failure (SPOF) where a crash in rule evaluation would halt log collection.
+============================================================
+
+IMAGE 17: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image034.png
+  PRECEDING:
+    * Before invoking block_ip or isolate_agent in app/playbooks.py, the playbook engine queries the active containment cache. If source_ip is already present in the blocklist table, subsequent playbooks exit cleanly with a status code of ALREADY_BLOCKED, suppressing redundant execution logs.
+    * 9.3 Application-Layer Containment vs. Kernel-Level Firewall Filtering
+    * 9.3.1 The Engineering Challenge
+    * A major architectural decision involved determining where automated threat containment should occur when a CRITICAL alert triggers block_ip:
+    * Figure 9.2: Enforcement Layer Comparison
+  FOLLOWING:
+    * Figure 9.2: Enforcement Layer Comparison
+    * Kernel-Level Packet Filtering (iptables / nftables / Windows Firewall):
+    * Modifies the host operating system's packet filtering tables to drop TCP SYN packets at the network layer.
+    * Application-Layer Gateway Filtering (app/api/ingress.py):
+    * Maintains an active blocklist within the container application memory, rejecting incoming requests matching blocked socket IPs with an HTTP 403 Forbidden status.
+============================================================
+
+IMAGE 18: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image036.png
+  PRECEDING:
+    * 9.5 Mitigating Self-Inflicted Denial of Service (Self-DoS) in Automated SOAR
+    * 9.5.1 The Engineering Challenge
+    * The primary operational risk of autonomous SOAR platforms is the execution of unintended, destructive mitigations. If a detection rule experiences a false-positive flood (e.g., a legitimate internal service generating an error burst), an unchecked block_ip playbook could block critical internal infrastructure, causing self-inflicted network lockouts.
+    * 9.5.2 Fail-Safe Controls Implementation
+    * To safeguard system availability, four safety boundaries were hardcoded into app/playbooks.py and app/api/ingress.py:
+  FOLLOWING:
+    * Figure 9.3: Fail-Safe Controls Implementation
+    * System Allowlist Gate:
+    * Hardcoded protection for loopback (127.0.0.1) and internal management subnets.
+    * Concurrency Rate Ceiling:
+    * A global variable (MAX_CONCURRENT_BLOCKS = 20) capping active simultaneous network blocks to prevent runaway automated lockouts.
+============================================================
+
+IMAGE 19: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image038.png
+  PRECEDING:
+    * While Chapter 7 outlined the systemic safeguards engineered into automated containment routines such as protected allowlists, concurrency rate ceilings, and mandatory block expiration timestamps, this chapter evaluates the overarching security, safety, and defensive posture of the microservices platform as a whole.
+    * Evaluating a security orchestration platform requires assessing both its active defensive capabilities and its internal resiliency against abuse. Introducing automated response workflows introduces the risk that a compromised, misconfigured, or exploited SIEM/SOAR system could be turned against the organisation itself. This chapter analyses the platform's core safety philosophy, forensic auditability mechanisms, and transparently discloses key architectural boundaries and cryptographic limitations inherent in this sandbox prototype deployment.
+    * 10.1 Safety-First Defensive Design Philosophy
+    * The core architectural principle governing the platform's automated orchestration engine (app/soar_engine.py) is that automated mitigation must never outpace engineering confidence in an underlying detection rule. In enterprise Security Operations Centres (SOCs), reckless or unvalidated automated containment can trigger cascading availability outages that match or exceed the business impact of an active cyber exploit.
+    * To mitigate operational risk and prevent self-inflicted denial-of-service (Self-DoS) conditions, automated response workflows in app/playbooks.py are strictly categorised based on risk exposure:
+  FOLLOWING:
+    * To mitigate operational risk and prevent self-inflicted denial-of-service (Self-DoS) conditions, automated response workflows in app/playbooks.py are strictly categorised based on risk exposure:
+    * Figure 10.1: Risk Separated Playbook Execution
+    * Zero-Risk Informational Actions:
+    * Notifications dispatched via webhooks (notify_analyst) and audit log creations present zero threat to infrastructure availability. These workflows execute unconditionally and automatically upon alert generation.
+    * High-Risk Containment Actions:
+============================================================
+
+IMAGE 20: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image040.png
+  PRECEDING:
+    * The current REST endpoints exposed by the Ingress API (app/api/ingress.py), SOAR management routes (app/api/soar_api.py), and SOC Dashboard (app/api/dashboard.py) do not enforce cryptographic API key verification, JSON Web Tokens (JWT), or Role-Based Access Control (RBAC). The endpoints accept incoming HTTP payloads implicitly based on network reachability. Consequently, an unauthenticated host inside the network capable of routing packets to port 5000 or 5005 could inject spoofed log records, trigger false alerts, or issue arbitrary API calls.
+    * 10.3.2 Exposure to Cleartext Transport Protocols (HTTP Polyfill)
+    * Inter-service communication across client agents (agent.py, log_collector.py), Logstash forwarding pipelines (logstash.conf), and the central REST gateway (app/api/ingress.py) relies on unencrypted cleartext HTTP transport. The prototype does not implement Transport Layer Security (TLS/HTTPS) encapsulation or mutual certificate authentication (mTLS). On shared physical networks, this cleartext transport exposes sensitive event logs to passive packet sniffing, network eavesdropping, and man-in-the-middle (MitM) payload manipulation.
+    * 10.3.3 Application-Layer Rejection vs. Perimeter Kernel Enforcement
+    * As analysed in Chapter 9, active IP containment (block_ip) is enforced at the application software layer within app/api/ingress.py rather than interacting directly with kernel-level packet filters (such as iptables, nftables, or host OS firewalls).
+  FOLLOWING:
+    * As analysed in Chapter 9, active IP containment (block_ip) is enforced at the application software layer within app/api/ingress.py rather than interacting directly with kernel-level packet filters (such as iptables, nftables, or host OS firewalls).
+    * Figure 10.2: Perimeter vs. Application Drop
+    * While evaluating client socket IPs at the Ingress API successfully prevents malicious payloads from reaching application logic or database models, it requires the Flask server to complete the TCP handshake and parse HTTP headers before returning an HTTP 403 Forbidden response. As a result, an attacker could still attempt volumetric socket exhaustion attacks against the open server port, and unmonitored ports on the host remain unshielded.
+    * The programmatic fail-safes and risk-separated playbook architectures implemented within the platform demonstrate that automated threat containment can be deployed safely without jeopardising system availability. However, the cryptographic gaps disclosed in Section 10.4 emphasise that this implementation functions as a functional microservices proof-of-concept and research range rather than a hardened production appliance. Closing these security gaps defines the direct engineering roadmap for future development detailed in Chapter 12.
+    * CHAPTER 11: KEY CHALLENGES AND SYSTEM LIMITATIONS
+============================================================
+
+IMAGE 21: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image042.png
+  PRECEDING:
+    * 11.1.2 Simulated External Integrations in SOAR Playbooks
+    * While the SOAR engine (app/soar_engine.py) successfully executes dynamic IP drops (block_ip) and host containment (isolate_agent), high-level enterprise workflows, specifically ITSM incident ticket generation (create_ticket) and external notifications, operate via mock handlers and local audit logs (app/playbooks.py). The current iteration does not interface directly with commercial REST APIs like Jira Service Management or ServiceNow.
+    * 11.1.3 Endpoint Telemetry API Scope
+    * The lightweight client agents (agent.py, log_collector.py) focus primarily on capturing web application logs, standard HTTP request streams, and local event files. Low-level kernel auditing utilities (such as Linux Auditd or Windows Security Event Logs requiring elevated administrative execution tokens) were deferred to maintain a low agent resource footprint.
+    * 11.2 Availability, Reliability, and Scale Limitations
+  FOLLOWING:
+    * Figure 11.1: Single Point Of Failure (SPOF) Diagram
+    * 11.2.1 Single-Point-of-Failure (SPOF) Vulnerabilities
+    * The system architecture currently lacks horizontal high-availability (HA) redundancy. The central Ingress API gateway (app/api/ingress.py) and the primary SIEM server instance (siem_server.py) operate as single service containers. An unexpected process crash, memory exhaustion event, or network card failure on the primary server container halts log processing across the entire platform.
+    * 11.2.2 Memory-Bound Event Queueing and Concurrency Limits
+    * In-memory event queues are utilised to buffer incoming log records during high-throughput bursts. Under sustained volumetric log floods exceeding the container's memory allocation, the queue risks buffer overflow, leading to dropped telemetry records. The current architecture does not incorporate a distributed persistent broker (such as Apache Kafka or RabbitMQ) to handle enterprise-scale log backpressure.
+============================================================
+
+IMAGE 22: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image044.png
+  PRECEDING:
+    * CHAPTER 12: SUGGESTIONS, RECOMMENDATIONS & FUTURE SCOPE
+    * This chapter presents a comprehensive, structured technical roadmap for extending the operational capabilities of the software platform. Rather than presenting a speculative list of features, the engineering recommendations detailed herein serve as direct solutions to the systemic limitations, scalability bottlenecks, and security boundaries identified in Chapter 10 and Chapter 11.
+    * The future scope prioritises hardening security controls, scaling inter-service communication, introducing artificial intelligence and machine learning models, and expanding telemetry ingestion across broader enterprise infrastructures.
+    * 12.1 Staged Integration of Layered Artificial Intelligence & ML
+    * While the current detection engine (app/engine.py) relies on deterministic, rule-based correlation logic, future iterations will transition toward a hybrid detection model combining static rules with machine learning (ML) and Large Language Models (LLMs):
+  FOLLOWING:
+    * While the current detection engine (app/engine.py) relies on deterministic, rule-based correlation logic, future iterations will transition toward a hybrid detection model combining static rules with machine learning (ML) and Large Language Models (LLMs):
+    * Figure 12.1: Three Stage AI/ML Detection Roadmap
+    * 12.1.1 Stage 1: Dynamic Statistical Telemetry Baselining
+    * Objective:
+    * Replace static, global numerical constants (e.g., hardcoded threshold ≥ 5 HTTP 401 failures) with rolling per-host and per-service statistical baselines.
+============================================================
+
+IMAGE 23: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image046.png
+  PRECEDING:
+    * Connect the simulated ticketing module (create_ticket) in app/playbooks.py to production enterprise IT Service Management (ITSM) REST APIs.
+    * Operational Value:
+    * Automatically instantiates, updates, and assigns trackable incident tickets in platforms like Jira Service Management or ServiceNow when HIGH or CRITICAL alerts fire, aligning automated security response with enterprise SOC ticketing workflows.
+    * 12.3 Expansion of Distributed Telemetry & Ingestion Sources
+    * To expand network visibility beyond web application HTTP logs (vulnerable_app.py), the ingestion pipeline (app/api/ingress.py, logstash.conf) should be extended to ingest heterogeneous enterprise log streams:
+  FOLLOWING:
+    * To expand network visibility beyond web application HTTP logs (vulnerable_app.py), the ingestion pipeline (app/api/ingress.py, logstash.conf) should be extended to ingest heterogeneous enterprise log streams:
+    * Figure 12.2: Expanded Telemetry Ingestion Architecture
+    * Operating System Audit Feeds:
+    * Deploy Winlogbeat for Windows Security Event Logs (tracking Event ID 4624/4625 authentication records) and Auditd/Journald harvesters for Linux kernel execution logs.
+    * Network Infrastructure Telemetry:
+============================================================
+
+IMAGE 24: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image048.png
+  PRECEDING:
+    * Implement granular user authentication and role permissions within the SOC Dashboard (app/api/dashboard.py), restricting manual playbook execution and override controls to authorised security engineers.
+    * End-to-End Transport Encryption (TLS/mTLS):
+    * Enforce mandatory HTTPS/TLS 1.3 encapsulation across all inter-service communication paths, requiring mutual TLS (mTLS) certificate verification between client agents (agent.py) and the central Ingress API.
+    * 12.5 High Availability, Distributed Message Queuing, and Scalability
+    * To handle enterprise-scale log throughput (≥10,000 logs/second) without memory buffer overflows or single-point-of-failure risks:
+  FOLLOWING:
+    * To handle enterprise-scale log throughput (≥10,000 logs/second) without memory buffer overflows or single-point-of-failure risks:
+    * Figure 12.3: High-Availability Enterprise Deployment
+    * Distributed Message Broker (Apache Kafka / RabbitMQ):
+    * Introduce a persistent, distributed message broker between the Ingress API gateway (app/api/ingress.py) and the SIEM evaluation engine (app/engine.py). This decouples ingestion from processing, absorbing volumetric log bursts and eliminating memory queue overflow risks.
+    * Horizontal Server Clustering & Load Balancing:
+============================================================
+
+IMAGE 25: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image050.png
+  PRECEDING:
+    * The recommendations, architectural upgrades, and technical future scope presented in this chapter map directly to the system limitations identified during testing. By establishing a clear progression for artificial intelligence integration, kernel-level response enforcement, transport layer encryption, and horizontal high-availability scaling, this roadmap provides a complete blueprint for evolving the working microservices prototype into a production-grade enterprise security appliance.
+    * CHAPTER 13: PERSONAL LEARNING OUTCOMES
+    * Beyond the software engineering deliverables, architectural diagrams, and microservices constructed during this internship project, the development lifecycle provided a comprehensive foundation for professional growth across multiple computer science and cybersecurity domains.
+    * This chapter synthesises the core technical proficiencies, system design concepts, domain-specific insights, and professional methodologies acquired during the internship. It evaluates these learning achievements as structured outcomes resulting from the design, implementation, debugging, and validation of the microservices-based Security Information and Event Management (SIEM) and Security Orchestration, Automation, and Response (SOAR) platform.
+    * 13.1 Technical Proficiencies Gained
+  FOLLOWING:
+    * 13.1 Technical Proficiencies Gained
+    * Figure 13.1: Summary Of Technical Skills Gained
+    * 13.1.1 Microservices Architecture & Containerised Orchestration
+    * Engineering the platform as a collection of decoupled, containerised microservices rather than a monolithic application provided deep practical experience in distributed system design. Key learnings include:
+    * Packaging independent execution environments using custom Dockerfiles (Dockerfile.siem, Dockerfile.agent, Dockerfile.collector, Dockerfile.vulnerable).
+============================================================
+
+IMAGE 26: NRL%20SIEM%20&%20SOAR%20INTERNSHIP%20REPORT_files/image052.png
+  PRECEDING:
+    * Interactive SOC Monitoring Dashboard:
+    * Constructed a web-based monitoring interface (app/static/dashboard/) that polls backend REST routes (app/api/dashboard.py) asynchronously to visualise live event feeds, threat severity distributions, active blocklists, and automated SOAR execution histories.
+    * Containerised Microservices Orchestration:
+    * Packaged all independent microservices into an isolated Docker Compose environment (docker-compose.yml, Dockerfile.*) for single-command deployment and reproducible testing.
+    * 14.2 Empirical Scope Assessment
+  FOLLOWING:
+    * 14.2 Empirical Scope Assessment
+    * Figure 13.1: Summary Of Technical Skills Gained
+    * To maintain academic and engineering rigour, the project maintains full transparency regarding its operational scope. The platform was evaluated within an isolated containerised testing range rather than deployed directly onto active production refinery network segments.
+    * Empirical testing (Chapter 8) confirmed that automating threat detection and response workflows reduces Mean Time to Detect (MTTD) to under 2.5 seconds and Mean Time to Respond (MTTR) to under 1.2 seconds, achieving a > 99% performance improvement over manual SOC triage workflows. At the same time, the project acknowledged systemic boundaries including application-layer containment, unauthenticated REST routes, and cleartext inter-service transport, establishing a clear baseline for the production hardening roadmap outlined in Chapter 12.
+    * 14.3 Final Engineering Assessment
+============================================================
+

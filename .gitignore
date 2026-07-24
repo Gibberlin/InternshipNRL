@@ -1,0 +1,14 @@
+# Ignore everything by default
+*
+
+# Keep the selected project files and folders tracked
+!main.tex
+!*.md
+!*.txt
+!images/
+!images/**
+!resources/
+!resources/**
+
+# Always keep the ignore file itself
+!.gitignore

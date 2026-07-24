@@ -1,0 +1,176 @@
+# Outline Plan: LaTeX Document Restructuring
+
+We will restructure `main.tex` starting from line 170 (after the front matter pages) to align exactly with the Table of Contents (TOC) of the HTML report (`NRL SIEM & SOAR INTERNSHIP REPORT.htm`).
+
+## Constraints Checked & Rules Followed
+- **No edits before line 169**: All content above line 169 (Title, Certificate, Declaration) will remain untouched.
+- **Rules.md alignment**: Follow formatting guidelines and escape LaTeX special characters.
+
+## Restructuring Plan
+
+We will replace the placeholder chapters in `main.tex` (lines 170–188) with the following LaTeX chapter, section, and subsection structure:
+
+- **CHAPTER 1: INTRODUCTION**
+  - `\section{Introduction to SIEM and SOAR}`
+  - `\section{Problem Statement}`
+  - `\section{Significance and Objectives of the Study}`
+  - `\section{Scope and Limitations of the Project}`
+  - `\section{Structure of the Report}`
+
+- **CHAPTER 2: COMPANY PROFILE**
+  - `\section{Overview of Numaligarh Refinery Limited (NRL)}`
+  - `\section{History and Background}`
+  - `\section{Vision, Mission, and Core Values}`
+  - `\section{Overview of NRL’s IIS and Cybersecurity Infrastructure}`
+  - `\section{Shareholding Patterns}`
+  - `\section{Alliances and Joint Ventures}`
+
+- **CHAPTER 3: LITERATURE REVIEW**
+  - `\section{Sources of Literature}`
+  - `\section{Conceptual Background}`
+    - `\subsection{Evolution of SIEM Technologies}`
+    - `\subsection{SOAR as an Operational Extension of SIEM}`
+    - `\subsection{The MITRE ATT&CK Framework}`
+    - `\subsection{NIST Cybersecurity Framework (CSF)}`
+    - `\subsection{ISO/IEC 27001 Standard}`
+  - `\section{Review of Existing SIEM/SOAR Platforms}`
+  - `\section{Research \& Engineering Gap}`
+  - `\section{Statement of the Problem}`
+
+- **CHAPTER 4: RESEARCH AND DEVELOPMENT METHODOLOGY**
+  - `\section{Development Approach and Engineering Lifecycle}`
+    - `\subsection{Phase I: Telemetry \& Ingestion Backbone Engineering}`
+    - `\subsection{Phase II: Target Application \& Attack Simulation Integration}`
+    - `\subsection{Phase III: Stateful Detection \& Rule Correlation}`
+    - `\subsection{Phase IV: Closed-Loop SOAR Playbook Execution}`
+    - `\subsection{Phase V: SOC Visualization Fabric}`
+  - `\section{Telemetry Sources and Attack Generation}`
+    - `\subsection{Target Web Application Logs (vulnerable\_app.py)}`
+    - `\subsection{Automated Attack Script Telemetry (log\_generator.sh)}`
+    - `\subsection{Distributed Python Agents (agent.py, log\_collector.py)}`
+    - `\subsection{Logstash \& Filebeat Ingestion Pipeline (logstash.conf, filebeat.yml)}`
+  - `\section{Containerised Microservices Sandbox}`
+  - `\section{Technical Stack and Tooling Infrastructure}`
+
+- **CHAPTER 5: SYSTEM ARCHITECTURE**
+  - `\section{Ingestion Pipeline and Operational Overview}`
+  - `\section{Microservice Component Descriptions}`
+    - `\subsection{Distributed Log Shipping and Agent Boundary}`
+    - `\subsection{Central Ingress API Gateway (app/api/ingress.py)}`
+    - `\subsection{SIEM Detection and Correlation Core (app/engine.py, siem\_server.py)}`
+    - `\subsection{SOAR Orchestration and Playbook Engine (app/soar\_engine.py, app/playbooks.py)}`
+    - `\subsection{Vulnerable Target Application (vulnerable\_app.py)}`
+    - `\subsection{SOC Monitoring Dashboard (app/static/dashboard/)}`
+  - `\section{Asynchronous Telemetry Data Flow}`
+  - `\section{Architectural Rationale and Microservice Decoupling}`
+
+- **CHAPTER 6: IMPLEMENTATION DETAILS**
+  - `\section{Overview of System Implementation}`
+  - `\section{Telemetry Ingestion and Log Processing Pipeline}`
+    - `\subsection{Distributed Log Shipping Agents (agent.py, log\_collector.py)}`
+    - `\subsection{Filebeat and Logstash Integration (filebeat.yml, logstash.conf)}`
+    - `\subsection{Central REST Ingress API (app/api/ingress.py)}`
+  - `\section{Target Application and Attack Simulation (vulnerable\_app.py, log\_generator.sh)}`
+    - `\subsection{Vulnerable Web Application (vulnerable\_app.py)}`
+    - `\subsection{Automated Threat Generator (log\_generator.sh)}`
+    - `\subsection{Industrial SCADA/OT Telemetry Interface}`
+  - `\section{SIEM Detection Engine and Incident Modelling}`
+    - `\subsection{Alert Data Modelling (app/models.py)}`
+    - `\subsection{Detection Engine Logic (app/engine.py, siem\_server.py)}`
+  - `\section{SOAR Orchestration Engine and Response Playbooks}`
+    - `\subsection{SOAR Core (app/soar\_engine.py, app/api/soar\_api.py)}`
+    - `\subsection{Automated Response Playbooks (app/playbooks.py)}`
+    - `\subsection{Verification Framework (test\_soar.py)}`
+  - `\section{SOC Monitoring Dashboard UI (app/api/dashboard.py, app/static/dashboard/)}`
+
+- **CHAPTER 7: DETECTION RULE CATALOG \& SOAR PLAYBOOK DESIGN**
+  - `\section{SIEM Detection Rule Catalogue}`
+    - `\subsection{Detailed Rule Logic Specifications}`
+  - `\section{SOAR Playbook Design \& Mapping}`
+    - `\subsection{Playbook Mapping Matrix}`
+  - `\section{Automated Mitigation Mechanisms}`
+    - `\subsection{Active IP Containment (block\_ip)}`
+    - `\subsection{Host Agent Containment (isolate\_agent)}`
+    - `\subsection{Analyst Webhook Dispatches (notify\_analyst)}`
+  - `\section{Safety Controls and Automated Containment Safeguards}`
+
+- **CHAPTER 8: RESULTS \& DEMONSTRATION**
+  - `\section{Attack Simulation and Test Environment Setup}`
+  - `\section{Demonstration Scenario 1: Automated Brute-Force Detection \& Dynamic IP Blocking}`
+    - `\subsection{Execution \& Attack Injection}`
+    - `\subsection{Log Ingestion \& SIEM Engine Evaluation}`
+    - `\subsection{Automated SOAR Playbook Execution}`
+  - `\section{Demonstration Scenario 2: Web Application Exploit \& Host Agent Containment}`
+    - `\subsection{Execution \& Attack Injection}`
+    - `\subsection{Log Ingestion \& SIEM Engine Evaluation}`
+    - `\subsection{Automated SOAR Playbook Execution}`
+  - `\section{SOAR Engine Verification and Test Harness Results (test\_soar.py)}`
+  - `\section{SOC Monitoring Dashboard UI Performance (app/static/dashboard/)}`
+  - `\section{System Evaluation Summary \& Key Performance Metrics}`
+
+- **CHAPTER 9: ENGINEERING CHALLENGES \& DESIGN TRADE-OFFS**
+  - `\section{Real-Time Log Ingestion Throughput vs. Microservices Architectural Overhead}`
+    - `\subsection{The Engineering Challenge}`
+    - `\subsection{Evaluated Alternatives \& Selected Trade-Off}`
+  - `\section{State Persistence and Race Conditions in Asynchronous Alert Handling}`
+    - `\subsection{The Engineering Challenge}`
+    - `\subsection{Technical Resolution}`
+  - `\section{Application-Layer Containment vs. Kernel-Level Firewall Filtering}`
+    - `\subsection{The Engineering Challenge}`
+    - `\subsection{Design Trade-Off Analysis}`
+  - `\section{Handling Polymorphic Log Schemas and Unstructured Fields}`
+    - `\subsection{The Engineering Challenge}`
+    - `\subsection{Technical Resolution}`
+  - `\section{Mitigating Self-Inflicted Denial of Service (Self-DoS) in Automated SOAR}`
+    - `\subsection{The Engineering Challenge}`
+    - `\subsection{Fail-Safe Controls Implementation}`
+
+- **CHAPTER 10: SECURITY \& SAFETY CONSIDERATIONS**
+  - `\section{Safety-First Defensive Design Philosophy}`
+  - `\section{Forensic Invariance and Data Auditability}`
+  - `\section{Documented Security Gaps and Architectural Limitations}`
+    - `\subsection{Absence of Cryptographic Access Authentication (API Gateways)}`
+    - `\subsection{Exposure to Cleartext Transport Protocols (HTTP Polyfill)}`
+    - `\subsection{Application-Layer Rejection vs. Perimeter Kernel Enforcement}`
+
+- **CHAPTER 11: KEY CHALLENGES AND SYSTEM LIMITATIONS**
+  - `\section{Scope and Feature Limitations}`
+    - `\subsection{Deterministic Rule Logic vs. Machine Learning Integration}`
+    - `\subsection{Simulated External Integrations in SOAR Playbooks}`
+    - `\subsection{Endpoint Telemetry API Scope}`
+  - `\section{Availability, Reliability, and Scale Limitations}`
+    - `\subsection{Single-Point-of-Failure (SPOF) Vulnerabilities}`
+    - `\subsection{Memory-Bound Event Queueing and Concurrency Limits}`
+    - `\subsection{Micro-Batch Evaluation Latency Floor}`
+  - `\section{Security \& Cryptographic Boundaries}`
+  - `\section{System Verification Limitations}`
+
+- **CHAPTER 12: SUGGESTIONS, RECOMMENDATIONS & FUTURE SCOPE**
+  - `\section{Staged Integration of Layered Artificial Intelligence \& ML}`
+    - `\subsection{Stage 1: Dynamic Statistical Telemetry Baselining}`
+    - `\subsection{Stage 2: Unsupervised Machine Learning Anomaly Detection}`
+    - `\subsection{Stage 3: LLM-Driven Incident Triage \& Automated Summarisation}`
+  - `\section{Production SOAR Infrastructure \& Integration Extensions}`
+    - `\subsection{Kernel-Level Host Containment (iptables / eBPF)}`
+    - `\subsection{Production ITSM \& Ticket System Integration}`
+  - `\section{Expansion of Distributed Telemetry \& Ingestion Sources}`
+  - `\section{Hardening Cryptographic Security and Access Control}`
+  - `\section{High Availability, Distributed Message Queuing, and Scalability}`
+
+- **CHAPTER 13: PERSONAL LEARNING OUTCOMES**
+  - `\section{Technical Proficiencies Gained}`
+    - `\subsection{Microservices Architecture \& Containerised Orchestration}`
+    - `\subsection{Telemetry Ingestion, Shipping, and Log Parsing Pipelines}`
+    - `\subsection{Stateful Threat Detection and Event Correlation}`
+    - `\subsection{Closed-Loop Security Automation (SOAR) \& Safety Gate Engineering}`
+    - `\subsection{Modern SOC Interface Development \& Async API Integration}`
+  - `\section{Conceptual Systems Understanding Gained}`
+  - `\section{Industry Exposure and Professional Growth at Numaligarh Refinery Limited (NRL)}`
+
+- **CHAPTER 14: CONCLUSION**
+  - `\section{Technical Achievements and Core Deliverables}`
+  - `\section{Empirical Scope Assessment}`
+  - `\section{Final Engineering Assessment}`
+
+- **ANNEXURES** (represented as `\chapter{ANNEXURES}`)
+- **REFERENCES** (represented as `\chapter{REFERENCES}`)

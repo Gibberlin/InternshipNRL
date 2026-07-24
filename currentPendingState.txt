@@ -1,0 +1,7 @@
+Pending Tasks for Internship Report:
+1. Complete the LaTeX restructuring from line 170 onward so the report body matches the TOC structure from the HTML source.
+2. Replace the current placeholder chapter content with the required chapter/section/subsection hierarchy.
+3. Preserve all front-matter pages and content above line 169 exactly as-is.
+4. Escape LaTeX special characters and keep formatting consistent with rules.md.
+5. Verify the document compiles cleanly after the body restructuring.
+6. Review the generated TOC and body headings for alignment and completeness.

@@ -1,0 +1,160 @@
+# Image Mapping Table
+# This file maps the MS Word exported image files to high-quality clean descriptive names in the images/ directory,
+# along with their locations and captions inside main.tex.
+
+Image 1:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image001.png
+  LaTeX Image Path:    images/nrl-logo.png
+  Document Location:   Cover Page / Document Header
+  Figure Caption:      NRL Logo
+
+Image 2:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image003.jpg
+  LaTeX Image Path:    images/nrl-main-gate.jpg
+  Document Location:   2.1 Overview of Numaligarh Refinery Limited (NRL)
+  Figure Caption:      Figure 2.1: NRL Main gate
+
+Image 3:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image005.png
+  LaTeX Image Path:    images/assam-accord.png
+  Document Location:   2.2 History and Background
+  Figure Caption:      Figure 2.2: The signing of the historic Assam Accord on August 15, 1985
+
+Image 4:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image007.jpg
+  LaTeX Image Path:    images/best-ciso-award.jpg
+  Document Location:   2.4 Overview of NRL’s IIS and Cybersecurity Infrastructure
+  Figure Caption:      Figure 2.3: Best CISO of the Year award at the 2nd Bharat PSU Manthan 2026
+
+Image 5:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image009.png
+  LaTeX Image Path:    images/shareholding-pattern.png
+  Document Location:   2.5 Shareholding Patterns
+  Figure Caption:      Figure 2.4: Shareholding Pattern
+
+Image 6:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image011.png
+  LaTeX Image Path:    images/architecture-overview.png
+  Document Location:   4.1 Development Approach and Engineering Lifecycle
+  Figure Caption:      Figure 4.1: Architecture Overview
+
+Image 7:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image013.png
+  LaTeX Image Path:    images/docker-compose-env.png
+  Document Location:   4.3 Containerised Microservices Sandbox
+  Figure Caption:      Figure 4.2: Docker Compose Environment
+
+Image 8:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image015.png
+  LaTeX Image Path:    images/system-architecture-flow.png
+  Document Location:   5.1 Ingestion Pipeline and Operational Overview
+  Figure Caption:      Figure 5.1: System Architecture Flow
+
+Image 9:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image017.png
+  LaTeX Image Path:    images/raw-log-collector.png
+  Document Location:   6.2 Telemetry Ingestion and Log Processing Pipeline
+  Figure Caption:      Figure 6.1: Centralised Raw Log Collector Stream Viewer
+
+Image 10:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image019.png
+  LaTeX Image Path:    images/corporate-portal-auth.png
+  Document Location:   6.3.1 Vulnerable Web Application (vulnerable_app.py)
+  Figure Caption:      Figure 6.2: The Corporate Portal Authentication Interface
+
+Image 11:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image021.png
+  LaTeX Image Path:    images/scada-hmi-dashboard.png
+  Document Location:   6.3.3 Industrial SCADA/OT Telemetry Interface
+  Figure Caption:      Figure 6.3: SCADA HMI Industrial Mixture Control Dashboard
+
+Image 12:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image023.png
+  LaTeX Image Path:    images/soar-severity-levels.png
+  Document Location:   6.5.2 Automated Response Playbooks (app/playbooks.py)
+  Figure Caption:      Figure 6.4: SOAR Engine Severity Levels
+
+Image 13:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image025.png
+  LaTeX Image Path:    images/playbook-mapping-matrix.png
+  Document Location:   7.2 SOAR Playbook Design & Mapping
+  Figure Caption:      Figure 7.1: Playbook Mapping Matrix
+
+Image 14:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image027.png
+  LaTeX Image Path:    images/test-env-execution-flow.png
+  Document Location:   8.1 Attack Simulation and Test Environment Setup
+  Figure Caption:      Figure 8.1: Test Environment Execution Flow
+
+Image 15:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image029.png
+  LaTeX Image Path:    images/soc-monitoring-dashboard.png
+  Document Location:   8.5 SOC Monitoring Dashboard UI Performance (app/static/dashboard/)
+  Figure Caption:      Figure 8.2: Security Operations Centre (SOC) Monitoring & SOAR Dashboard
+
+Image 16:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image031.png
+  LaTeX Image Path:    images/sync-vs-async-tradeoff.png
+  Document Location:   9.1.1 The Engineering Challenge
+  Figure Caption:      Figure 9.1: Synchronous vs. Asynchronous Trade Off
+
+Image 17:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image033.png
+  LaTeX Image Path:    images/enforcement-layer-comparison.png
+  Document Location:   9.3.1 The Engineering Challenge
+  Figure Caption:      Figure 9.2: Enforcement Layer Comparison
+
+Image 18:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image035.png
+  LaTeX Image Path:    images/fail-safe-controls.png
+  Document Location:   9.5.2 Fail-Safe Controls Implementation
+  Figure Caption:      Figure 9.3: Fail-Safe Controls Implementation
+
+Image 19:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image037.png
+  LaTeX Image Path:    images/risk-separated-playbooks.png
+  Document Location:   10.1 Safety-First Defensive Design Philosophy
+  Figure Caption:      Figure 10.1: Risk Separated Playbook Execution
+
+Image 20:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image039.png
+  LaTeX Image Path:    images/perimeter-vs-app-drop.png
+  Document Location:   10.3.3 Application-Layer Rejection vs. Perimeter Kernel Enforcement
+  Figure Caption:      Figure 10.2: Perimeter vs. Application Drop
+
+Image 21:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image041.png
+  LaTeX Image Path:    images/spof-diagram.png
+  Document Location:   11.2 Availability, Reliability, and Scale Limitations
+  Figure Caption:      Figure 11.1: Single Point Of Failure (SPOF) Diagram
+
+Image 22:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image043.png
+  LaTeX Image Path:    images/three-stage-ai-roadmap.png
+  Document Location:   12.1 Staged Integration of Layered Artificial Intelligence & ML
+  Figure Caption:      Figure 12.1: Three Stage AI/ML Detection Roadmap
+
+Image 23:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image045.png
+  LaTeX Image Path:    images/expanded-telemetry-architecture.png
+  Document Location:   12.3 Expansion of Distributed Telemetry & Ingestion Sources
+  Figure Caption:      Figure 12.2: Expanded Telemetry Ingestion Architecture
+
+Image 24:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image047.png
+  LaTeX Image Path:    images/high-availability-deployment.png
+  Document Location:   12.5 High Availability, Distributed Message Queuing, and Scalability
+  Figure Caption:      Figure 12.3: High-Availability Enterprise Deployment
+
+Image 25:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image049.png
+  LaTeX Image Path:    images/technical-skills-summary.png
+  Document Location:   13.1 Technical Proficiencies Gained
+  Figure Caption:      Figure 13.1: Summary Of Technical Skills Gained
+
+Image 26:
+  Word High-Res File:  resources\NRL SIEM & SOAR INTERNSHIP REPORT_files\image051.png
+  LaTeX Image Path:    images/empirical-scope-skills-summary.png
+  Document Location:   14.2 Empirical Scope Assessment
+  Figure Caption:      Figure 13.1: Summary Of Technical Skills Gained
+

@@ -1,0 +1,56 @@
+Part 1 — Industrial IT/OT Convergence & Digital Infrastructure
+
+5G CNPN and Edge Computing
+BSNL and Numaligarh Refinery signed an agreement to deploy a captive non-public 5G network (CNPN) at NRL, intended to provide ultra-reliable, low-latency connectivity for industrial use cases including real-time IoT telemetry and AR/VR-based operator training.
+
+Private 5G CNPNs in industry enable millisecond-level latency and deterministic QoS at the site edge, which supports time-sensitive sensor telemetry, remote video for situational awareness, and immersive augmented/virtual reality applications for maintenance and training.
+
+Deployments typically combine BSNL’s spectrum/core services with system integrators and edge compute (on-prem or MEC) to place data processing close to the plant, reducing backhaul to central clouds and improving resilience and security for critical control-plane traffic.
+
+Hexagon 3D Digital Twin
+Hexagon’s digital-twin solutions create visual, spatially accurate replicas of industrial sites that merge as-built 3D geometry with live telemetry to form a single operational picture.
+
+Connected digital-twin workflows bind physical assets (pipes, valves, instruments) to IoT streams and enterprise systems so that condition, location, and performance metrics update in near real time; this supports predictive maintenance and operator situational awareness.
+
+Hexagon products provide connectors and integrations for operational and cloud systems, enabling the twin to ingest sensor/IoT feeds and present a synchronized, georeferenced view of asset state and alerts.
+
+AspenTech, SCADA/DCS and InfoPlus.21 Historian
+AspenTech InfoPlus.21 (IP.21) is a high-performance process historian designed to collect millisecond-to-second time-series from DCS/SCADA/PLC systems and contextualize events for analytics, visualization, and batch/process reporting.
+
+Typical integrations use industry-standard interfaces (OPC, REST, ODBC, COM) and are architected to stream plant automation telemetry (process variables, alarms, batch events) into IP.21 for both real-time dashboards and long-term analysis.
+
+When paired with digital twin or analytics platforms, IP.21 supplies the live telemetry that keeps 3D models and decision-support apps in sync with the physical plant.
+
+Cloud Migration — AWS IEDDMS for Engineering Blueprints
+Enterprise engineering document and data management systems migrate to AWS to scale storage of large engineering blueprints and enable serverless or containerized processing for OCR, indexing, and metadata extraction.
+
+On AWS the typical architecture for an IEDDMS places document storage in Amazon S3, uses Lambda/Step Functions for processing and orchestration (e.g., Textract for OCR), and persists metadata in DynamoDB or Aurora, all inside a secured VPC with IAM controls and encryption.
+
+Hexagon and other EAM/digital-twin vendors have documented integrations and joint best-practices with AWS for securely hosting digital-twin services, enabling the twin and document systems to share artifacts, telemetry, and AI/ML services in cloud-native workflows.
+
+Migration benefits include scalable object storage for very large drawings, automated intelligent document processing (indexing and search), disaster recovery, and simplified integration with analytics or machine-learning pipelines hosted on AWS.
+
+How these pieces work together at NRL (concise architecture narrative)
+
+Edge capture and transport: Field sensors, PLCs, and operator AR devices send telemetry over the BSNL private 5G CNPN to on-site edge compute or MEC nodes to guarantee low latency and site-isolated connectivity.
+
+Local historian and control integration: Edge gateways forward millisecond-level telemetry into the plant historian (Aspen InfoPlus.21) and into SCADA/DCS supervisory layers for real-time control and alarm management.
+
+Twin synchronization and situational awareness: Hexagon’s 3D digital twin subscribes to historian and IoT streams so the 3D site model reflects live values (flow, temperature, valve status), enabling visual alerts and predictive maintenance workflows.
+
+Cloud-backed documentation and analytics: Engineering blueprints, vendor manuals, and large asset files are stored in AWS (S3) and processed with document-inspection and ML services; the cloud-hosted IEDDMS provides global access, versioning, and integration with asset management and twin services.
+
+Security & resilience considerations: The CNPN isolates industrial traffic from public networks, while edge compute, historian retention policies, and cloud IAM/encryption protect data flows; system integrations should follow standards (OPC, REST) and vendor best-practices for secure connectors.
+
+Short list of primary integration points (useful for later securing/design)
+
+5G CNPN ↔ MEC/Edge compute (sensor aggregation, protocol translation).
+
+Edge gateways ↔ DCS/SCADA (OPC/Modbus) ↔ InfoPlus.21 historian.
+
+InfoPlus.21 ↔ Hexagon digital twin (real-time feeds and contextual metadata).
+
+IEDDMS (AWS S3 + Lambda/Textract + DB) ↔ Engineering workstations and Hexagon/asset systems.
+
+Cross-domain APIs (REST/HTTPS) used by SOC or SIEM collectors to ingest telemetry/alerts for cybersecurity monitoring.
+
