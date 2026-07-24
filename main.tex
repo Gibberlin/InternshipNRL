@@ -1193,9 +1193,10 @@ This makes the platform a governed simulation of SOC automation rather than an u
 \newpage
 \chapter{RESULTS \& DEMONSTRATION}
 
-This chapter presents the empirical validation of the lab-scale SIEM/SOAR platform. The objective is to prove that even a simplified Dockerised microservice architecture can demonstrate the necessity of machine-speed response for critical infrastructure operations.
-
-The platform was evaluated using controlled attack simulations against the \texttt{vulnerable\_app.py} honeypot, while telemetry was shipped through \texttt{agent.py}, \texttt{log\_collector.py}, and the ingress gateway. The measured results emphasise why a refinery cannot rely on manual human response for deterministic threats.
+This chapter presents the empirical validation of the lab-scale SIEM/SOAR platform. The objective is to prove that even a simplified Dockerised microservice architecture can demonstrate the necessity of machine-speed response for critical infrastructure operations. \\
+The platform was evaluated using controlled attack simulations against the \\
+\texttt{vulnerable\_app.py} honeypot, while telemetry was shipped through\\
+\texttt{agent.py}, \texttt{log\_collector.py}, and the ingress gateway. The measured results emphasise why a refinery cannot rely on manual human response for deterministic threats.
 
 \section{Attack Simulation and Test Environment Setup}
 
@@ -1272,7 +1273,7 @@ The automated verification suite validated the playbook execution lifecycle.
 \caption{SOAR Playbook Automated Test Verification Results}
 \label{tab:test-verification}
 \footnotesize
-\begin{tabularx}{\textwidth}{|p{2.5cm}|X|X|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{5.5cm}|X|X|p{2.0cm}|}
 \hline
 \textbf{Test Module / Function} & \textbf{Evaluated Capability} & \textbf{Execution Output} & \textbf{Status Result} \\ \hline
 \texttt{test\_alert\_ingestion()} & SOAR listener pickup of new alerts & ALERT PICKUP SUCCESS & \textbf{PASSED} \\ \hline
@@ -1662,7 +1663,8 @@ This chapter synthesises the core technical proficiencies, system design concept
 
 Engineering the platform as a collection of decoupled, containerised microservices rather than a monolithic application provided deep practical experience in distributed system design. Key learnings include:
 \begin{itemize}
-  \item Packaging independent execution environments using custom Dockerfiles (\texttt{Dockerfile.siem}, \texttt{Dockerfile.agent}, \texttt{Dockerfile.collector}, \texttt{Dockerfile.vulnerable}).
+  \item Packaging independent execution environments using custom Dockerfiles \\ 
+  (\texttt{Dockerfile.siem}, \texttt{Dockerfile.agent}, \texttt{Dockerfile.collector},\\ \texttt{Dockerfile.vulnerable}).
   \item Managing inter-container network isolation, service dependencies, and environment variable routing using Docker Compose.
   \item Diagnosing inter-service network boundaries, port forwarding configurations, and local communication across container interfaces.
   \item Understanding the deployment separation between enterprise IT systems and plant control OT networks, mapping container network segregation to physical industrial network firewalls.
@@ -1691,7 +1693,7 @@ Building the core detection engine (\texttt{engine.py}) provided hands-on experi
 
 \subsection{Closed-Loop Security Automation \& Safety Gate Engineering}
 
-Transitioning passive alert detection into automated, machine-speed containment (\texttt{playbooks.py}) provided direct experience with security automation principles:
+Transitioning passive alert detection into automated, machine-speed containment \\ (\texttt{playbooks.py}) provided direct experience with security automation principles:
 \begin{itemize}
   \item Codifying modular Python response playbooks (\texttt{block\_ip}, \texttt{isolate\_agent}) mapped to alert severity levels.
   \item Translating defensive philosophy into programmatic fail-safes such as protected system allowlists, mandatory block expiration timestamps, and concurrency rate ceilings to prevent self-inflicted denial of service (Self-DoS).
