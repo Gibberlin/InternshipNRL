@@ -25,7 +25,9 @@
 \titlespacing*{\chapter}{0pt}{-25pt}{12pt}
 \titlespacing*{\section}{0pt}{10pt}{6pt}
 \titlespacing*{\subsection}{0pt}{8pt}{4pt}
-
+\usepackage{caption}              % For customizing figure and table captions
+\captionsetup[table]{skip=10pt}
+\usepackage{array}                %
 \usepackage{tikz}                 %This package is for borders
 \usetikzlibrary{calc}
 \usepackage{eso-pic}              %This is also for borders
@@ -44,6 +46,10 @@
 % Put a dot after chapter numbers in the Table of Contents
 \renewcommand{\cftchapaftersnum}{.}
 
+\usetikzlibrary{positioning}      %For positioning nodes in diagrams
+\usepackage{listings}
+\usepackage{xcolor}
+
 % ========================================
 % Page Border
 % ========================================
@@ -57,6 +63,33 @@ rectangle
 
 \end{tikzpicture}
 }
+
+% Define custom colors for code highlighting
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.94}
+
+% Setup the style
+\lstdefinestyle{annexstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=annexstyle}
 
 \begin{document}
 % Make normal paragraphs fully justified
@@ -350,8 +383,27 @@ To study and evaluate these complex enterprise-scale security dynamics in a prac
 
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{resources/NRL SIEM & SOAR INTERNSHIP REPORT_files/image054.jpg}
+  \centering % Keeps it centered relative to your shift
+  \hspace*{-1cm} % <--- Adjust this negative value to move it left
+  \resizebox{\linewidth}{!}{%
+    \begin{tikzpicture}[>=stealth, 
+      stepblock/.style={rectangle, draw, fill=blue!5, text width=2.8cm, align=center, rounded corners, minimum height=1.2cm, font=\small}]
+      
+      \begin{scope}[node distance=0.8cm]
+        \node[stepblock, text width=3.5cm] (ingest) {Ingestion\\(\texttt{log\_collector.py})};
+        \node[stepblock, right=of ingest] (norm) {Normalization\\(\texttt{ingress.py})};
+        \node[stepblock, right=of norm] (correlate) {Correlation\\(\texttt{engine.py})};
+        \node[stepblock, text width=3.4cm, right=of correlate] (orchestrate) {Orchestration\\(\texttt{siem\_server.py})};
+        \node[stepblock, right=of orchestrate] (contain) {Containment\\(\texttt{block\_ip} Playbook)};
+      \end{scope}
+      
+      \draw[->, thick] (ingest) -- (norm);
+      \draw[->, thick] (norm) -- (correlate);
+      \draw[->, thick] (correlate) -- (orchestrate);
+      \draw[->, thick] (orchestrate) -- (contain);
+      \draw[->, thick, dashed] (contain) .. controls ([yshift=-1.5cm]correlate.south) .. (ingest);
+    \end{tikzpicture}%
+  }
   \caption{The closed-loop SIEM and SOAR sandbox execution pipeline.}
   \label{fig:siem-soar-loop}
 \end{figure}
@@ -680,9 +732,9 @@ The corporate security landscape has experienced major structural changes driven
 \centering
 \caption{SIEM and SOAR Platform Benchmarking}
 \label{tab:platform-comparison}
+\renewcommand{\arraystretch}{1.3}
 \footnotesize
-\begin{tabularx}{\textwidth}{|p{2.5cm}|X|X|X|X|}
-\hline
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}\hline
 Platform Name & Deployment Type & System Architecture & Advanced Detection \& SOAR Approach & Primary Architectural Trade-off \\ \hline
 Splunk Enterprise Security & Commercial Enterprise & Centralised heavy ingestion \& index search cluster & Stateful rule mapping + UEBA; Integrated Splunk SOAR / Phantom playbooks & High licensing costs scaling linearly with daily log volume. \\ \hline
 Elastic Security & Commercial (Open Core) & Elasticsearch data nodes + Logstash/Filebeat pipeline + Kibana UI & EQL-based correlation rules + Machine Learning; Webhook-driven alerts & High ingest speed; complex cluster setup and resource footprint. \\ \hline
@@ -1105,7 +1157,6 @@ This rule layer is not a production SOC replacement. Instead, it functions as a 
   \label{fig:playbook-mapping-matrix}
 \end{figure}
 
-
 \renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
 \centering
@@ -1303,34 +1354,73 @@ The dashboard verifies the SOC visibility layer and demonstrates how the simulat
   \item Enterprise mapping to FortiAnalyzer, Airtel iSOC, and Dark Web enrichment contexts.
 \end{itemize}
 
-\section{System Evaluation Summary \& Key Performance Metrics}
+\subsection{System Evaluation Summary \& Key Performance Metrics}
 
 The benchmarked performance confirms why machine-speed SOAR mitigation is essential in a large critical infrastructure environment.
 
-\renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
 \centering
+\vspace{6pt}
 \caption{Operational MTTD and MTTR Performance Metrics}
-\label{tab:performance-metrics}
-\footnotesize
-\begin{tabularx}{\textwidth}{|X|p{4cm}|p{3cm}|p{3.5cm}|}
+\label{tab:operational-metrics}
+\vspace{6pt}
+
+\renewcommand{\arraystretch}{1.3}
+% Using tabularx to keep it perfectly within margins, with raggedright to prevent weird word spacing
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
 \hline
-Performance Metric & Manual Triage Baseline (Estimated) & Automated Platform Execution & Performance Gain \\ \hline
-Mean Time to Detect (MTTD) & 5 to 15 minutes & $< 2.5$ seconds & $> 99\%$ reduction \\ \hline
-Mean Time to Respond (MTTR) & 10 to 30 minutes & $< 1.2$ seconds & $> 99\%$ reduction \\ \hline
-Log Processing Throughput & Manual review ($\approx 10$ logs/min) & $\geq 2500$ logs/second & $> 15000\%$ increase \\ \hline
-Playbook Execution Latency & Manual firewall setup (5 to 10 min) & $< 800$ milliseconds & Near-instant containment \\ \hline
+\textbf{Performance Metric} & \textbf{Manual Triage Baseline (Estimated)} & \textbf{Automated Platform Execution} & \textbf{Performance Gain} \\ \hline
+
+Mean Time to Detect (MTTD) & 5 to 15 minutes & $<$ 2.5 seconds & $>$ 99\% reduction \\ \hline
+
+Mean Time to Respond (MTTR) & 10 to 30 minutes & $<$ 1.2 seconds & $>$ 99\% reduction \\ \hline
+
+Log Processing Throughput & Manual review ($\approx$ 10 logs/min) & $\geq$ 2500 logs/second & $>$ 15000\% increase \\ \hline
+
+Playbook Execution Latency & Manual firewall setup (5 to 10 min) & $<$ 800 milliseconds & Near-instant containment \\ \hline
 \end{tabularx}
 \end{table}
 
 These results provide the concrete justification for the integrated SIEM/SOAR design: in a refinery or similar critical infrastructure environment, even a few minutes of uncontrolled attack propagation can expose safety-critical systems to unacceptable risk.
 
+\vspace{12pt}
+\subsubsection*{Supporting Performance Calculations}
+
+To ensure accuracy, all baseline units are converted into the same units as the automated platform (seconds or logs/second) using the most conservative manual estimates.
+
+\begin{itemize}
+    \item \textbf{Mean Time to Detect (MTTD) Reduction:} \\
+    Using the conservative 5-minute (300 seconds) manual baseline against the 2.5-second automated detection:
+    \[
+    \text{Percentage Reduction} = \left( \frac{300 - 2.5}{300} \right) \times 100 = \left( \frac{297.5}{300} \right) \times 100 \approx 99.16\%
+    \]
+    
+    \item \textbf{Mean Time to Respond (MTTR) Reduction:} \\
+    Using the conservative 10-minute (600 seconds) manual baseline against the 1.2-second automated response:
+    \[
+    \text{Percentage Reduction} = \left( \frac{600 - 1.2}{600} \right) \times 100 = \left( \frac{598.8}{600} \right) \times 100 = 99.80\%
+    \]
+    
+    \item \textbf{Log Processing Throughput Speedup:} \\
+    Normalizing the manual review rate to logs per second yields roughly 0.1667 logs/sec ($10 \text{ logs} / 60 \text{ seconds}$). 
+    \[
+    \text{Speedup Factor} = \frac{2500 \text{ logs/sec}}{10 / 60 \text{ logs/sec}} = \frac{2500 \times 60}{10} = 15,000\text{x faster}
+    \]
+    \textit{Note: The table denotes a $>15000\%$ increase, which reflects the 15,000x multiplier scale.}
+    
+    \item \textbf{Playbook Execution Latency:} \\
+    Using the conservative 5-minute (300 seconds) manual baseline against the 800-millisecond (0.8 seconds) automated execution:
+    \[
+    \text{Fraction of Original Time} = \frac{0.8 \text{ seconds}}{300 \text{ seconds}} \approx 0.0026
+    \]
+    The automated playbook executes in approximately \textbf{0.26\%} of the time it takes to do it manually, justifying the ``Near-instant containment'' designation.
+\end{itemize}
 \newpage
 \chapter{ENGINEERING CHALLENGES \& DESIGN TRADE-OFFS}
 
 The transition from conceptual SIEM/SOAR design to an implemented microservice architecture introduces multiple engineering compromises. These are not hypothetical design flaws; they are practical constraints encountered in moving from a research sandbox to an enterprise-scale nervous system for security operations.
 
-\begin{tcolorbox}[colback=blue!5,colframe=blue!65!black,title=Engineering Trade-off Summary]
+\begin{tcolorbox}[colback=blue!5,colframe=red!65!black,title=Engineering Trade-off Summary]
 The project demonstrates that a lab-scale simulation can preserve the logic of an enterprise SOC, but it cannot reproduce the physical scale, operational load, and governance requirements of a 9 MMTPA refinery environment. The core challenge is therefore not building the controls themselves, but scaling them safely and reliably from a proof-of-concept to production-critical infrastructure.
 \end{tcolorbox}
 
@@ -1788,156 +1878,148 @@ Confronting real-world software engineering challenges such as inter-container n
 \chapter*{ANNEXURES}
 \addcontentsline{toc}{chapter}{ANNEXURES}
 
-\textbf{Annexure I — Core Configuration: OT Digital Twin simulation sandbox}
+\section*{Annexure I — Core Configuration: OT Digital Twin simulation sandbox}
 
 The multi-container orchestration manifest used to deploy the isolated microservices network:
 
-\begin{verbatim}
+\begin{lstlisting}[language=bash, title=docker-compose.yml]
 version: '3.8'
- 
+
 services:
-  siem-server:
-    build:
-      context: .
-      dockerfile: Dockerfile.siem
-    ports:
-      - "5000:5000"
-    environment:
-      - FLASK_ENV=development
-      - PORT=5000
-    volumes:
-      - ./app:/app/app
-    networks:
-      - siem-net
- 
-  log-collector:
-    build:
-      context: .
-      dockerfile: Dockerfile.collector
-    ports:
-      - "5005:5001"
-    environment:
-      -
-  SIEM_SERVER_URL=http://siem-server:5000/api/ingress
-    depends_on:
-      - siem-server
-    networks:
-      - siem-net
- 
-  agent-node:
-    build:
-      context: .
-      dockerfile: Dockerfile.agent
-    environment:
-      -
-  COLLECTOR_URL=http://log-collector:5001/api/ingress
-      - AGENT_NAME=agent-node-01
-    depends_on:
-      - log-collector
-    networks:
-      - siem-net
- 
-  vulnerable-app:
-    build:
-      context: .
-      dockerfile: Dockerfile.vulnerable
-    ports:
-      - "5001:5001"
-    environment:
-      - PORT=5001
-    networks:
-      - siem-net
- 
+  siem-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.siem
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - PORT=5000
+    volumes:
+      - ./app:/app/app
+    networks:
+      - siem-net
+
+  log-collector:
+    build:
+      context: .
+      dockerfile: Dockerfile.collector
+    ports:
+      - "5005:5001"
+    environment:
+      - SIEM_SERVER_URL=http://siem-server:5000/api/ingress
+    depends_on:
+      - siem-server
+    networks:
+      - siem-net
+
+  agent-node:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - COLLECTOR_URL=http://log-collector:5001/api/ingress
+      - AGENT_NAME=agent-node-01
+    depends_on:
+      - log-collector
+    networks:
+      - siem-net
+
+  vulnerable-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.vulnerable
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+    networks:
+      - siem-net
+
 networks:
-  siem-net:
-    driver: bridge
-\end{verbatim}
+  siem-net:
+    driver: bridge
+\end{lstlisting}
 
-\textbf{Annexure II — Logstash Pipeline Configuration: Logstash event processing pipeline}
+\vspace{1cm}
 
+\section*{Annexure II — Logstash Pipeline Configuration}
 The ingestion parsing pipeline used to parse raw HTTP access logs into normalized JSON fields:
 
-\begin{verbatim}
+\begin{lstlisting}[language=Ruby, title=logstash.conf]
 input {
-  beats {
-    port => 5044
-  }
-  http {
-    port => 8080
-    codec => json
-  }
+  beats {
+    port => 5044
+  }
+  http {
+    port => 8080
+    codec => json
+  }
 }
- 
+
 filter {
-  if [type] == "web-access" {
-    grok {
-      match => { 
-        "message" => "%{IP:client_ip}
-  %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\]
-  \"%{WORD:http_method} %{URIPATHPARAM:request_uri}
-  HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int}
-  %{NUMBER:bytes}" 
-      }
-    }
-    mutate {
-      add_field => {
-  "ingest_source" => "logstash-pipeline" }
-    }
-  }
+  if [type] == "web-access" {
+    grok {
+      match => { 
+        "message" => "%{IP:client_ip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] \"%{WORD:http_method} %{URIPATHPARAM:request_uri} HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int} %{NUMBER:bytes}" 
+      }
+    }
+    mutate {
+      add_field => { "ingest_source" => "logstash-pipeline" }
+    }
+  }
 }
- 
+
 output {
-  http {
-    url =>
-  "http://siem-server:5000/api/ingress"
-    http_method => "post"
-    format => "json"
-  }
+  http {
+    url => "http://siem-server:5000/api/ingress"
+    http_method => "post"
+    format => "json"
+  }
 }
-\end{verbatim}
+\end{lstlisting}
 
-\textbf{Annexure III — Filebeat Collector Manifest: Filebeat security agent configuration}
+\vspace{1cm}
 
+\section*{Annexure III — Filebeat Collector Manifest}
 The lightweight log shipping configuration for harvesting application logs:
 
-\begin{verbatim}
+\begin{lstlisting}[language=bash, title=filebeat.yml]
 filebeat.inputs:
-  - type: log
-    enabled: true
-    paths:
-      - /var/log/vulnerable_app/*.log
-      - /app/logs/*.log
-    fields:
-      log_type: web-access
-      environment: sandbox-range
- 
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/vulnerable_app/*.log
+      - /app/logs/*.log
+    fields:
+      log_type: web-access
+      environment: sandbox-range
+
 output.logstash:
-  hosts: ["logstash:5044"]
-\end{verbatim}
+  hosts: ["logstash:5044"]
+\end{lstlisting}
 
-\textbf{Annexure IV — Sample Normalised Ingestion JSON Payloads}
+\vspace{1cm}
 
-Sample JSON request body transmitted from client agents (EDR host agent) to the central Ingress API endpoint (/api/ingress):
+\section*{Annexure IV — Sample Normalised Ingestion JSON Payloads}
+Sample JSON request body transmitted from client agents (EDR host agent) to the central Ingress API endpoint (\texttt{/api/ingress}):
 
-1. HTTP 401 Authentication Failure Log
-
-\begin{verbatim}
+\textbf{1. HTTP 401 Authentication Failure Log}
+\begin{lstlisting}
 {
-  "timestamp": "2026-07-23T12:04:15.102Z",
-  "source_ip": "192.168.1.105",
-  "target_host": "vulnerable-web-01",
-  "service_name": "corp-portal-auth",
-  "log_level": "WARNING",
-  "status_code": 401,
-  "request_uri": "/api/login",
-  "message": "User login
-  failed for account 'admin' - Invalid password"
+  "timestamp": "2026-07-23T12:04:15.102Z",
+  "source_ip": "192.168.1.105",
+  "target_host": "vulnerable-web-01",
+  "service_name": "corp-portal-auth",
+  "log_level": "WARNING",
+  "status_code": 401,
+  "request_uri": "/api/login",
+  "message": "User login failed for account 'admin' - Invalid password"
 }
-\end{verbatim}
+\end{lstlisting}
 
-2. Web Application Exploit Attempt Payload (SQL Injection)
-
-\begin{verbatim}
+\textbf{2. SQL Injection Attempt Log}
+\begin{lstlisting}
 {
   "timestamp": "2026-07-23T12:08:42.884Z",
   "source_ip": "198.51.100.200",
@@ -1945,12 +2027,10 @@ Sample JSON request body transmitted from client agents (EDR host agent) to the 
   "service_name": "corp-portal-db",
   "log_level": "CRITICAL",
   "status_code": 500,
-  "request_uri": "/products?category=1' UNION SELECT
-  username, password FROM users--",
-  "message": "Uncaught database exception: SQL syntax
-  error near UNION SELECT"
+  "request_uri": "/products?category=1' UNION SELECT username, password FROM users--",
+  "message": "Uncaught database exception: SQL syntax error near UNION SELECT"
 }
-\end{verbatim}
+\end{lstlisting}
 
 \newpage
 \chapter*{REFERENCES}
