@@ -8,17 +8,17 @@
 \usepackage{xcolor}               % Load color package before titlesec
 \usepackage{titlesec}             % For clean heading formatting
 \titleformat{\chapter}[block]
-  {\normalfont\LARGE\bfseries\color{black}\centering}
+  {\normalfont\large\bfseries\color{black}\centering}
   {\chaptername\ \thechapter:\quad}
   {0pt}
   {}
 \titleformat{\section}
-  {\normalfont\large\bfseries}
+  {\normalfont\normalsize\bfseries}
   {\thesection\quad}
   {0pt}
   {}
 \titleformat{\subsection}
-  {\normalfont\large\itshape\raggedright}
+  {\normalfont\normalsize\itshape}
   {\thesubsection\quad}
   {0pt}
   {}
@@ -168,7 +168,7 @@ rectangle
 
 \begin{center}
   \vspace*{1cm}
-  {\LARGE \textbf{CERTIFICATE}}
+  {\Large \textbf{CERTIFICATE}}
 \end{center}
 \addcontentsline{toc}{chapter}{CERTIFICATE}
 \vspace{1cm}
@@ -177,7 +177,7 @@ rectangle
 
 \begin{center}
 
-This is to certify that the following students,  pursuing the \textbf{Bachelor of Technology (B.Tech.) in Computer Science and Engineering} at \textbf{Barak Valley Engineering College (BVEC)}, has successfully completed their \textbf{internship at Numaligarh Refinery Limited (NRL)} and has submitted the internship report entitled:
+This is to certify that the following students, pursuing the \textbf{Bachelor of Technology (B.Tech.) in Computer Science and Engineering} at \textbf{Barak Valley Engineering College (BVEC)}, have successfully completed their \textbf{internship at Numaligarh Refinery Limited (NRL)} and have submitted the internship report entitled:
 
 \vspace{0.5cm}
 
@@ -209,14 +209,11 @@ To the best of our knowledge, this report is an original piece of work and has n
 
 \begin{singlespace}
 \noindent
-
-\textbf{Signature of Supervisor} \hfill \textbf{Signature of Head of Department} \\
-
-Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \hfill
-Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
-
-Designation: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \hfill
-Department: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\\
+\begin{tabularx}{\textwidth}{@{}X X@{}}
+\textbf{Signature of Supervisor} & \textbf{Signature of Head of Department} \\[1.2cm]
+Name: \rule{5.2cm}{0.4pt} & Name: \rule{5.2cm}{0.4pt} \\[1.2cm]
+Designation: \rule{4.6cm}{0.4pt} & Department: \rule{4.6cm}{0.4pt}
+\end{tabularx}
 
 \end{singlespace}
 % =========================================================
@@ -225,7 +222,7 @@ Department: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 \newpage
 \begin{center}
   \vspace*{1cm}
-  {\LARGE \textbf{DECLARATION}}
+  {\Large \textbf{DECLARATION}}
 \end{center}
 \addcontentsline{toc}{chapter}{DECLARATION}
 \vspace{1cm}
@@ -329,7 +326,6 @@ To practically evaluate these enterprise-scale security dynamics, a microservice
     \item A centralized SIEM analytics engine (\texttt{siem\_server.py}, \texttt{engine.py}) modeling SOC log correlation.
     \item Automated SOAR playbooks (\texttt{block\_ip}, \texttt{isolate\_agent}) demonstrating closed-loop incident containment.
 \end{itemize}
-
 \vspace{0.3cm}
 This integrated approach bridges the gap between \textbf{theoretical industrial architectures} and \textbf{hands-on defensive engineering}, providing a comprehensive analysis of modern critical national infrastructure protection.
 \vspace{0.4cm}
@@ -822,11 +818,57 @@ Cross-Domain APIs & SIEM Collectors & Forwards security events and API logs via 
 The integration points described above establish the industrial data fabric analysed in Chapter 5.
 
 \newpage
+
 \chapter{SYSTEM ARCHITECTURE}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth, height=0.6\textheight, keepaspectratio]{images/system-architecture-flow.png}
+  \begin{tikzpicture}[
+      node distance=2cm and 1cm,
+      box/.style={draw, rectangle, rounded corners, minimum height=1.2cm, text width=4cm, align=center, font=\sffamily\small, thick},
+      arrow/.style={thick, ->, >=stealth},
+      label_text/.style={font=\sffamily\scriptsize, fill=white, inner sep=3pt, align=center}
+  ]
+
+      % Level 1: Data Sources
+      \node[box, fill=cyan!10] (agent) {Simulated Log Agent \\ \texttt{(agent.py)}};
+      \node[box, fill=cyan!10, left=1cm of agent] (app) {Vulnerable Target App \\ \texttt{(vulnerable\_app.py)}};
+      \node[box, fill=cyan!10, right=1cm of agent] (logstash) {Logstash \& Filebeat \\ \texttt{(logstash.conf)}};
+
+      % Level 2: Ingress
+      \node[box, fill=yellow!10, below=2cm of agent, text width=6cm] (ingress) {Ingress API Gateway \\ \texttt{(app/api/ingress.py)}};
+
+      % Level 3: SIEM
+      \node[box, fill=green!10, below=1.8cm of ingress, text width=6cm] (siem) {Core SIEM Engine \\ \texttt{(app/engine.py, siem\_server.py)}};
+
+      % Level 4: Storage and SOAR
+      \node[box, fill=red!10, below left=2cm and -0.5cm of siem] (models) {Alert Models \\ \texttt{(app/models.py)}};
+      \node[box, fill=violet!10, below right=2cm and -0.5cm of siem] (soar) {SOAR Engine \\ \texttt{(app/playbooks.py)}};
+
+      % Level 5: Containment
+      \node[box, fill=pink!20, below=1.8cm of soar] (containment) {Active Firewall Block \\ / Containment};
+
+      % Connections
+      % 1. Data Sources to Ingress (Merge routing to avoid overlap)
+      \coordinate (merge_top) at ([yshift=-1cm]agent.south);
+      \draw[thick] (app.south) |- (merge_top);
+      \draw[thick] (logstash.south) |- (merge_top);
+      \draw[thick] (agent.south) -- (merge_top);
+      \draw[arrow] (merge_top) -- (ingress.north) node[midway, label_text] {Encrypted HTTPS / Stream Payload};
+
+      % 2. Ingress to SIEM
+      \draw[arrow] (ingress.south) -- (siem.north) node[midway, label_text] {Asynchronous Payload Normalization};
+
+      % 3. SIEM to Models & SOAR (Split routing for clean labels)
+      \coordinate (split_bottom) at ([yshift=-0.8cm]siem.south);
+      \draw[thick] (siem.south) -- (split_bottom);
+      \draw[arrow] (split_bottom) -| (models.north) node[pos=0.25, above, font=\sffamily\scriptsize] {Relational Storage State};
+      \draw[arrow] (split_bottom) -| (soar.north) node[pos=0.25, above, font=\sffamily\scriptsize] {Stateful Correlation Analysis};
+
+      % 4. SOAR to Containment
+      \draw[arrow] (soar.south) -- (containment.north) node[midway, right, label_text, text width=3cm] {Automated Mitigation Execution};
+
+  \end{tikzpicture}
   \caption{System Architecture Flow}
   \label{fig:system-architecture-flow}
 \end{figure}
@@ -906,7 +948,6 @@ The execution path of a security event through this platform follows an explicit
 Structuring this platform as a collection of decoupled containerised microservices rather than a monolithic application represents a core engineering design choice. Isolating log collection, API ingress, threat detection analytics, SOAR response execution, target simulation, and UI rendering into independent execution spaces prevents single-point-of-failure risks.
 
 This modular design decouples log ingestion from analytical processing. Consequently, new detection rules, SOAR playbooks, or dashboard widgets can be developed, tested, and scaled independently without disrupting the continuous telemetry flow streaming from target endpoints. In the refinery environment, this decoupling ensures that process control networks (OT) remain highly available and isolated from enterprise IT application updates, preserving the safety and continuity of the industrial plant.
-
 \newpage
 \chapter{IMPLEMENTATION DETAILS}
 
@@ -1128,11 +1169,11 @@ The detection engine evaluates incoming event streams using threshold logic, sli
 \begin{tabularx}{\textwidth}{|p{1.8cm}|X|X|X|p{2cm}|}
 \hline
 Rule ID & Rule Technical Name & Evaluation Target \& Grouping Criteria & Mathematical / Logical Trigger Condition & Assigned Severity \\ \hline
-RULE-01 & Brute-Force Authentication Attempt & Grouped by \texttt{source\_ip} over sliding T = 60s window & $\geq 5$ HTTP 401 failures within 60s & HIGH / CRITICAL \\ \hline
+RULE-01 & Brute-Force Authentication Attempt & Grouped by \texttt{source\_ip} over sliding T = 60s window & $\geq 5$ HTTP 401 failures within 60s & CRITICAL \\ \hline
 RULE-02 & Application Error Rate Spike & Grouped by \texttt{target\_host} or \texttt{service\_name} & $\geq 10$ HTTP 500 / exception logs within 30s & MEDIUM \\ \hline
 RULE-03 & Web Exploitation Signature Match & Evaluates \texttt{request\_uri} and payload fields & SQLi / XSS / traversal signature match & CRITICAL \\ \hline
 RULE-04 & Unauthorised Scanning / Directory Probing & Grouped by \texttt{source\_ip} & $\geq 8$ HTTP 403 / 404 responses within 45s & MEDIUM \\ \hline
-RULE-05 & Anomalous Host Agent Connection & Evaluates heartbeat and metadata & Unregistered \texttt{agent\_id} or unexpected socket origin & LOW / INFORMATIONAL \\ \hline
+RULE-05 & Anomalous Host Agent Connection & Evaluates heartbeat and metadata & Unregistered \texttt{agent\_id} or unexpected socket origin & LOW \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -1513,7 +1554,6 @@ The platform uses a two-layer transformation sequence:
 This is a necessary prerequisite for any enterprise-scale ingestion model, where production logs from firewalls, endpoints, applications, and OT devices frequently differ in structure.
 
 \section{Mitigating Self-Inflicted Denial of Service in Automated SOAR}
-
 \subsection{The Engineering Challenge}
 
 Automated mitigation can themselves become a threat if a false positive floods the SOAR engine.
@@ -1600,54 +1640,67 @@ This chapter consolidates the macro-level constraints that arise when moving fro
 \section{Scope and Feature Limitations}
 
 \subsection{Deterministic Rule Logic vs. Machine Learning Integration}
-
 The platform relies on stateful threshold logic and signature matching rather than unsupervised anomaly detection. This keeps the prototype understandable, but limits adaptive detection capability.
 
 \subsection{Simulated External Integrations in SOAR Playbooks}
-
-The SOAR routines simulate enterprise workflows such as notification and ticketing operations, but do not yet integrate with production-grade systems such as ServiceNow or Jira.
+The SOAR routines currently simulate enterprise workflows such as notification and ticketing operations via local logging. However, they do not yet feature bidirectional integration with production-grade IT Service Management (ITSM) systems such as ServiceNow or Jira. Consequently, incident tracking and resolution management remain siloed within the sandbox environment. Future iterations will utilize RESTful API integrations to auto-generate tracking tickets, assign SOC analysts, and automatically synchronize alert states between the custom SIEM engine and the enterprise helpdesk.
 
 \subsection{Endpoint Telemetry API Scope}
-
 The current client scripts focus on application and HTTP telemetry rather than full kernel-level logging. This is a deliberate simplification to preserve portability and lab-scale testing.
 
 \section{Availability, Reliability, and Scale Limitations}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/spof-diagram.png}
-  \caption{Single Point Of Failure (SPOF) Diagram}
-  \label{fig:spof-diagram}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    box/.style={draw, rectangle, rounded corners, minimum height=1.2cm, text centered, font=\sffamily, thick, fill=gray!10},
+    arrow/.style={thick, ->, >=stealth},
+    spof/.style={text=red!80!black, font=\sffamily\bfseries\small}
+]
+    % Nodes
+    \node[box] (agents) { Distributed Agents };
+    \node[box, right=1.5cm of agents, text width=4.5cm] (ingress) { Central Ingress Gateway  \\ \small\texttt{(app/api/ingress.py)}};
+    \node[box, right=1.5cm of ingress, text width=4.8cm] (siem) { Central SIEM / SOAR Server  \\ \small\texttt{(siem\_server.py)}};
+
+    \node[spof, below=1.2cm of ingress] (ingress_spof) {* [ CRITICAL SPOF ]};
+    \node[text width=4cm, font=\sffamily\small, below=0.1cm of ingress_spof] (ingress_desc) {\textbullet\ No Load Balancer \\ \textbullet\ No Ingress Replicas};
+
+    \node[spof, below=1.2cm of siem] (siem_spof) {* [ CRITICAL SPOF ]};
+    \node[text width=4.5cm, font=\sffamily\small, below=0.1cm of siem_spof] (siem_desc) {\textbullet\ Monolithic Python State \\ \textbullet\ Single Memory Queue};
+
+    % Arrows
+    \draw[arrow] (agents) -- (ingress);
+    \draw[arrow] (ingress) -- (siem);
+    \draw[arrow] (ingress) -- (ingress_spof);
+    \draw[arrow] (siem) -- (siem_spof);
+\end{tikzpicture}
+\caption{Single Point Of Failure (SPOF) Diagram}
+\label{fig:spof}
 \end{figure}
 
 \subsection{Single-Point-of-Failure Vulnerabilities}
-
-There is no HA redundancy across the central ingress or SIEM core. A single service failure halts log processing. In a real refinery this would be unacceptable.
+As illustrated in Figure \ref{fig:spof}, there is no HA redundancy across the central ingress or SIEM core. A single service failure halts log processing. In a real refinery this would be unacceptable.
 
 \subsection{Memory-Bound Event Queueing and Concurrency Limits}
-
-The event queue is in-memory. Under severe burst conditions the platform is vulnerable to queue overflow and dropped telemetry.
+The event queue is currently implemented in-memory. Under severe burst conditions---such as a volumetric DDoS attack or a massive influx of concurrent endpoint alerts---the platform is vulnerable to queue overflow. Without a dedicated message broker (like Kafka or RabbitMQ) to persist the backlog, this constraint can lead to dropped telemetry and a failure to trigger critical automated mitigations when they are most needed.
 
 \subsection{Micro-Batch Evaluation Latency Floor}
-
-Because the engine evaluates logs in batches, the message path is still slower than a true streaming correlation engine.
+Because the engine evaluates logs in discrete micro-batches rather than continuously parsing individual events in a true streaming fashion, the message path incurs a built-in latency floor. While acceptable for a lab environment, production refinery systems require true real-time stream processing frameworks (e.g., Apache Flink) to reduce evaluation latency to the sub-millisecond range.
 
 \section{Security \& Cryptographic Boundaries}
 
-The prototype is intentionally bounded in terms of cryptographic maturity:
+The prototype is intentionally bounded in terms of cryptographic maturity, prioritizing functional demonstration over production hardening. The current security boundaries exhibit the following limitations:
 
-\begin{enumerate}
-  \item unauthenticated REST endpoints,
-  \item cleartext inter-service transport,
-  \item application-layer containment rather than kernel enforcement.
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{Unauthenticated REST Endpoints:} The Ingress API currently accepts telemetry without cryptographic validation. In a production scenario, this exposes the SIEM to log-spoofing or unauthorized SOAR playbook triggers. Future enterprise iterations must enforce JSON Web Tokens (JWT), Role-Based Access Control (RBAC), or secure API keys.
+    \item \textbf{Cleartext Inter-Service Transport:} Inter-container communication currently relies on unencrypted HTTP protocols. While isolated within a local Docker bridge network, enterprise environments mandate Zero Trust principles. A production deployment would require end-to-end encryption (TLS 1.3) and Mutual TLS (mTLS) to prevent internal packet sniffing or lateral eavesdropping.
+    \item \textbf{Application-Layer Containment:} Currently, malicious IPs are blocked at the application layer via the Ingress API. As noted in Section 10.3.3, this still permits an attacker to complete the TCP handshake, leaving the system vulnerable to volumetric socket exhaustion. A hardened deployment would necessitate migrating this defense to kernel-level enforcement using \texttt{iptables} or eBPF to drop malicious packets at the host network interface.
+\end{itemize}
 
-These limitations define the boundary between a convincing research prototype and a hardened enterprise security appliance.
+These limitations explicitly define the boundary between a convincing research prototype and a hardened enterprise security appliance suitable for critical infrastructure.
 
 \section{System Verification Limitations}
-
 The evaluation relies on simulated attack scripts and isolated containers. It has not yet been stress-tested across the operating scale and geographic distribution of a refinery environment.
-
 \newpage
 \chapter{SUGGESTIONS, RECOMMENDATIONS \& FUTURE SCOPE}
 
@@ -1882,8 +1935,8 @@ Confronting real-world software engineering challenges such as inter-container n
 The multi-container orchestration manifest used to deploy the isolated microservices network:
 
 \begin{lstlisting}[language=bash, title=docker-compose.yml]
-version: '3.8'
 
+version: '3.8'
 services:
   siem-server:
     build:
@@ -1929,7 +1982,7 @@ services:
       context: .
       dockerfile: Dockerfile.vulnerable
     ports:
-      - "5001:5001"
+      - "PORT: 5001"
     environment:
       - PORT=5001
     networks:
@@ -1960,7 +2013,7 @@ filter {
   if [type] == "web-access" {
     grok {
       match => { 
-        "message" => "%{IP:client_ip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] \"%{WORD:http_method} %{URIPATHPARAM:request_uri} HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int} %{NUMBER:bytes}" 
+        "message" => "%{IP:client_ip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] \"%{WORD:http_method} % {URIPATHPARAM:request_uri} HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int} %{NUMBER:bytes}" 
       }
     }
     mutate {
