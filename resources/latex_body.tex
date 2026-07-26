@@ -180,7 +180,7 @@ As of the current operational cycle, NRL possesses an Authorized Share Capital o
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+\begin{tabular}{|P{3cm}|P{3cm}|P{3cm}|P{3cm}|}
 \hline
 Name of shareholder & Number of shares & \% of shareholding & Paid-up value of Rs. 10 each \\ \hline
 Oil India Limited & 1,22,47,85,313 & 69.63 & Rs.12,24,78,53,130 \\ \hline
@@ -256,7 +256,7 @@ These market realignments have driven increased interest toward modular open-sou
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|p{5cm}|p{5cm}|}
+\begin{tabular}{|P{3cm}|P{5cm}|P{5cm}|P{5cm}|P{5cm}|}
 \hline
 Platform Name & Deployment Type & System Architecture & Advanced Detection \& SOAR Approach & Primary Architectural Trade-off \\ \hline
 Splunk Enterprise Security & Commercial Enterprise & Centralised heavy ingestion \& index search cluster & Stateful rule mapping + UEBA; Integrated Splunk SOAR / Phantom playbooks & High licensing costs scaling linearly with daily log volume. \\ \hline
@@ -362,7 +362,7 @@ The technical selections for the platform were made to ensure high processing pe
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{5cm}|p{3cm}|p{5cm}|p{5cm}|}
+\begin{tabular}{|P{5cm}|P{3cm}|P{5cm}|P{5cm}|}
 \hline
 Domain / Layer & Selected Technology & Corresponding Repo Component(s) & Architectural Functionality \\ \hline
 Containerization \& Orchestration & Docker, Docker Compose & docker-compose.yml, Dockerfile.siem, Dockerfile.agent, Dockerfile.collector, Dockerfile.vulnerable & Manages container lifecycle, network isolation, and microservice dependencies. \\ \hline
@@ -549,7 +549,7 @@ Security events and active alerts are represented as structured Python data clas
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{3cm}|p{3cm}|p{5cm}|}
+\begin{tabular}{|P{3cm}|P{3cm}|P{5cm}|}
 \hline
 Attribute Name & Data Type & Functional Description \\ \hline
 id & Integer / String & Cryptographically unique identifier for the alert instance. \\ \hline
@@ -637,7 +637,7 @@ The detection engine (app/engine.py) evaluates incoming log events using statefu
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|l|p{5cm}|p{5cm}|p{5cm}|p{3cm}|}
+\begin{tabular}{|P{3cm}|P{5cm}|P{5cm}|P{5cm}|P{3cm}|}
 \hline
 Rule ID & Rule Technical Name & Evaluation Target \& Grouping Criteria & Mathematical / Logical Trigger Condition & Assigned Severity \\ \hline
 RULE-01 & Brute-Force Authentication Attempt & Grouped by source\_ip over sliding window T = 60s & $\ge$ 5 HTTP 401 Unauthorised / Auth Failure logs within 60s & HIGH / CRITICAL \\ \hline
@@ -678,7 +678,7 @@ RULE-05 & Anomalous Host Agent Connection & Evaluates client agent heartbeat and
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|p{5cm}|}
+\begin{tabular}{|P{3cm}|P{5cm}|P{5cm}|P{5cm}|}
 \hline
 Triggering SIEM Rule & Programmatic Action Sequence & Containment Mode Lifecycle & Target Infrastructure \\ \hline
 RULE-01 (Brute-Force) & notify\_analyst()$\rightarrow$block\_ip() & Active Enforcement (30-Minute Expiring Block) & Perimeter Gateway / Ingress API \\ \hline
@@ -810,7 +810,7 @@ The automated test script validated the following core execution pathways:
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{3cm}|p{5cm}|p{3cm}|l|}
+\begin{tabular}{|P{3cm}|P{5cm}|P{3cm}|P{3cm}|}
 \hline
 Test Module / Function & Evaluated Capability & Execution Output & Status Result \\ \hline
 test\_alert\_ingestion() & Verifies SOAR listener pickup of unhandled alerts from app/models.py. & ALERT\_PICKUP\_SUCCESS & PASSED \\ \hline
@@ -846,7 +846,7 @@ The empirical results captured across all test scenarios demonstrate significant
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{3cm}|p{5cm}|p{3cm}|p{3cm}|}
+\begin{tabular}{|P{3cm}|P{5cm}|P{3cm}|P{3cm}|}
 \hline
 Performance Metric & Manual Triage Baseline (Estimated) & Automated Platform Execution & Performance Gain \\ \hline
 Mean Time to Detect (MTTD) & 5.0 minutes - 15.0 minutes & < 2.5 seconds & > 99\% Reduction \\ \hline
@@ -919,7 +919,7 @@ A major architectural decision involved determining where automated threat conta
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|p{5cm}|}
+\begin{tabular}{|P{3cm}|P{5cm}|P{5cm}|P{5cm}|}
 \hline
 Architectural Dimension & Kernel-Level Filtering (iptables) & Application-Layer Gateway (ingress.py) & Selected Approach \& Rationale \\ \hline
 Resource Efficiency & Extremely High (Packets dropped before kernel processing). & Moderate (HTTP headers parsed before rejection). & Application Layer: Prevents target service starvation while maintaining container safety. \\ \hline
