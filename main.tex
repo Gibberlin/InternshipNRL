@@ -35,7 +35,8 @@
 \usepackage{xurl}                 % For graceful URL line breaks
 \usepackage[most]{tcolorbox}      % For highlighted engineering trade-off callouts
 \usetikzlibrary{positioning}      %For positioning nodes in diagrams
-
+\usepackage{listings}
+\usepackage{xcolor}
 % ========================================
 % Page Border
 % ========================================
@@ -49,6 +50,34 @@ rectangle
 
 \end{tikzpicture}
 }
+
+
+% Define custom colors for code highlighting
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.94}
+
+% Setup the style
+\lstdefinestyle{annexstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=annexstyle}
 
 \begin{document}
 
@@ -1106,7 +1135,7 @@ This rule layer is not a production SOC replacement. Instead, it functions as a 
   \label{fig:playbook-mapping-matrix}
 \end{figure}
 
-\subsection{Playbook Mapping Matrix}
+
 
 \renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
@@ -1371,7 +1400,7 @@ To ensure accuracy, all baseline units are converted into the same units as the 
 
 The transition from conceptual SIEM/SOAR design to an implemented microservice architecture introduces multiple engineering compromises. These are not hypothetical design flaws; they are practical constraints encountered in moving from a research sandbox to an enterprise-scale nervous system for security operations.
 
-\begin{tcolorbox}[colback=blue!5,colframe=blue!65!black,title=Engineering Trade-off Summary]
+\begin{tcolorbox}[colback=blue!5,colframe=red!65!black,title=Engineering Trade-off Summary]
 The project demonstrates that a lab-scale simulation can preserve the logic of an enterprise SOC, but it cannot reproduce the physical scale, operational load, and governance requirements of a 9 MMTPA refinery environment. The core challenge is therefore not building the controls themselves, but scaling them safely and reliably from a proof-of-concept to production-critical infrastructure.
 \end{tcolorbox}
 
@@ -1829,180 +1858,158 @@ Confronting real-world software engineering challenges such as inter-container n
 \chapter*{ANNEXURES}
 \addcontentsline{toc}{chapter}{ANNEXURES}
 
-Annexure I — Core Configuration: OT Digital Twin simulation sandbox
-
+\section*{Annexure I — Core Configuration: OT Digital Twin simulation sandbox}
 The multi-container orchestration manifest used to deploy the isolated microservices network:
 
-\begin{verbatim}
+\begin{lstlisting}[language=bash, title=docker-compose.yml]
 version: '3.8'
- 
+
 services:
-  siem-server:
-    build:
-      context: .
-      dockerfile: Dockerfile.siem
-    ports:
-      - "5000:5000"
-    environment:
-      - FLASK_ENV=development
-      - PORT=5000
-    volumes:
-      - ./app:/app/app
-    networks:
-      - siem-net
- 
-  log-collector:
-    build:
-      context: .
-      dockerfile: Dockerfile.collector
-    ports:
-      - "5005:5001"
-    environment:
-      -
-  SIEM_SERVER_URL=http://siem-server:5000/api/ingress
-    depends_on:
-      - siem-server
-    networks:
-      - siem-net
- 
-  agent-node:
-    build:
-      context: .
-      dockerfile: Dockerfile.agent
-    environment:
-      -
-  COLLECTOR_URL=http://log-collector:5001/api/ingress
-      - AGENT_NAME=agent-node-01
-    depends_on:
-      - log-collector
-    networks:
-      - siem-net
- 
-  vulnerable-app:
-    build:
-      context: .
-      dockerfile: Dockerfile.vulnerable
-    ports:
-      - "5001:5001"
-    environment:
-      - PORT=5001
-    networks:
-      - siem-net
- 
+  siem-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.siem
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - PORT=5000
+    volumes:
+      - ./app:/app/app
+    networks:
+      - siem-net
+
+  log-collector:
+    build:
+      context: .
+      dockerfile: Dockerfile.collector
+    ports:
+      - "5005:5001"
+    environment:
+      - SIEM_SERVER_URL=http://siem-server:5000/api/ingress
+    depends_on:
+      - siem-server
+    networks:
+      - siem-net
+
+  agent-node:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - COLLECTOR_URL=http://log-collector:5001/api/ingress
+      - AGENT_NAME=agent-node-01
+    depends_on:
+      - log-collector
+    networks:
+      - siem-net
+
+  vulnerable-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.vulnerable
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+    networks:
+      - siem-net
+
 networks:
-  siem-net:
-    driver: bridge
-\end{verbatim}
+  siem-net:
+    driver: bridge
+\end{lstlisting}
 
-Annexure II — Logstash Pipeline Configuration: Logstash event processing pipeline
+\vspace{1cm}
 
+\section*{Annexure II — Logstash Pipeline Configuration}
 The ingestion parsing pipeline used to parse raw HTTP access logs into normalized JSON fields:
 
-\begin{verbatim}
+\begin{lstlisting}[language=Ruby, title=logstash.conf]
 input {
-  beats {
-    port => 5044
-  }
-  http {
-    port => 8080
-    codec => json
-  }
+  beats {
+    port => 5044
+  }
+  http {
+    port => 8080
+    codec => json
+  }
 }
- 
+
 filter {
-  if [type] == "web-access" {
-    grok {
-      match => { 
-        "message" => "%{IP:client_ip}
-  %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\]
-  \"%{WORD:http_method} %{URIPATHPARAM:request_uri}
-  HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int}
-  %{NUMBER:bytes}" 
-      }
-    }
-    mutate {
-      add_field => {
-  "ingest_source" => "logstash-pipeline" }
-    }
-  }
+  if [type] == "web-access" {
+    grok {
+      match => { 
+        "message" => "%{IP:client_ip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] \"%{WORD:http_method} %{URIPATHPARAM:request_uri} HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int} %{NUMBER:bytes}" 
+      }
+    }
+    mutate {
+      add_field => { "ingest_source" => "logstash-pipeline" }
+    }
+  }
 }
- 
+
 output {
-  http {
-    url =>
-  "http://siem-server:5000/api/ingress"
-    http_method => "post"
-    format => "json"
-  }
+  http {
+    url => "http://siem-server:5000/api/ingress"
+    http_method => "post"
+    format => "json"
+  }
 }
-\end{verbatim}
+\end{lstlisting}
 
-Annexure III — Filebeat Collector Manifest: Filebeat security agent configuration
+\vspace{1cm}
 
+\section*{Annexure III — Filebeat Collector Manifest}
 The lightweight log shipping configuration for harvesting application logs:
 
-\begin{verbatim}
+\begin{lstlisting}[language=bash, title=filebeat.yml]
 filebeat.inputs:
-  - type: log
-    enabled: true
-    paths:
-      - /var/log/vulnerable_app/*.log
-      - /app/logs/*.log
-    fields:
-      log_type: web-access
-      environment: sandbox-range
- 
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/vulnerable_app/*.log
+      - /app/logs/*.log
+    fields:
+      log_type: web-access
+      environment: sandbox-range
+
 output.logstash:
-  hosts: ["logstash:5044"]
-\end{verbatim}
+  hosts: ["logstash:5044"]
+\end{lstlisting}
 
-Annexure IV — Sample Normalised Ingestion JSON Payloads
+\vspace{1cm}
 
-Sample JSON request body transmitted from client agents (EDR host agent) to the central Ingress API endpoint (/api/ingress):
+\section*{Annexure IV — Sample Normalised Ingestion JSON Payloads}
+Sample JSON request body transmitted from client agents (EDR host agent) to the central Ingress API endpoint (\texttt{/api/ingress}):
 
-1. HTTP 401 Authentication Failure Log
-
-\begin{verbatim}
+\textbf{1. HTTP 401 Authentication Failure Log}
+\begin{lstlisting}
 {
-  "timestamp":
-  "2026-07-23T12:04:15.102Z",
-  "source_ip":
-  "192.168.1.105",
-  "target_host":
-  "vulnerable-web-01",
-  "service_name":
-  "corp-portal-auth",
-  "log_level": "WARNING",
-  "status_code": 401,
-  "request_uri":
-  "/api/login",
-  "message": "User login
-  failed for account 'admin' - Invalid password"
-}
-\end{verbatim}
-
-\begin{verbatim}
-{
- 
-  "timestamp": "2026-07-23T12:08:42.884Z",
- 
-  "source_ip": "198.51.100.200",
- 
+  "timestamp": "2026-07-23T12:04:15.102Z",
+  "source_ip": "192.168.1.105",
   "target_host": "vulnerable-web-01",
- 
-  "service_name": "corp-portal-db",
- 
-  "log_level": "CRITICAL",
- 
-  "status_code": 500,
- 
-  "request_uri": "/products?category=1' UNION SELECT
-  username, password FROM users--",
- 
-  "message": "Uncaught database exception: SQL syntax
-  error near UNION SELECT"
+  "service_name": "corp-portal-auth",
+  "log_level": "WARNING",
+  "status_code": 401,
+  "request_uri": "/api/login",
+  "message": "User login failed for account 'admin' - Invalid password"
 }
-\end{verbatim}
+\end{lstlisting}
+
+\textbf{2. SQL Injection Attempt Log}
+\begin{lstlisting}
+{
+  "timestamp": "2026-07-23T12:08:42.884Z",
+  "source_ip": "198.51.100.200",
+  "target_host": "vulnerable-web-01",
+  "service_name": "corp-portal-db",
+  "log_level": "CRITICAL",
+  "status_code": 500,
+  "request_uri": "/products?category=1' UNION SELECT username, password FROM users--",
+  "message": "Uncaught database exception: SQL syntax error near UNION SELECT"
+}
+\end{lstlisting}
 
 2. Web Application Exploit Attempt Payload (SQL Injection)
 
