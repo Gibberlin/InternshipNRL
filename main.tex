@@ -8,17 +8,17 @@
 \usepackage{xcolor}               % Load color package before titlesec
 \usepackage{titlesec}             % For clean heading formatting
 \titleformat{\chapter}[block]
-  {\normalfont\large\bfseries\color{blue}\centering}
+  {\normalfont\LARGE\bfseries\color{black}\centering}
   {\chaptername\ \thechapter:\quad}
   {0pt}
   {}
 \titleformat{\section}
-  {\normalfont\normalsize\bfseries}
+  {\normalfont\large\bfseries}
   {\thesection\quad}
   {0pt}
   {}
 \titleformat{\subsection}
-  {\normalfont\normalsize\itshape}
+  {\normalfont\large\itshape\raggedright}
   {\thesubsection\quad}
   {0pt}
   {}
@@ -32,11 +32,24 @@
 \usetikzlibrary{calc}
 \usepackage{eso-pic}              %This is also for borders
 \usepackage{tabularx}             % For tables with wrapping columns
+\usepackage{array}                % Extended column definitions
+\usepackage{ragged2e}             % Better justification controls
+\usepackage{tocloft}              % Customize Table of Contents
+% Define left-aligned paragraph column type for tables
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 \usepackage{xurl}                 % For graceful URL line breaks
 \usepackage[most]{tcolorbox}      % For highlighted engineering trade-off callouts
+
+% Make tabularx X columns left-aligned (ragged-right)
+\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Put a dot after chapter numbers in the Table of Contents
+\renewcommand{\cftchapaftersnum}{.}
+
 \usetikzlibrary{positioning}      %For positioning nodes in diagrams
 \usepackage{listings}
 \usepackage{xcolor}
+
 % ========================================
 % Page Border
 % ========================================
@@ -50,7 +63,6 @@ rectangle
 
 \end{tikzpicture}
 }
-
 
 % Define custom colors for code highlighting
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -80,6 +92,8 @@ rectangle
 \lstset{style=annexstyle}
 
 \begin{document}
+% Make normal paragraphs fully justified
+\justifying
 
 % =========================================================
 % PAGE 1: TITLE PAGE (COVER)
@@ -123,21 +137,21 @@ rectangle
    \end{center}
    
     
-    
+    \vspace{0.5cm}
     \textbf{Under the Guidance of} \\
     \vspace{0.2cm}
     {\large \textbf{Mr. Muhammad Kasim}} \\
     Senior Officer (IIS) \\
-    \vspace{0.4cm}
+    \vspace{0.6cm}
     
     \textbf{Internship Organization} \\
     \vspace{0.2cm}
     Numaligarh Refinery Limited (NRL) \\
-    \vspace{0.4cm}
+    \vspace{0.6cm}
     
     \textbf{Institution} \\
     Barak Valley Engineering College \\
-    \vspace{0.4cm}
+    \vspace{0.6cm}
     
     \textbf{Academic Session} \\
     2024--2027
@@ -153,8 +167,8 @@ rectangle
 \newpage
 
 \begin{center}
-    \vspace*{1cm}
-    {\Large \textbf{\color{blue}CERTIFICATE}}
+  \vspace*{1cm}
+  {\LARGE \textbf{CERTIFICATE}}
 \end{center}
 \addcontentsline{toc}{chapter}{CERTIFICATE}
 \vspace{1cm}
@@ -198,11 +212,11 @@ To the best of our knowledge, this report is an original piece of work and has n
 
 \textbf{Signature of Supervisor} \hfill \textbf{Signature of Head of Department} \\
 
-Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \hfill
-Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
+Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \hfill
+Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
 
-Designation: \_\_\_\_\_\_\_\_\_\_\_\_\_ \hfill
-Department: \_\_\_\_\_\_\_\_\_\_\_\_\_\\
+Designation: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \hfill
+Department: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\\
 
 \end{singlespace}
 % =========================================================
@@ -210,8 +224,8 @@ Department: \_\_\_\_\_\_\_\_\_\_\_\_\_\\
 % =========================================================
 \newpage
 \begin{center}
-    \vspace*{1cm}
-    {\Large \textbf{\color{blue}DECLARATION}}
+  \vspace*{1cm}
+  {\LARGE \textbf{DECLARATION}}
 \end{center}
 \addcontentsline{toc}{chapter}{DECLARATION}
 \vspace{1cm}
@@ -266,8 +280,8 @@ We further declare that this report has not been submitted, either in whole or i
  
 \newpage
 \begin{center}
-    \vspace*{1cm}
-    {\Large \textbf{\color{blue}ACKNOWLEDGEMENT}}
+  \vspace*{1cm}
+  {\LARGE \textbf{ACKNOWLEDGEMENT}}
 \end{center}
 \addcontentsline{toc}{chapter}{ACKNOWLEDGEMENT}
 \vspace{2cm}
@@ -285,8 +299,8 @@ Lastly, we would like to express our heartfelt gratitude to our families and co-
 
 \newpage
 \begin{center}
-    \vspace*{1cm}
-    {\Large \textbf{\color{blue}ABSTRACT}}
+  \vspace*{1cm}
+  {\LARGE \textbf{ABSTRACT}}
 \end{center}
 \addcontentsline{toc}{chapter}{ABSTRACT}
 
@@ -320,9 +334,9 @@ To practically evaluate these enterprise-scale security dynamics, a microservice
 This integrated approach bridges the gap between \textbf{theoretical industrial architectures} and \textbf{hands-on defensive engineering}, providing a comprehensive analysis of modern critical national infrastructure protection.
 \vspace{0.4cm}
 \begin{center}
-\renewcommand{\arraystretch}{1.3}
+\renewcommand{\arraystretch}{1.05}
 \small
-\begin{tabularx}{\textwidth}{|p{3cm}|X|X|p{3.2cm}|}
+\begin{tabularx}{\textwidth}{|P{3cm}|X|X|P{3.2cm}|}
 \hline
 \multicolumn{4}{|c|}{\textbf{Core Project Mapping \& Compliance Parameters}} \\ \hline
 \textbf{Focus Domain} & \textbf{Enterprise Infrastructure} & \textbf{PoC Sandbox Replicate} & \textbf{Compliance Basis} \\ \hline
@@ -341,7 +355,13 @@ Keywords: Cybersecurity, IT/OT Convergence, 5G CNPN, Managed Detection and Respo
 % =========================================================
 % TABLE OF CONTENTS
 % =========================================================
-\tableofcontents
+\makeatletter
+\begin{center}
+  {\Large\bfseries Contents}
+\end{center}
+\vspace{-0.5em}
+\@starttoc{toc}
+\makeatother
 
 % --- Switch back to regular Arabic numbers for chapters ---
 \newpage
@@ -360,6 +380,7 @@ To address this challenge, Security Orchestration, Automation, and Response (SOA
 Within a major national infrastructure asset like Numaligarh Refinery Limited (NRL), security monitoring has transitioned to a proactive, Managed Detection and Response (MDR) security posture. Deployed through the Airtel Business Secure Intelligent SOC (iSOC), this framework integrates AI/ML-driven event analysis and automated containment playbooks to protect both enterprise business applications and industrial control systems.
 
 To study and evaluate these complex enterprise-scale security dynamics in a practical setting, this study develops a containerized Proof-of-Concept (PoC) simulation sandbox alongside the architectural review of NRL's production environment. The PoC sandbox replicates these enterprise controls in a controlled lab environment, establishing a closed-loop defensive pipeline.
+
 
 \begin{figure}[htbp]
   \centering % Keeps it centered relative to your shift
@@ -423,6 +444,7 @@ The custom Proof-of-Concept (PoC) sandbox maps these enterprise security operati
 \end{tabularx}
 \end{table}
 
+\newpage
 \section{Problem Statement}
 
 Securing an enterprise-scale petroleum refining infrastructure involves addressing three critical operational challenges:
@@ -468,7 +490,7 @@ Securing these flows requires strict alignment with Purdue model levels and secu
 \caption{Purdue Model Levels \& Industrial System Classification}
 \label{tab:purdue-model}
 \small
-\begin{tabularx}{\textwidth}{|p{2.5cm}|p{2cm}|X|X|}
+\begin{tabularx}{\textwidth}{|P{2.5cm}|P{3cm}|X|X|}
 \hline
 \textbf{Purdue Level} & \textbf{Domain} & \textbf{Enterprise Systems} & \textbf{Key Security Strategy} \\ \hline
 \textbf{Level 4 \& 5} & Enterprise IT & SAP S/4 HANA, ERP, AWS Cloud Hosting, IEDDMS & Central iSOC Monitoring, ZTNA, MFA, Cloud Access IAM \\ \hline
@@ -731,7 +753,7 @@ Consequently, a distinct engineering gap exists between functionally opaque prod
 
 Enterprise security operations struggle with severe inefficiencies stemming from massive log volumes, fragmented data sources, and slow manual incident triage. When critical indicators of compromise are scattered across web servers, databases, and application endpoints, standalone log viewers fail to connect related events. Furthermore, purely manual incident response workflows cannot react quickly enough to contain active attacks before system degradation occurs.
 
-This project directly addresses this operational challenge by designing, implementing, and validating a containerised, multi-component microservice architecture. The system continuously ingests telemetry streams, normalises incoming logs into structured data models, evaluates stateful correlation rules, executes automated remediation playbooks, and renders active threats on a cThe industry concepts, compliance standards, and architectural paradigms evaluated in this chapter establish the theoretical foundation for the platform. By combining centralised log shipping with real-time correlation and automated response orchestration, the platform provides a robust framework for the methodology and detailed system architecture detailed in subsequent chapters.
+This project directly addresses this operational challenge by designing, implementing, and validating a containerised, multi-component microservice architecture. The system continuously ingests telemetry streams, normalises incoming logs into structured data models, evaluates stateful correlation rules, executes automated remediation playbooks, and renders active threats on a the industry concepts, compliance standards, and architectural paradigms evaluated in this chapter establish the theoretical foundation for the platform. By combining centralised log shipping with real-time correlation and automated response orchestration, the platform provides a robust framework for the methodology and detailed system architecture detailed in subsequent chapters.
 
 \newpage
 \chapter{DIGITAL TRANSFORMATION \& INDUSTRIAL CONNECTIVITY}
@@ -804,7 +826,7 @@ The integration points described above establish the industrial data fabric anal
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/system-architecture-flow.png}
+  \includegraphics[width=\linewidth, height=0.6\textheight, keepaspectratio]{images/system-architecture-flow.png}
   \caption{System Architecture Flow}
   \label{fig:system-architecture-flow}
 \end{figure}
@@ -1134,8 +1156,6 @@ This rule layer is not a production SOC replacement. Instead, it functions as a 
   \caption{Playbook Mapping Matrix}
   \label{fig:playbook-mapping-matrix}
 \end{figure}
-
-
 
 \renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
@@ -1859,6 +1879,7 @@ Confronting real-world software engineering challenges such as inter-container n
 \addcontentsline{toc}{chapter}{ANNEXURES}
 
 \section*{Annexure I — Core Configuration: OT Digital Twin simulation sandbox}
+
 The multi-container orchestration manifest used to deploy the isolated microservices network:
 
 \begin{lstlisting}[language=bash, title=docker-compose.yml]
@@ -2010,8 +2031,6 @@ Sample JSON request body transmitted from client agents (EDR host agent) to the 
   "message": "Uncaught database exception: SQL syntax error near UNION SELECT"
 }
 \end{lstlisting}
-
-2. Web Application Exploit Attempt Payload (SQL Injection)
 
 \newpage
 \chapter*{REFERENCES}
