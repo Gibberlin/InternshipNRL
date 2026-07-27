@@ -131,7 +131,7 @@ rectangle
             \textbf{Darshana Saikia} & 232010007016 \\
             \textbf{Priyangka Das} & 232010007042 \\
             \textbf{Rivleena Khound} & 232010007047 \\
-            \textbf{Yashin Syed Hussain} & 242050007014 \\
+            \textbf{Syed Yashin Hussain} & 242050007014 \\
 
        \end{tabular}
    \end{center}
@@ -201,7 +201,7 @@ To the best of our knowledge, this report is an original piece of work and has n
             \textbf{Darshana Saikia} & 232010007016 \\
             \textbf{Priyangka Das} & 232010007042 \\
             \textbf{Rivleena Khound} & 232010007047 \\
-            \textbf{Yashin Syed Hussain} & 242050007014 \\
+            \textbf{Syed Yashin Hussain} & 242050007014 \\
        \end{tabular}
    \end{center}
    
@@ -261,7 +261,7 @@ We further declare that this report has not been submitted, either in whole or i
         Rivleena Khound -- 232010007047\\[1.0em]
         
         \rule{6cm}{0.4pt}\\[4pt]
-        Yashin Syed Hussain -- 242050007014
+        Syed Yashin Hussain -- 242050007014
     \end{minipage}
     &
     % Right side: Date and Place block
@@ -656,6 +656,11 @@ To support its tripling capacity expansion and cross-border commercial strategy,
   \item \textbf{International Alliances}: The construction and operation of the historic Indo-Bangla Friendship Pipeline, spanning from Siliguri to Bangladesh, allowing NRL to smoothly export middle distillates internationally.
   \item \textbf{Logistics \& Supply Expansion}: Massive supply-chain infrastructure joint ventures, including a dedicated Crude Oil Import Terminal at Paradip Port (Odisha) connected to the refinery via a newly laid 1,640 KM cross-country crude pipeline.
 \end{itemize}
+\newpage
+
+\chapter{Foundational Cybersecurity Concepts \& Enterprice Tooling}
+\section{CIA Triad}
+
 
 \newpage
 \chapter{LITERATURE REVIEW}
@@ -698,11 +703,16 @@ Level 0 & Physical Process & The physical refining equipment. & Field sensors, c
 \subsection{Managed Detection and Response (MDR) in Critical Infrastructure}
 
 Refineries are classified as Critical Information Infrastructure (CII), where system downtime or security incidents impact national security. Traditional localized Security Operations Centers (SOCs) struggle to maintain 24/7/365 coverage due to geographical constraints and the talent shortage in cybersecurity. Evolving threat landscapes demand \textbf{Managed Detection and Response (MDR)}, where a dedicated external partner (e.g. Airtel Business Secure iSOC) monitors telemetry round-the-clock, enriches events with global threat intelligence, and triggers automated playbooks to contain threats before lateral movement occurs.
-
+\\
 \subsection{Next-Gen EDR/XDR vs. Legacy Antivirus}
 
-Traditional antivirus solutions depend heavily on static signature databases and scheduled system scans. Consequently, they fail against modern threat vectors such as fileless malware, memory injection attacks, and fast-moving ransomware. Next-Generation \textbf{Endpoint Detection and Response (EDR/XDR)} systems run lightweight agent engines locally on hosts. These engines use behavior analytics and machine learning to reconstruct execution processes (e.g. SentinelOne Storyline), detecting and isolating anomalous behavior at machine speed even when offline.
-
+Traditional antivirus solutions depend heavily on static signature databases and \\ 
+scheduled system scans. Consequently, they fail against modern threat vectors such as \\
+fileless malware, memory injection attacks, and fast-moving ransomware.\\ 
+Next-Generation \textbf{Endpoint Detection and Response (EDR/XDR)} systems \\ 
+run lightweight agent engines locally on hosts. These engines use behavior \\
+analytics and machine learning to reconstruct execution processes \\
+(e.g. SentinelOne Storyline), detecting and isolating anomalous behavior at machine speed even when offline.
 \renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
 \centering
@@ -818,7 +828,6 @@ Cross-Domain APIs & SIEM Collectors & Forwards security events and API logs via 
 The integration points described above establish the industrial data fabric analysed in Chapter 5.
 
 \newpage
-
 \chapter{SYSTEM ARCHITECTURE}
 
 \begin{figure}[htbp]
@@ -1046,13 +1055,14 @@ An automated shell script \texttt{log\_generator.sh} simulates adversarial behav
 This generator provides repeatable telemetry for testing the correlation rules, event models, and automated SOAR playbooks.
 
 \begin{figure}[htbp]
-  \centering
   \includegraphics[width=\textwidth, keepaspectratio]{images/scada-hmi-dashboard.png}
-  \caption{SCADA HMI Industrial Mixture Control Dashboard}
+  \caption{SCADA HMI Industrial Mixture Control Dashboard.}
   \label{fig:scada-hmi-dashboard}
+  \vspace{0.5cm}
+  The figure above shows the simulated industrial interface that is intentionally lightweight but representative of a SCADA/OT display tier for liveness testing and demonstration. The purpose is not full plant control emulation, but the creation of a security-relevant endpoint for attack telemetry generation.
+
 \end{figure}
 
-The figure above shows the simulated industrial interface that is intentionally lightweight but representative of a SCADA/OT display tier for liveness testing and demonstration. The purpose is not full plant control emulation, but the creation of a security-relevant endpoint for attack telemetry generation.
 
 \section{SIEM Detection Engine and Incident Modelling}
 
