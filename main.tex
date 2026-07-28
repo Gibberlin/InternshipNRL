@@ -2,11 +2,13 @@
 
 % --- Packages for styling ---
 \usepackage[utf8]{inputenc}
+\usepackage{enumitem}             % For customizing itemize and enumerate environments
 \usepackage[margin=1in]{geometry} % Standard 1-inch margins
 \usepackage{graphicx}             % For adding images/logos
 \usepackage{setspace}             % For line spacing
 \usepackage{xcolor}               % Load color package before titlesec
 \usepackage{titlesec}             % For clean heading formatting
+\usepackage{placeins}             % For float control
 \titleformat{\chapter}[block]
   {\normalfont\large\bfseries\color{black}\centering}
   {\chaptername\ \thechapter:\quad}
@@ -29,7 +31,7 @@
 \captionsetup[table]{skip=10pt}
 \usepackage{array}                %
 \usepackage{tikz}                 %This package is for borders
-\usetikzlibrary{calc}
+\usetikzlibrary{calc,arrows.meta}
 \usepackage{eso-pic}              %This is also for borders
 \usepackage{tabularx}             % For tables with wrapping columns
 \usepackage{array}                % Extended column definitions
@@ -171,7 +173,7 @@ rectangle
   {\Large \textbf{CERTIFICATE}}
 \end{center}
 \addcontentsline{toc}{chapter}{CERTIFICATE}
-\vspace{1cm}
+\vspace{0.2cm}
 
 
 
@@ -281,7 +283,7 @@ We further declare that this report has not been submitted, either in whole or i
   {\LARGE \textbf{ACKNOWLEDGEMENT}}
 \end{center}
 \addcontentsline{toc}{chapter}{ACKNOWLEDGEMENT}
-\vspace{2cm}
+\vspace{0.8cm}
 We would like to express our sincere gratitude to \textbf{Numaligarh Refinery Limited (NRL)} for providing us with the valuable opportunity to undertake our internship in the field of cybersecurity and log monitoring. We extend our special thanks to \textbf{Mr. Sangam Panchanan}, Head (T\&D), for granting us this opportunity to learn and for their continuous support throughout the process.
 \vspace{1cm}\\
 We extend our deepest appreciation to our industry mentor, \textbf{Mr. Muhammad Kasim}, Senior Officer (IIS), NRL, for his invaluable guidance, constant encouragement, and insightful suggestions. His expertise and commitment have been instrumental in shaping the direction and quality of this project. We are indebted to him for his patience, understanding, and the time he has dedicated to reviewing and improving our work.
@@ -368,16 +370,7 @@ Keywords: Cybersecurity, IT/OT Convergence, 5G CNPN, Managed Detection and Respo
 \section{Introduction to SIEM and SOAR}
 
 Modern enterprise Information Technology (IT) and Operational Technology (OT) infrastructures in the industrial sector, particularly within critical petroleum refining environments, generate vast amounts of operational telemetry and security logs. Across systems such as enterprise resource planning (ERP) platforms, cloud-based data repositories, Distributed Control Systems (DCS), Supervisory Control and Data Acquisition (SCADA) networks, and thousands of endpoint devices, daily log generation routinely scales to millions of raw events. Hidden within this massive volume of network and application traffic are critical indicators of compromise (IoCs) that may signal unauthorized access attempts, system anomalies, or Advanced Persistent Threats (APTs) targeting critical national infrastructure.
-
-Security Information and Event Management (SIEM) systems function as the central visibility hub in modern Security Operations Centers (SOCs). A SIEM architecture aggregates heterogeneous log streams from distributed assets, normalizes unstructured log strings into standardized data schemas, applies real-time event correlation rules, and surfaces actionable security incidents. However, in high-throughput industrial environments, security detection alone is insufficient. The latency between identifying a security event and manual mitigation by an analyst presents a critical window of vulnerability.
-
-To address this challenge, Security Orchestration, Automation, and Response (SOAR) frameworks extend the capability of SIEM platforms by automating response playbooks. When a high-severity alert is validated by the SIEM layer, the SOAR module executes automated scripts to isolate compromised endpoints, block malicious traffic at the network perimeter, and alert security personnel at machine speed. 
-
-Within a major national infrastructure asset like Numaligarh Refinery Limited (NRL), security monitoring has transitioned to a proactive, Managed Detection and Response (MDR) security posture. Deployed through the Airtel Business Secure Intelligent SOC (iSOC), this framework integrates AI/ML-driven event analysis and automated containment playbooks to protect both enterprise business applications and industrial control systems.
-
-To study and evaluate these complex enterprise-scale security dynamics in a practical setting, this study develops a containerized Proof-of-Concept (PoC) simulation sandbox alongside the architectural review of NRL's production environment. The PoC sandbox replicates these enterprise controls in a controlled lab environment, establishing a closed-loop defensive pipeline.
-
-
+\vspace{0.2cm}
 \begin{figure}[htbp]
   \centering % Keeps it centered relative to your shift
   \hspace*{-1cm} % <--- Adjust this negative value to move it left
@@ -404,6 +397,17 @@ To study and evaluate these complex enterprise-scale security dynamics in a prac
   \label{fig:siem-soar-loop}
 \end{figure}
 
+Security Information and Event Management (SIEM) systems function as the central visibility hub in modern Security Operations Centers (SOCs). A SIEM architecture aggregates heterogeneous log streams from distributed assets, normalizes unstructured log strings into standardized data schemas, applies real-time event correlation rules, and surfaces actionable security incidents. However, in high-throughput industrial environments, security detection alone is insufficient. The latency between identifying a security event and manual mitigation by an analyst presents a critical window of vulnerability.
+
+To address this challenge, Security Orchestration, Automation, and Response (SOAR) frameworks extend the capability of SIEM platforms by automating response playbooks. When a high-severity alert is validated by the SIEM layer, the SOAR module executes automated scripts to isolate compromised endpoints, block malicious traffic at the network perimeter, and alert security personnel at machine speed. 
+
+Within a major national infrastructure asset like Numaligarh Refinery Limited (NRL), security monitoring has transitioned to a proactive, Managed Detection and Response (MDR) security posture. Deployed through the Airtel Business Secure Intelligent SOC (iSOC), this framework integrates AI/ML-driven event analysis and automated containment playbooks to protect both enterprise business applications and industrial control systems.
+
+To study and evaluate these complex enterprise-scale security dynamics in a practical setting, this study develops a containerized Proof-of-Concept (PoC) simulation sandbox alongside the architectural review of NRL's production environment. The PoC sandbox replicates these enterprise controls in a controlled lab environment, establishing a closed-loop defensive pipeline.
+
+
+
+
 The transition from signature-based host defense to behavior-based Next-Gen EDR/XDR is a cornerstone of this posture, as outlined in Table~\ref{tab:av-vs-edr}.
 
 \renewcommand{\arraystretch}{1.3}
@@ -421,6 +425,7 @@ The transition from signature-based host defense to behavior-based Next-Gen EDR/
 \textbf{Connectivity} & Relies on periodic cloud definition database sync. & Real-time telemetry streaming and offline local behavioral agents. \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 The custom Proof-of-Concept (PoC) sandbox maps these enterprise security operations and controls to localized Python modules as summarized in Table~\ref{tab:concept-mapping}.
 
@@ -439,6 +444,7 @@ The custom Proof-of-Concept (PoC) sandbox maps these enterprise security operati
 \textbf{SCADA \& Target Assets} & Critical OT process controls and plant infrastructure. & SCADA telemetry honeypot service (\texttt{vulnerable\_app.py}). \\ \hline
 \end{tabularx}
 \end{table}
+
 
 \newpage
 \section{Problem Statement}
@@ -495,6 +501,7 @@ Securing these flows requires strict alignment with Purdue model levels and secu
 \textbf{Level 0 \& 1} & Physical Process & Sensors, Actuators, Programmable Logic Controllers (PLC) & Captive 5G CNPN edge network containment, hardwired interlocks \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 \section{Significance and Objectives of the Study}
 
@@ -534,7 +541,6 @@ Scope of the Study
   \item PoC Sandbox Design: Implementation of custom Python host agents, SIEM correlation engines, and a SCADA web honeypot.
   \item Automated Mitigation Workflows: Empirical testing of closed-loop mitigation playbooks, including IP address blocking and real-time dashboard notifications.
 \end{itemize}
-
 Limitations of the Study
 
 \begin{itemize}
@@ -542,26 +548,40 @@ Limitations of the Study
   \item Non-Intrusive Analysis: Active security testing, vulnerability scanning, and penetration testing on live refinery production assets were not performed to maintain operational availability and safety.
   \item Data Confidentiality: Specific network topologies, granular firewall access-control lists, active security signatures, and internal incident logs have been abstracted to protect proprietary information.
 \end{itemize}
-
 \section{Structure of the Report}
 
 This report is organized into the following chapters:
 
 \begin{itemize}
   \item \textbf{Chapter 1: Introduction} — Outlines the background of enterprise security, defining the problem statement, objectives, scope, and study limitations.
-  \item \textbf{Chapter 2: Company Profile} — Details the organizational profile, shareholding patterns, joint ventures, and existing digital and cybersecurity infrastructure of NRL.
-  \item \textbf{Chapter 3: Literature Review} — Examines network protocols, core security principles, industry standards (ISO 27001, NIST), and benchmarks commercial and open-source SIEM/SOAR platforms.
-  \item \textbf{Chapter 4: Digital Transformation at NRL} — Investigates the deployment of BSNL's 5G Captive Non-Public Network (CNPN) and Hexagon's ALIM for 3D Digital Twin modeling.
-  \item \textbf{Chapter 5: Cloud and Plant IT Infrastructure} — Analyzes the cloud-based IEDDMS hosted on AWS and the AspenTech Operational Excellence Suite used for process automation.
-  \item \textbf{Chapter 6: Foundational Security Mechanics \& PoC Ingestion} — Deep dive into EDR/XDR, redundant firewalls, and Layer 7 WAF, mapped to the custom Python collectors (\texttt{agent.py}, \texttt{log\_collector.py}) and Ingress APIs (\texttt{ingress.py}).
-  \item \textbf{Chapter 7: Cryptographic Security \& Detection Rules} — Cryptographic principles in the enterprise, mapped to the custom SIEM detection rules (\texttt{engine.py}).
-  \item \textbf{Chapter 8: Security Operations \& SOAR Playbooks} — Details the operations of the Airtel Secure Intelligent SOC, AI-driven event analysis, and dark web monitoring using Cyble AI, mapped to the automated PoC response playbooks (\texttt{playbooks.py}).
-  \item \textbf{Chapter 9: Engineering \& Integration Challenges} — Analyzes the technical challenges associated with IT/OT convergence, system interoperability, and container volume state sync.
-  \item \textbf{Chapter 10: Security, Privacy \& Safety Considerations} — Examines data privacy controls (DPDP Act), operational safety, and defensive engineering practices.
-  \item \textbf{Chapter 11: System Constraints and Technical Limitations} — Outlines limits in security coverage, remote location connectivity constraints, and skills shortages.
-  \item \textbf{Chapter 12: Suggestions, Recommendations \& Future Scope} — Recommends a path forward, including Zero Trust Architectures (ZTA) and advanced machine learning models.
-  \item \textbf{Chapter 13: Technical \& Personal Learning Outcomes} — Summarizes key learnings in cloud security, industrial networking, cybersecurity operations, and systems integration.
-  \item \textbf{Chapter 14: Conclusion} — Provides a summary of research outcomes, enterprise security postures, and final technical conclusions.
+  
+  \item \textbf{Chapter 2: Company Profile} — Details the organizational profile, shareholding patterns, joint ventures, and the existing digital and cybersecurity infrastructure of NRL.
+  
+  \item \textbf{Chapter 3: Foundational Cybersecurity Concepts } — Establishes core cybersecurity principles (CIA Triad, Cryptography), the threat landscape (OWASP Top 10), and surveys modern SOC enterprise tooling (EDR, NDR, XDR, Dark Web Monitoring).
+  
+  \item \textbf{Chapter 4: Literature Review} — Examines industrial network segmentation (Purdue Model), industry standards (ISO 27001, NIST), and benchmarks commercial versus open-source SIEM/SOAR platforms.
+  
+  \item \textbf{Chapter 5: Digital Transformation \& Industrial Connectivity} — Investigates the deployment of BSNL's 5G Captive Non-Public Network (CNPN), Hexagon's ALIM Digital Twin, AWS-hosted IEDDMS, and AspenTech process automation.
+  
+  \item \textbf{Chapter 6: System Architecture} — Presents the containerized microservices design, high-level data flow diagrams, component boundaries, and asynchronous data handling logic.
+  
+  \item \textbf{Chapter 7: Implementation Details} — Explains the code-level implementation of log shipping agents, the Flask Ingress API, detection rules, SOAR workflows, and the vulnerable target application.
+  
+  \item \textbf{Chapter 8: Detection Rule Catalog \& SOAR Playbook Design} — Documents the exact detection parameters, threshold logic, severity mappings, and safety controls built into the automated playbook execution.
+  
+  \item \textbf{Chapter 9: Results \& Demonstration} — Provides empirical validation results, API verification responses, and execution outputs captured during automated attack simulations.
+  
+  \item \textbf{Chapter 10: Engineering Challenges \& Design Trade-offs} — Analyzes the technical challenges associated with real-time log ingestion throughput, asynchronous alert race conditions, and application-layer containment.
+  
+  \item \textbf{Chapter 11: Security \& Safety Considerations} — Evaluates the defensive design philosophy, forensic auditability, cleartext transport boundaries, and security disclosures of the PoC platform.
+  
+  \item \textbf{Chapter 12: Key Challenges and System Limitations} — Summarizes systemic macro-level architectural limitations, scalability boundaries, and single-point-of-failure (SPOF) risks.
+  
+  \item \textbf{Chapter 13: Suggestions, Recommendations \& Future Scope} — Outlines a phased engineering roadmap for integrating machine learning anomaly detection, LLM incident triage, and production kernel firewall hooks.
+  
+  \item \textbf{Chapter 14: Personal Learning Outcomes} — Summarizes technical skills and conceptual insights gained in microservices, log pipelines, containerization, and automated security orchestration.
+  
+  \item \textbf{Chapter 15: Conclusion} — Provides a summary of core research deliverables, system capabilities, and final technical conclusions.
 \end{itemize}
 \chapter{COMPANY PROFILE}
 
@@ -571,7 +591,7 @@ Numaligarh Refinery Limited (NRL) is a prestigious Navratna Central Public Secto
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/nrl-main-gate.jpg}
+  \includegraphics[width=0.75\textwidth, keepaspectratio]{images/nrl-main-gate.jpg}
   \caption{NRL Main gate}
   \label{fig:nrl-main-gate}
 \end{figure}
@@ -586,7 +606,7 @@ The historical genesis of NRL is deeply rooted in the historic ``Assam Accord,''
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/assam-accord.png}
+  \includegraphics[width=0.75\textwidth, keepaspectratio]{images/assam-accord.png}
   \caption{The signing of the historic Assam Accord on August 15, 1985}
   \label{fig:assam-accord}
 \end{figure}
@@ -610,7 +630,7 @@ From a cybersecurity perspective, NRL has maintained a rigorous ISO 27001 Inform
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/best-ciso-award.jpg}
+  \includegraphics[width=0.75\textwidth, keepaspectratio]{images/best-ciso-award.jpg}
   \caption{Best CISO of the Year award at the 2nd Bharat PSU Manthan 2026}
   \label{fig:best-ciso-award}
 \end{figure}
@@ -638,10 +658,11 @@ Nominee of Govt. of Assam & 14 & - & Rs. 140 \\ \hline
 Total & 1,75,89,90,361 & 100.00 & Rs.17,58,99,03,610 \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/shareholding-pattern.png}
+  \includegraphics[width=0.75\textwidth, keepaspectratio]{images/shareholding-pattern.png}
   \caption{Shareholding Pattern}
   \label{fig:shareholding-pattern}
 \end{figure}
@@ -658,27 +679,510 @@ To support its tripling capacity expansion and cross-border commercial strategy,
 \end{itemize}
 \newpage
 
-\chapter{Foundational Cybersecurity Concepts }
+\chapter{FOUNDATIONAL CYBERSECURITY CONCEPTS }
 
 \section{Core Principles of Cybersecurity}
+    Cybersecurity is the practice of protecting systems, networks, applications, and data from unauthorised access, misuse, disruption, or attack. In industrial environments such as oil and gas facilities, cybersecurity is especially important because safety, availability, and operational continuity are critical.
+    
+    \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=0.75\textwidth, keepaspectratio]{images/Cybersecurity_Core_Principles.png}
+        \caption{Core Principles of Cybersecurity}
+        \label{fig:cybersecurity-core-principles}
+      \end{figure}
+
     \subsection{The CIA Triad}
+The CIA Triad is a fundamental framework in information security used to protect data and maintain secure, reliable systems. It guides policies to ensure information remains confidential, accurate, and accessible to authorised users.
+    \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=\textwidth, keepaspectratio]{images/CIA-Triad.png}
+        \caption{The CIA Triad}
+        \label{fig:cia-triad}
+      \end{figure}
+      
+\begin{itemize}[noitemsep,topsep=0pt,partopsep=0pt,parsep=0pt]
+    \item \textbf{Confidentiality:} It ensures that sensitive data is accessible only to authorised individuals or systems. Its purpose is to prevent unauthorised viewing, access, or misuse of private information.
+    \begin{itemize}
+        \item \textbf{Risks to Confidentiality:}
+        \begin{itemize}
+            \item \textit{Unauthorised Access:} Attackers exploit vulnerabilities to access protected data.
+            \item \textit{Weak Encryption:} Outdated or weak encryption can be easily broken, exposing sensitive information.
+            \item \textit{Insider Threats:} Employees or trusted users may leak or accidentally expose confidential data.
+        \end{itemize}
+        \item \textbf{Ensure Confidentiality:}
+        \begin{itemize}
+            \item \textit{Encryption:} Use strong encryption methods like AES (Advanced Encryption Standard) or RSA (Rivest-Shamir-Adleman) to protect data from unauthorised reading. Avoid outdated algorithms like DES (Data Encryption Standard).
+            \item \textit{VPN:} A Virtual Private Network creates an encrypted tunnel for internet communication, preventing interception.
+            \item \textit{Access Controls:} Implement strict authentication and authorisation policies to limit data access to only authorised users.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Integrity:} It ensures that data remains accurate, authentic, and unaltered during storage or transmission. Any unauthorised modification or corruption compromises the reliability of data.
+    \begin{itemize}
+        \item \textbf{Risks to Integrity:}
+        \begin{itemize}
+            \item \textit{Data Tampering:} Attackers may intentionally alter or corrupt data for malicious purposes.
+            \item \textit{Malware \& Ransomware:} Malicious software can modify, encrypt, or destroy data, leading to loss and system disruption.
+        \end{itemize}
+        \item \textbf{Ensure Integrity:} Hash Functions detect modifications by generating unique hash values for data. Common hash functions include:
+        \begin{itemize}
+            \item \textit{MD5:} Produces a 128-bit hash value.
+            \item \textit{SHA (Secure Hash Algorithm) Family:} Includes SHA-1, SHA-2, and SHA-3 with varying bit lengths.
+        \end{itemize}
+        \item \textbf{Working of Hash Functions:}
+        \begin{enumerate}
+            \item \textit{Host A Sends Data:} Host A creates a hash value (H1) using a hash function.
+            \item \textit{Attach Hash:} H1 is sent along with the data.
+            \item \textit{Host B Verifies:} Host B generates a new hash (H2) from the received data.
+            \item \textit{Compare:} If H1 = H2, the data is unchanged (integrity preserved); else H1 $\neq$ H2, the data was altered or corrupted.
+        \end{enumerate}
+    \end{itemize}
+
+    \item \textbf{Availability:} It ensures that systems, networks, and data are accessible to authorised users whenever needed. Disruptions can halt operations and cause major losses.
+    \begin{itemize}
+        \item \textbf{Risks to Availability:}
+        \begin{itemize}
+            \item \textit{DoS and DDoS Attacks:} Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks flood network resources with excessive traffic, making them unavailable to legitimate users.
+            \item \textit{Impact:} Such attacks can cause major service disruptions, downtime, and financial losses for companies.
+        \end{itemize}
+        \item \textbf{Ensure Availability:}
+        \begin{itemize}
+            \item \textit{Hardware Maintenance:} Regularly maintain and upgrade hardware to prevent failures and ensure smooth operations.
+            \item \textit{Regular Upgrades:} Keep systems and software updated to maintain performance and security.
+            \item \textit{Failover Plan:} Implement failover systems so that if one component fails, another can take over, minimising downtime.
+            \item \textit{Preventing Bottlenecks:} Monitor and manage network traffic to avoid congestion or bottlenecks, ensuring consistent performance.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
     \subsection{Cryptography \& Encryption Models}
+Cryptography is the process of securing information by converting readable data (plaintext) into an unreadable format (ciphertext) using encryption algorithms and cryptographic keys. It ensures the confidentiality, integrity, and authenticity of data, allowing only authorized users to access the original information. Cryptography is widely used in secure communication, online banking, digital signatures, and data protection.
+
+\subsubsection*{Working of Cryptography}
+The cryptographic process follows a structured sequence to secure and recover data:
+\begin{enumerate}
+    \item \textbf{Plaintext:} The original readable message or data is provided as input for encryption.
+    \item \textbf{Encryption:} An encryption algorithm uses an encryption key to convert the plaintext into ciphertext.
+    \item \textbf{Ciphertext:} The encrypted data appears as random, unreadable characters, making it inaccessible to unauthorized users.
+    \item \textbf{Transmission or Storage:} The ciphertext is securely transmitted over a network or stored on a device.
+    \item \textbf{Decryption:} The authorized recipient uses the correct decryption key to convert the ciphertext back into plaintext.
+    \item \textbf{Plaintext Recovery:} The original message is restored and can now be read by the intended recipient.
+\end{enumerate}
+
+\subsubsection*{Types of Cryptography}
+
+Depending on the operational requirements, different cryptographic models are implemented to secure enterprise systems:
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{7cm}|>{\raggedright\arraybackslash}p{3cm}|}
+        \hline
+        \textbf{Type} & \textbf{Description} & \textbf{Examples} \\
+        \hline
+        \textbf{Symmetric Key Cryptography} & Uses the same key for encryption and decryption. Fast and efficient for large data. & AES, DES \\
+        \hline
+        \textbf{Asymmetric Key Cryptography} & Uses a public key for encryption and a private key for decryption. & RSA, ECC \\
+        \hline
+        \textbf{Hash Functions} & Generates a fixed-length hash to ensure data integrity and secure password storage. & SHA-256, SHA-3 \\
+        \hline
+    \end{tabular}
+    \caption{Comparison of Cryptographic Models}
+    \label{tab:crypto_types}
+\end{table}
+\FloatBarrier
+    \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=\textwidth, keepaspectratio]{images/cryptography_process.png}
+        \caption{Cryptography Process}
+        \label{fig:cryptography-process}
+      \end{figure}
+      \FloatBarrier
+
 
 \section{The Threat Landscape and Attack Vectors}
-    \subsection{Common Cyber Attacks}
-    \subsection{OWASP Top 10 Web Application Vulnerabilities}
+
+\subsection{Common Cyber Attacks}
+Modern enterprise infrastructures face diverse threat vectors targeting human, network, and application layers. The primary categories of cyber attacks include:
+
+\begin{itemize}[noitemsep, topsep=0pt, partopsep=0pt]
+    \item \textbf{Malware Attacks:} Malware (malicious software) encompasses harmful programs designed to disrupt, damage, or gain unauthorized access to computer systems. Once installed—typically via malicious email attachments or compromised websites—it can exfiltrate sensitive data or hijack system control.
+    \begin{itemize}
+        \item \textit{Ransomware:} Encrypts an organization's critical files or locks users out of their devices, demanding payment (often in cryptocurrency) to restore access.
+        \item \textit{Trojans:} Malicious programs disguised as legitimate software. They trick users into installation, creating hidden backdoors for future exploitation.
+        \item \textit{Spyware:} Software that silently monitors user activity, capturing keystrokes, passwords, and browsing history to steal credentials.
+    \end{itemize}
+    
+    \item \textbf{Social Engineering \& Phishing:} Social engineering manipulates human psychology rather than technical flaws to trick individuals into compromising security
+    \begin{itemize}
+        \item \textit{Phishing:} Fraudulent communications pretending to be from trusted entities (e.g., banks, corporate HR) to trick users into revealing credentials or clicking malicious links
+        \item \textit{Spear Phishing:} A highly customized, targeted variant of phishing directed at specific high-value individuals or organizational roles.
+        \item \textit{Business Email Compromise (BEC):} Attackers compromise or impersonate executive email accounts to authorize fraudulent wire transfers or request confidential corporate data.
+    \end{itemize}
+    
+    \item \textbf{Network Disruptions (DoS and DDoS):} 
+    \begin{itemize}
+        \item \textit{Denial-of-Service (DoS):} Intentionally floods a target system or network with illegitimate traffic to exhaust system resources, rendering it unavailable to legitimate users.
+        \item \textit{Distributed Denial-of-Service (DDoS):} Leverages a vast, geographically distributed network of compromised devices (botnets) to launch massive, coordinated traffic floods that completely crash target services.
+    \end{itemize}
+    
+    \item \textbf{Man-in-the-Middle (MitM) Attacks:} A malicious actor secretly intercepts and eavesdrops on communications between two endpoints. The communicating parties believe they are connected securely, but the attacker intercepts, views, or alters data in transit.
+    
+    \item \textbf{Application Layer Attacks (Code \& SQL Injection):} Occur when untrusted, unvalidated input is supplied to an application interpreter as part of a command or query.
+    \begin{itemize}
+        \item \textit{SQL Injection (SQLi):} Exploits flaws in how web applications construct SQL queries, allowing adversaries to view, modify, or delete backend database records.
+        \item \textit{Code Injection:} Involves executing arbitrary malicious code directly on the application host server to take control of the host.
+    \end{itemize}
+    
+    \item \textbf{Supply Chain Attacks:} Rather than attacking an enterprise directly, threat actors compromise less secure third-party vendors or software dependencies to pivot into the main corporate network through trusted channels.
+    
+    \item \textbf{Insider Threats:} Security risks originating from within the organization. Employees, contractors, or business partners with legitimate access may cause harm accidentally (e.g., failing to follow security procedures) or maliciously (e.g., stealing intellectual property).
+\end{itemize}
+
+\subsection{OWASP Top 10 Web Application Vulnerabilities}
+The Open Worldwide Application Security Project (OWASP) Top 10 serves as the global standard benchmark for the most critical web application security risks :
+
+\begin{enumerate}
+    \item \textbf{Broken Access Control (A01:2021):} Enforces boundaries such that users cannot act outside their intended permissions. Flaws allow unauthorized privilege escalation.
+    \begin{itemize}
+        \item \textit{Example:} A standard non-admin user accesses administrative parameters by altering a URL string from \texttt{/user/dashboard} to \texttt{/admin/dashboard}.
+    \end{itemize}
+
+    \item \textbf{Cryptographic Failures (A02:2021):} Formerly known as Sensitive Data Exposure, this occurs when sensitive data is inadequately protected in transit or at rest.
+    \begin{itemize}
+        \item \textit{Example:} Storing user credentials or passwords in plain text within a database without cryptographic hashing.
+    \end{itemize}
+
+    \item \textbf{Injection (A03:2021):} Occurs when untrusted data sent to an interpreter leads to unintended command execution.
+    \begin{itemize}
+        \item \textit{Examples:} SQL Injection (SQLi), NoSQL Injection, and OS Command Injection.
+    \end{itemize}
+
+    \item \textbf{Insecure Design (A04:2021):} Focuses on risks related to design and architectural flaws rather than bad coding implementation.
+    \begin{itemize}
+        \item \textit{Example:} Omitting rate-limiting mechanisms on an authentication page, enabling automated brute-force credential attempts.
+    \end{itemize}
+
+    \item \textbf{Security Misconfiguration (A05:2021):} Arises when security settings are misconfigured, default settings are left unchanged, or verbose error messages are exposed.
+    \begin{itemize}
+        \item \textit{Example:} Leaving default administrator passwords active or revealing detailed stack traces during application exceptions.
+    \end{itemize}
+
+    \item \textbf{Vulnerable and Outdated Components (A06:2021):} Using third-party software libraries, modules, or frameworks that contain publicly known vulnerabilities.
+    \begin{itemize}
+        \item \textit{Example:} Deploying a web service on an unpatched web framework version with known remote code execution (RCE) flaws.
+    \end{itemize}
+
+    \item \textbf{Identification and Authentication Failures (A07:2021):} Weaknesses in session management or user authentication that permit account takeover.
+    \begin{itemize}
+        \item \textit{Example:} Permitting weak passwords, failing to invalidate session tokens upon logout, or lacking multi-factor authentication (MFA).
+    \end{itemize}
+
+    \item \textbf{Software and Data Integrity Failures (A08:2021):} Relates to code and infrastructure that does not protect against integrity violations during software updates or data processing.
+    \begin{itemize}
+        \item \textit{Example:} Installing unverified, unsigned software updates or executing insecure CI/CD deployment pipelines.
+    \end{itemize}
+
+    \item \textbf{Security Logging and Monitoring Failures (A09:2021):} Insufficient logging, audit trails, or real-time monitoring that hinders breach detection and incident response.
+    \begin{itemize}
+        \item \textit{Example:} Failing to log repeated invalid authentication failures or application security exceptions.
+    \end{itemize}
+
+    \item \textbf{Server-Side Request Forgery (SSRF) (A10:2021):} Flaws where a web application fetches a remote resource without validating the user-supplied destination URI.
+    \begin{itemize}
+        \item \textit{Example:} Tricking a public web server into issuing unauthorized HTTP requests to protected internal infrastructure or cloud metadata endpoints.
+    \end{itemize}
+\end{enumerate}
 
 \section{Defensive Security Controls}
-    \subsection{Antivirus Systems}
-    \subsection{Firewalls and Web Application Firewalls (WAF)}
-    \subsection{Intrusion Detection Systems (IDS)}
 
+\subsection{Antivirus Systems}
+
+Antivirus software is designed to search, detect, prevent, and remove software viruses from a system, as well as other harmful software like worms and adware. It serves as a proactive approach to cybersecurity by preventing threats from infiltrating the computer. The software works by continually comparing computer applications and incoming files against a database of known malware types and isolating or eliminating matches.
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[
+    % Define block styling
+    box/.style={
+        rectangle, 
+        draw=blue!50!purple, 
+        fill=blue!10!purple!5, 
+        thick, 
+        minimum width=3cm, 
+        minimum height=0.8cm, 
+        align=center, 
+        font=\sffamily
+    },
+    % Define label styling
+    lbl/.style={
+        fill=gray!10, 
+        inner sep=2pt, 
+        font=\sffamily\footnotesize
+    },
+    % Define arrow styling
+    arrow/.style={
+        draw=green!60!black, 
+        thick, 
+        -{Stealth[length=3mm, width=2mm, black]}
+    },
+    node distance=1.8cm and 0.8cm
+]
+
+% Nodes
+\node[box, minimum width=1.5cm] (user) {User};
+\node[box, below=1.5cm of user] (av) {Antivirus Software};
+\node[box, below=2.2cm of av] (heur) {Heuristic Engine};
+\node[box, left=of heur] (sig) {Signature Database};
+\node[box, right=of heur] (beh) {Behavioral Engine};
+\node[box, below=2.2cm of heur] (mal) {Malware Detected};
+\node[box, below=1.5cm of mal] (action) {Quarantine/Delete/Alert};
+\node[box, below=1.5cm of action, minimum width=2.5cm] (log) {Activity Log};
+
+% Connections
+\draw[arrow] (user) -- node[lbl] {Opens File/Program} (av);
+
+\draw[arrow] (av.south) -- node[lbl] {Scans for Signatures} (sig.north);
+\draw[arrow] (av.south) -- node[lbl] {Heuristic Analysis} (heur.north);
+\draw[arrow] (av.south) -- node[lbl] {Behavior Analysis} (beh.north);
+
+\draw[arrow] (sig.south) -- node[lbl] {Match Found} (mal.north);
+\draw[arrow] (heur.south) -- node[lbl] {Suspicious Activity} (mal.north);
+\draw[arrow] (beh.south) -- node[lbl] {Unusual Behavior} (mal.north);
+
+\draw[arrow] (mal.south) -- node[lbl] {Take Action} (action.north);
+\draw[arrow] (action.south) -- node[lbl] {Logs Action} (log.north);
+
+\end{tikzpicture}
+\end{figure}
+\FloatBarrier
+\vspace{1cm}
+Modern antivirus programs employ four primary detection techniques:
+\begin{itemize}
+    \item \textbf{Signature Detection:} Keenly scans files brought into a system to analyze likely hazardous files by matching them against known threat patterns.
+    \item \textbf{Specific Detection:} Looks for known parts or types of malware that are linked by a common codebase.
+    \item \textbf{Generic Detection:} Similar to specific detection, it identifies malware patterns related to a broad, common codebase.
+    \item \textbf{Heuristic Detection:} Identifies unknown or novel infections by spotting suspicious file structures or behaviors.
+\end{itemize}
+
+A core component of antivirus functionality is the \textbf{signature}, which is a unique pattern or identifier linked to a specific exploit. Signatures are categorized into three types:
+\begin{itemize}
+    \item \textbf{Static Signatures:} Predefined byte sequences tied to known malware, which are highly effective against identified threats but limited against new variants.
+    \item \textbf{Dynamic Signatures:} Generated in real-time by analyzing file or process behavior, enabling the detection of unknown threats based on malicious activity.
+    \item \textbf{Heuristic Signatures:} Utilize algorithms to identify anomalies in code, allowing for the detection of modified or entirely new threats.
+\end{itemize}
+\newpage
+\subsection{Firewalls and Web Application Firewalls (WAF)}
+A firewall is a fundamental network security device, implemented as hardware or software, that monitors incoming and outgoing network traffic. It acts as a barrier between a trusted internal network and untrusted external networks, such as the internet. 
+\begin{itemize}
+    \item \textbf{Network Firewalls:} At a fundamental level, a firewall processes data packets through a rigid set of access control rules. It functions similarly to a Deterministic Finite Automaton (DFA), where a packet's specific headers (such as IP address and port number) are processed to determine whether the firewall should enter an "accept" (allow) or "reject" (drop) state.
+        \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=\textwidth, keepaspectratio]{images/firewall.png}
+        \caption{Workings of a Network Firewall}
+        \label{fig:firewall}
+      \end{figure}
+      \FloatBarrier
+    \item \textbf{Web Application Firewalls (WAF):} While standard firewalls protect broader network infrastructure, a WAF sits specifically in front of web applications. It analyzes HTTP and HTTPS traffic at the application layer to filter out malicious web-based exploits. A WAF is strictly configured to intercept and block application-layer attacks, such as SQL injection, preventing malicious actors from forcing unauthorized queries through standard user input fields.
+       \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=\textwidth, keepaspectratio]{images/waf.png}
+        \caption{Workings of a Web Application Firewall (WAF)}
+        \label{fig:waf}
+      \end{figure}
+    \FloatBarrier
+  \end{itemize}
+
+   
+
+
+\newpage
+\vspace{5cm}
+\subsection{Intrusion Detection Systems (IDS)}
+
+An Intrusion Detection System (IDS) is a cybersecurity mechanism that monitors network traffic or system activities to detect unauthorized access, malicious activities, or policy violations. When suspicious behavior is identified, the IDS analyzes the events and generates alerts for security administrators to investigate.
+
+    \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=0.62\textwidth, keepaspectratio]{images/ids.png}
+        \caption{Workings of an Intrusion Detection System (IDS)}
+        \label{fig:ids}
+      \end{figure}
+      \FloatBarrier
+\textbf{Types of IDS:}
+\begin{itemize}
+    \item \textbf{Network-based IDS (NIDS):} Monitors traffic passively across an entire network segment to detect attacks in transit.
+    \item \textbf{Host-based IDS (HIDS):} Monitors activities on a specific device or host, observing file changes, system logs, and user actions.
+\end{itemize}
+
+\textbf{Detection Methods:}
+\begin{itemize}
+    \item \textbf{Signature-based Detection:} Identifies known attacks by comparing observed activity against a database of documented attack signatures.
+    \item \textbf{Anomaly-based Detection:} Detects unusual behavior by identifying deviations from a normal, established baseline of system or network activity.
+\end{itemize}
+
+\textbf{Advantages and Limitations:}
+While an IDS provides early warnings of security incidents and helps organizations investigate cyberattacks, it possesses inherent limitations. Unlike an Intrusion Prevention System (IPS), an IDS cannot automatically stop an active attack. Furthermore, it may generate false positives or false negatives, and signature-based models are entirely incapable of detecting new or unknown attacks without receiving updated signature databases.
+\newpage
 \section{Security Operations Center (SOC) \& Enterprise Tooling}
-    \subsection{SOC Operational Functions}
-    \subsection{Endpoint Detection and Response (EDR) \& XDR}
-    \subsection{Network Detection and Response (NDR)}
-    \subsection{Firewall Analytics \& Logging}
-    \subsection{Dark Web Threat Intelligence \& Monitoring}
+
+\subsection{SOC Operational Functions}
+A Security Operations Centre (SOC) is a centralised function or team responsible for improving an organisation's cybersecurity posture and preventing, detecting, and responding to threats. The SOC team monitors identities, endpoints, servers, databases, network applications, websites, and other systems to quickly uncover and mitigate potential cyberattacks. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{images/soc.png}
+    \caption{Core Components and Workflows of a Security Operations Center}
+    \label{fig:soc_architecture}
+\end{figure}
+\FloatBarrier
+To achieve centralised monitoring, detection, analysis, and response, SOC teams perform several critical functions:
+\begin{itemize}
+    \item \textbf{Log Collection \& Aggregation:} Collecting logs and events from diverse sources across the network and correlating them to identify potential threats and incidents.
+    \item \textbf{SIEM / Analytics:} Monitoring environments using security analytics solutions such as Security Information and Event Management (SIEM), Security Orchestration, Automation, and Response (SOAR), and Extended Detection and Response (XDR). The SOC uses these tools to analyze and prioritize threats while filtering out false positives.
+    \item \textbf{Threat Intelligence \& Research:} Receiving and analyzing threat intelligence from global sources to proactively detect threats, while continuously developing new detection rules to improve the overall security posture.
+    \item \textbf{Ticketing \& Case Management:} Tracking, managing, and resolving security incidents through a structured workflow to ensure rapid incident response and accountability.
+    \item \textbf{Knowledge Base Management:} Storing automated playbooks, response procedures, and lessons learned from past incidents to drive continuous operational improvement.
+    \item \textbf{Reporting and Compliance:} Generating dashboards, alerts, and compliance reports to ensure adherence to privacy regulations and industry standards, such as ISO 27001, the NIST Cybersecurity Framework, and GDPR.
+\end{itemize}
+
+\subsection{Endpoint Detection and Response (EDR) \& XDR}
+
+\subsubsection*{Endpoint Detection and Response (EDR)}
+Endpoint Detection and Response (EDR) represents a critical paradigm shift from traditional, signature-based antivirus software toward continuous monitoring and behavioural analysis. EDR solutions are deployed directly on network endpoints such as workstations, servers, and mobile devices, which constitute the primary attack vectors in modern enterprise networks.
+
+Instead of relying solely on static databases of known malware signatures, EDR platforms continuously record system-level activities and telemetry. By leveraging data analytics and machine learning, EDR detects anomalous behaviours, automatically blocks malicious execution, and provides Security Operations Center (SOC) teams with historical data for deep investigation and real-time threat remediation.
+
+\textbf{Enterprise EDR Tooling:}
+\begin{itemize}
+    \item \textbf{SentinelOne:} A prominent EPP and EDR solution characterized by its autonomous, AI-driven architecture.
+    \begin{itemize}
+        \item \textit{Autonomous Threat Resolution:} Employs machine learning algorithms directly on the endpoint agent ("agentic security") to execute real-time threat detection and automated remediation.
+        \item \textit{Operational Efficiency:} Minimizes reliance on cloud connectivity for immediate threat neutralization, significantly reducing manual triage burden on SOC personnel.
+        \item \textit{Deployment:} Highly regarded for deployment efficiency and robust integration across complex network architectures.
+    \end{itemize}
+    \item \textbf{Alternate EDR Tools:}
+    \begin{itemize}
+        \item \textit{CrowdStrike (Falcon):} A cloud-native platform recognized for its extensive threat intelligence network and advanced AI-driven behavioral analytics, though requiring higher operational configuration overhead.
+        \item \textit{Microsoft Defender XDR:} Deeply integrated into the Microsoft ecosystem (Windows, Azure, Microsoft 365), delivering unified detection and automated attack disruption across enterprise assets.
+        \item \textit{Huntress (Managed EDR):} Pairs endpoint detection capabilities with a 24/7 human-led SOC team to investigate and validate alerts under a Managed Detection and Response (MDR) model.
+        \item \textit{Palo Alto Networks (Cortex XDR):} Engineered for large-scale enterprise consolidation, aggregating telemetry across endpoints, internal networks, and cloud infrastructure.
+        \item \textit{Sophos, Bitdefender, \& ESET:} Prevention-first platforms offering resource-efficient protection; Sophos Intercept X leverages deep learning for behavioral threat blocking.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Extended Detection and Response (XDR)}
+Extended Detection and Response (XDR) expands cybersecurity boundaries beyond endpoint monitoring. It collects, correlates, detects, investigates, and responds to threats across multiple security layers—including endpoints, network traffic, email systems, cloud applications, identity and access management (IAM), and perimeter security controls—from a unified platform.
+
+\textbf{How XDR Works:}
+\begin{enumerate}
+    \item \textbf{Multi-Source Data Ingestion:} Ingests telemetry across heterogeneous security layers simultaneously.
+    \item \textbf{Event Correlation:} Correlates isolated events across domain boundaries to uncover complex attack campaigns that appear benign when viewed individually.
+    \item \textbf{Behavioral Analysis:} Leverages AI, machine learning, and global threat intelligence feeds to spot anomalous execution paths.
+    \item \textbf{Automated Cross-Platform Response:} Executes automated playbooks, such as isolating compromised devices, revoking user session tokens, or pushing dynamic firewall block rules.
+    \item \textbf{Unified Investigation Interface:} Renders full attack storylines on a single pane of glass for SOC analysts.
+\end{enumerate}
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.5cm}|}
+        \hline
+        \textbf{Dimension} & \textbf{Endpoint Detection \& Response (EDR)} & \textbf{Extended Detection \& Response (XDR)} \\
+        \hline
+        \textbf{Monitoring Scope} & Restricted strictly to host endpoints (laptops, servers). & Enterprise-wide (endpoints, networks, cloud, email, identities). \\
+        \hline
+        \textbf{Visibility} & Limited to local system-level process lineage. & Broad cross-domain visibility across enterprise assets. \\
+        \hline
+        \textbf{Detection Basis} & Host behavioral anomalies and local Indicators of Compromise (IoCs). & Multi-vector correlated event patterns across disparate log sources. \\
+        \hline
+        \textbf{Response Capability} & Endpoint-centric actions (host isolation, process kill). & Cross-platform orchestration (network drop, IAM lock, endpoint isolation). \\
+        \hline
+    \end{tabular}
+    \caption{Comparative Mapping of EDR versus XDR Architectures}
+    \label{tab:edr_vs_xdr}
+\end{table}
+\FloatBarrier
+
+\textbf{Practical Multi-Vector Attack Example:}
+Consider a coordinated phishing attack against an enterprise user:
+\begin{itemize}
+    \item An employee receives a phishing email and clicks a malicious embedded hyperlink.
+    \item A dropper script downloads a stealth malware payload onto the endpoint workstation.
+    \item The malware executes and initiates command-and-control (C2) callback traffic to an external adversary server.
+\end{itemize}
+In this scenario, a standalone \textbf{EDR} tool may only flag the suspicious process execution on the local host. In contrast, an \textbf{XDR} platform correlates the email delivery log, suspicious identity authentication, executable host behavior, and anomalous outbound network session as one unified, multi-stage campaign—automatically isolating the workstation, locking the compromised user credentials, and updating perimeter firewalls simultaneously.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio]{images/Windows_Defender_EDR.png}
+    \caption{Windows Defender EDR Architecture}
+    \label{fig:windows-defender-edr}
+\end{figure}
+
+
+\subsection{Network Detection and Response (NDR)}
+
+Network Detection and Response (NDR) is a cybersecurity solution designed to provide organizations with continuous, real-time visibility into their network traffic. Unlike traditional endpoint-centric tools or legacy signature-based intrusion detection systems, NDR continuously monitors traffic across physical, hybrid, and cloud-based environments.
+
+By employing advanced analytical techniques such as machine learning (ML) and behavioral analytics, NDR platforms can detect stealthy malicious activity, lateral movement, insider threats, and command-and-control (C2) communications that might otherwise go unnoticed. Furthermore, NDR software captures detailed logs of network activity, empowering security operations teams to reconstruct events, proactively hunt for threats, and orchestrate rapid incident responses.
+
+\textbf{Core Components of NDR Architecture:}
+\begin{enumerate}
+    \item \textbf{Data Sources \& Traffic Capture:} NDR sensors (which can be physical, virtual, or cloud-based) capture and export network traffic from diverse environments, including internet gateways, firewalls, switches, routers, and cloud workloads.
+    \item \textbf{NDR Analytics Engine:} 
+    \begin{itemize}
+        \item \textit{Deep Packet Inspection (DPI):} Inspects packet contents and metadata.
+        \item \textit{Behavioral Analytics:} Uses ML and User and Entity Behavior Analytics (UEBA) to detect anomalous network patterns.
+        \item \textit{Entity \& User Profiling:} Builds a baseline of normal behavior for users and hosts to easily identify deviations.
+    \end{itemize}
+    \item \textbf{Response \& Integration:} Provides real-time alerts, triggers automated incident response workflows, and feeds correlated events directly into centralized SIEM and SOAR platforms for deep investigation and threat hunting.
+\end{enumerate}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio]{images/ndr.png}
+    \caption{Network Detection and Response (NDR) Architecture and Workflow}
+    \label{fig:ndr_architecture}
+\end{figure}
+
+\textbf{Enterprise NDR Tooling:}
+\begin{itemize}
+    \item \textbf{Nivetti HawkSecure™ NDR:} An advanced, AI-powered NDR solution that utilizes a combination of raw traffic analysis, deep packet inspection, and machine learning to detect threats early in the kill chain.
+    \begin{itemize}
+        \item \textit{Advanced Threat Detection:} Features unique "Policy Based Trip Wires" (PBTW) that autogenerate based on network baselines, alongside Algorithmic Threat Detection (ATD) engineered to provide actionable intelligence with minimal false positives.
+        \item \textit{Comprehensive Visibility:} Eliminates critical blind spots by providing complete, 360-degree visibility into both North-South (inbound/outbound) and East-West (internal) network traffic.
+        \item \textit{Automated Containment:} Orchestrates direct responses using customizable, inbuilt playbooks that integrate with a wide range of Firewalls and Network Access Control (NAC) solutions to automatically contain active threats.
+    \end{itemize}
+    
+    \item \textbf{Alternate NDR Tools:}
+    \begin{itemize}
+        \item \textit{NetWitness NDR:} Provides end-to-end network visibility and utilizes AI-driven anomaly detection to uncover hidden threats, designed to integrate seamlessly with external SIEM systems.
+        \item \textit{NETSCOUT (Omnis Cyber Intelligence):} A cloud-native toolset relying heavily on deep packet inspection for real-time attack surface monitoring and retrospective incident analysis.
+        \item \textit{Corelight:} Focuses on supplying extended visibility and enriched network data, structuring it into detailed, correlated logs enriched with environmental context for centralized threat hunting.
+        \item \textit{Stamus Networks:} Continuously scrutinizes network traffic utilizing a combination of predefined rules, signatures, and advanced machine learning, heavily utilized by analysts for proactive threat hunting.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Firewall Analytics \& Logging}
+A Firewall Analyzer is a specialised network monitoring and security management tool designed to simplify the complex task of interpreting firewall logs and traffic data. Its primary functions include real-time log management, compliance and auditing, and threat detection (such as identifying anomalies or repeated failed login attempts). Platforms like Fortinet FortiAnalyzer consolidate telemetry and use AI/ML-powered analytics to correlate events. FortiAnalyzer goes beyond simple logging by including built-in SIEM and SOAR functionalities, streamlining incident response.
+    \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=\textwidth, keepaspectratio]{images/Firewall_Analyzer.png}
+        \caption{Firewall Analyzer Architecture}
+        \label{fig:firewall-analyzer}
+      \end{figure}
+      \FloatBarrier
+
+\subsection{Dark Web Threat Intelligence \& Monitoring}
+Dark Web Monitoring is a proactive cybersecurity discipline focused on scanning the hidden layers of the internet—such as TOR networks, I2P, and underground criminal forums—where cybercriminals trade illicit goods and data. The core objective is to detect early indicators of compromise (IoCs), such as leaked corporate credentials or exposed intellectual property, before a full-scale attack occurs. Tools like Cyble (Cyble Vision \& Blaze AI) utilise an Agentic AI engine to autonomously hunt for threats, reason through unstructured data using Natural Language Processing (NLP), and trigger automated responses in minutes.
+
+    \begin{figure}[htbp]
+      \centering
+        \includegraphics[width=\textwidth, keepaspectratio]{images/darkweb.png}
+        \caption{Dark Web Monitoring Architecture}
+        \label{fig:darkweb-monitoring}
+      \end{figure}
+      \FloatBarrier
 
 \newpage
 \chapter{LITERATURE REVIEW}
@@ -704,7 +1208,7 @@ In industrial security architectures, enterprise networks must be strictly isola
 \begin{table}[htbp]
 \centering
 \caption{Purdue Model Levels \& System Classification}
-\label{tab:purdue-model}
+\label{tab:purdue-model-detailed}
 \footnotesize
 \begin{tabularx}{\textwidth}{|p{1.8cm}|p{2.5cm}|X|X|}
 \hline
@@ -717,6 +1221,7 @@ Level 1 & Local Control & Direct control of physical processes. & PLCs, Remote T
 Level 0 & Physical Process & The physical refining equipment. & Field sensors, control valves, pumps, heaters, and boilers. \\ \hline
 \end{tabularx}
 \end{table}
+
 
 \subsection{Managed Detection and Response (MDR) in Critical Infrastructure}
 
@@ -746,6 +1251,7 @@ Operational Capability & Traditional / Legacy Approach & Modern Next-Generation 
 \textbf{Threat Intelligence} & Reactive updates on known indicators of compromise (IoC) from vendor bulletins. & Proactive external threat intelligence and dark web credential scanning (Cyble AI). \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 \section{Review of Existing SIEM/SOAR Platforms}
 
@@ -766,6 +1272,7 @@ Wazuh & Open Source & Distributed architecture: Indexer, Manager, \& Active Host
 This Project Sandbox & Purpose-Built Microservices Prototype & Containerized: Ingress Gateway + Logstash/Filebeat + Python Engines (\texttt{engine.py}, \texttt{playbooks.py}) & Stateful multi-source correlation rules + Automated Python response playbooks (\texttt{playbooks.py}) & Lightweight, fully transparent codebase; scoped for lab/sandbox evaluation scale. \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 \section{Research \& Engineering Gap}
 
@@ -777,8 +1284,9 @@ Consequently, a distinct engineering gap exists between functionally opaque prod
 
 Enterprise security operations struggle with severe inefficiencies stemming from massive log volumes, fragmented data sources, and slow manual incident triage. When critical indicators of compromise are scattered across web servers, databases, and application endpoints, standalone log viewers fail to connect related events. Furthermore, purely manual incident response workflows cannot react quickly enough to contain active attacks before system degradation occurs.
 
-This project directly addresses this operational challenge by designing, implementing, and validating a containerised, multi-component microservice architecture. The system continuously ingests telemetry streams, normalises incoming logs into structured data models, evaluates stateful correlation rules, executes automated remediation playbooks, and renders active threats on a the industry concepts, compliance standards, and architectural paradigms evaluated in this chapter establish the theoretical foundation for the platform. By combining centralised log shipping with real-time correlation and automated response orchestration, the platform provides a robust framework for the methodology and detailed system architecture detailed in subsequent chapters.
+This project directly addresses this operational challenge by designing, implementing, and validating a containerised, multi-component microservice architecture. The system continuously ingests telemetry streams, normalises incoming logs into structured data models, evaluates stateful correlation rules, executes automated remediation playbooks, and renders active threats on a centralized web monitoring interface. 
 
+The industry concepts, compliance standards, and architectural paradigms evaluated in this chapter establish the theoretical foundation for the platform. By combining centralised log shipping with real-time correlation and automated response orchestration, the platform provides a robust framework that supports the methodology and detailed system architecture explored in subsequent chapters.
 \newpage
 \chapter{DIGITAL TRANSFORMATION \& INDUSTRIAL CONNECTIVITY}
 
@@ -842,6 +1350,7 @@ AWS IEDDMS (S3) & Hexagon / Asset Systems & Links engineering drawings, approval
 Cross-Domain APIs & SIEM Collectors & Forwards security events and API logs via REST/HTTPS to cybersecurity monitoring systems. \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 The integration points described above establish the industrial data fabric analysed in Chapter 5.
 
@@ -1004,7 +1513,7 @@ The software stack is organized around the following layered implementation doma
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/raw-log-collector.png}
+  \includegraphics[width=0.75\textwidth, keepaspectratio]{images/raw-log-collector.png}
   \caption{Centralised Raw Log Collector Stream Viewer}
   \label{fig:raw-log-collector}
 \end{figure}
@@ -1044,7 +1553,7 @@ To validate the platform under realistic threat conditions, the project deployed
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth, keepaspectratio]{images/corporate-portal-auth.png}
+  \includegraphics[width=0.75\textwidth, keepaspectratio]{images/corporate-portal-auth.png}
   \caption{The Corporate Portal Authentication Interface}
   \label{fig:corporate-portal-auth}
 \end{figure}
@@ -1073,7 +1582,8 @@ An automated shell script \texttt{log\_generator.sh} simulates adversarial behav
 This generator provides repeatable telemetry for testing the correlation rules, event models, and automated SOAR playbooks.
 
 \begin{figure}[htbp]
-  \includegraphics[width=\textwidth, keepaspectratio]{images/scada-hmi-dashboard.png}
+  \centering
+  \includegraphics[width=0.75\textwidth, keepaspectratio]{images/scada-hmi-dashboard.png}
   \caption{SCADA HMI Industrial Mixture Control Dashboard.}
   \label{fig:scada-hmi-dashboard}
   \vspace{0.5cm}
@@ -1107,6 +1617,7 @@ timestamp & DateTime & UTC creation time. \\ \hline
 status & String & Lifecycle state of alert. \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 \subsection{Detection Engine Logic}
 
@@ -1204,6 +1715,7 @@ RULE-04 & Unauthorised Scanning / Directory Probing & Grouped by \texttt{source\
 RULE-05 & Anomalous Host Agent Connection & Evaluates heartbeat and metadata & Unregistered \texttt{agent\_id} or unexpected socket origin & LOW \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 \subsection{Detailed Rule Logic Specifications}
 
@@ -1242,6 +1754,7 @@ This rule layer is not a production SOC replacement. Instead, it functions as a 
 \textbf{RULE-05 (Anomalous Agent)} & \texttt{notify\_analyst()} & Diagnostic notification & SOC analyst workflow \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 \section{Automated Mitigation Mechanisms}
 
@@ -1409,6 +1922,7 @@ The automated verification suite validated the playbook execution lifecycle.
 \texttt{test\_soar\_api\_endpoints()} & REST endpoint verification & HTTP 200 OK & \textbf{PASSED} \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 The empirical test results confirm the deterministic reliability of the automation layer. In practice, this is important because the refinery’s production response model must operate at machine speed during active threats.
 
@@ -1449,6 +1963,7 @@ Log Processing Throughput & Manual review ($\approx$ 10 logs/min) & $\geq$ 2500 
 Playbook Execution Latency & Manual firewall setup (5 to 10 min) & $<$ 800 milliseconds & Near-instant containment \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 These results provide the concrete justification for the integrated SIEM/SOAR design: in a refinery or similar critical infrastructure environment, even a few minutes of uncontrolled attack propagation can expose safety-critical systems to unacceptable risk.
 
@@ -1562,6 +2077,7 @@ Portability & Low & High & Application-layer to preserve container compatibility
 Security Boundary & High privilege & Non-privileged execution & Application-layer safer for lab deployment \\ \hline
 \end{tabularx}
 \end{table}
+\FloatBarrier
 
 The selected design is intentionally pragmatic: it is portable, safer under container constraints, and sufficient for a lab-scale simulation. For a real refinery architecture, the long-term roadmap shifts to kernel-level enforcement.
 
@@ -1678,7 +2194,7 @@ The current client scripts focus on application and HTTP telemetry rather than f
 
 \section{Availability, Reliability, and Scale Limitations}
 
-\begin{figure}[h]
+\begin{figure}[htpb]
 \centering
 \begin{tikzpicture}[
     box/.style={draw, rectangle, rounded corners, minimum height=1.2cm, text centered, font=\sffamily, thick, fill=gray!10},
@@ -1705,7 +2221,7 @@ The current client scripts focus on application and HTTP telemetry rather than f
 \caption{Single Point Of Failure (SPOF) Diagram}
 \label{fig:spof}
 \end{figure}
-
+\FloatBarrier
 \subsection{Single-Point-of-Failure Vulnerabilities}
 As illustrated in Figure \ref{fig:spof}, there is no HA redundancy across the central ingress or SIEM core. A single service failure halts log processing. In a real refinery this would be unacceptable.
 
@@ -1834,7 +2350,7 @@ This chapter synthesises the core technical proficiencies, system design concept
   \caption{Summary Of Technical Skills Gained}
   \label{fig:technical-skills-summary}
 \end{figure}
-
+\section{Technical Proficiencies Gained}
 \subsection{Microservices Architecture \& Containerised Orchestration}
 
 Engineering the platform as a collection of decoupled, containerised microservices rather than a monolithic application provided deep practical experience in distributed system design. Key learnings include:
@@ -1960,10 +2476,8 @@ Confronting real-world software engineering challenges such as inter-container n
 
 \section*{Annexure I — Core Configuration: OT Digital Twin simulation sandbox}
 
-The multi-container orchestration manifest used to deploy the isolated microservices network:
-
+Microservices Deployment Manifest:
 \begin{lstlisting}[language=bash, title=docker-compose.yml]
-
 version: '3.8'
 services:
   siem-server:
@@ -1979,7 +2493,6 @@ services:
       - ./app:/app/app
     networks:
       - siem-net
-
   log-collector:
     build:
       context: .
@@ -1992,7 +2505,6 @@ services:
       - siem-server
     networks:
       - siem-net
-
   agent-node:
     build:
       context: .
@@ -2004,28 +2516,23 @@ services:
       - log-collector
     networks:
       - siem-net
-
   vulnerable-app:
     build:
       context: .
       dockerfile: Dockerfile.vulnerable
     ports:
-      - "PORT: 5001"
+      - "5001:5001"
     environment:
       - PORT=5001
     networks:
       - siem-net
-
 networks:
   siem-net:
     driver: bridge
 \end{lstlisting}
 
-\vspace{1cm}
-
 \section*{Annexure II — Logstash Pipeline Configuration}
-The ingestion parsing pipeline used to parse raw HTTP access logs into normalized JSON fields:
-
+HTTP Log Parsing Pipeline
 \begin{lstlisting}[language=Ruby, title=logstash.conf]
 input {
   beats {
@@ -2036,12 +2543,11 @@ input {
     codec => json
   }
 }
-
 filter {
   if [type] == "web-access" {
     grok {
       match => { 
-        "message" => "%{IP:client_ip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] \"%{WORD:http_method} % {URIPATHPARAM:request_uri} HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int} %{NUMBER:bytes}" 
+        "message" => "%{IP:client_ip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] \"%{WORD:http_method} %{URIPATHPARAM:request_uri} HTTP/%{NUMBER:http_version}\" %{NUMBER:status_code:int} %{NUMBER:bytes}" 
       }
     }
     mutate {
@@ -2049,7 +2555,6 @@ filter {
     }
   }
 }
-
 output {
   http {
     url => "http://siem-server:5000/api/ingress"
@@ -2060,7 +2565,7 @@ output {
 \end{lstlisting}
 
 \vspace{1cm}
-
+\newpage
 \section*{Annexure III — Filebeat Collector Manifest}
 The lightweight log shipping configuration for harvesting application logs:
 
@@ -2118,12 +2623,41 @@ Sample JSON request body transmitted from client agents (EDR host agent) to the 
 
 \begin{enumerate}
   \item National Institute of Standards and Technology (NIST) (2018). Framework for Improving Critical Infrastructure Cybersecurity (Version 1.1). U.S. Department of Commerce.
+
   \item MITRE Corporation (2024). MITRE ATT\&CK\textregistered{} Matrix for Enterprise. Retrieved from \url{https://attack.mitre.org/}.
-  \item ISO/IEC 27001:2022 (2022). Information security, cybersecurity and privacy protection - Information security management systems - Requirements. International Organization for Standardization.
+
+  \item ISO/IEC 27001:2022 (2022). Information security, cybersecurity and privacy protection -- Information security management systems -- Requirements. International Organization for Standardization.
+
   \item Elasticsearch B.V. (2026). Logstash Reference \& Filebeat Overview. Retrieved from \url{https://www.elastic.co/guide/en/logstash/current/index.html}.
+
   \item Pallets Projects (2026). Flask Documentation (Version 3.x). Retrieved from \url{https://flask.palletsprojects.com/}.
+
   \item Docker Inc. (2026). Docker Compose Architecture \& Microservices Specification. Retrieved from \url{https://docs.docker.com/compose/}.
+
   \item OWASP Foundation (2021). OWASP Top Ten Web Application Security Risks. Retrieved from \url{https://owasp.org/Top10/}.
+
+  \item Honeywell Process Solutions (2026). Industrial Cybersecurity Best Practices for SCADA and DCS Systems. Retrieved from \url{https://www.honeywellprocess.com/}.
+
+  \item Williams, T. J. (1992). \textit{The Purdue Enterprise Reference Architecture: A Technical Guide for CIM Planning and Implementation}. Instrument Society of America.
+
+  \item IEC 62443-3-3 (2013). \textit{Security for Industrial Automation and Control Systems -- Part 3-3: System Security Requirements and Security Levels}. International Electrotechnical Commission.
+
+  \item Hexagon AB (2026). \textit{Asset Lifecycle Information Management (ALIM) and j5 Operations Management Solutions Technical Documentation}. Retrieved from \url{https://hexagon.com/}.
+
+  \item Aspen Technology, Inc. (2026). \textit{Aspen InfoPlus.21 (IP21) and Aspen DMC3 User and Technical Guides}. Retrieved from \url{https://www.aspentech.com/}.
+
+  \item SentinelOne, Inc. (2026). \textit{SentinelOne Singularity XDR Platform and Behavioral AI Architecture Whitepaper}. Retrieved from \url{https://www.sentinelone.com/}.
+
+  \item Airtel Business (2026). \textit{Managed Detection and Response (MDR) Services and Intelligent Security Operations Center (iSOC) Architecture}. Retrieved from \url{https://www.airtel.in/business/}.
+
+  \item Amazon Web Services (AWS) (2026). \textit{AWS Serverless Multi-Tier Architectures and Amazon S3 / Textract Integration Documentation}. Retrieved from \url{https://docs.aws.amazon.com/}.
+
+  \item Bharat Sanchar Nigam Limited (BSNL) (2026). \textit{5G Private Captive Non-Public Network (CNPN) Deployment Guidelines for Industrial Enterprises}. Retrieved from \url{https://www.bsnl.co.in/}.
+
+  \item Python Software Foundation (2026). \textit{Python 3 Documentation}. Retrieved from \url{https://docs.python.org/3/}.
+
+  \item SQLite Development Team (2026). \textit{SQLite Documentation}. Retrieved from \url{https://www.sqlite.org/docs.html}.
+
 \end{enumerate}
 
 
